@@ -1,6 +1,7 @@
 package beans;
 
 public class TestUser {
+	public int id;
 	private String firstName;
 	private String lastName;
 	
