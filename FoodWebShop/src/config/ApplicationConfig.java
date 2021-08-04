@@ -12,7 +12,7 @@ public class ApplicationConfig extends ResourceConfig {
         registerService(TestService.class);
     }
 
-    private <T> void registerService(Class<T> service) {
+    private void registerService(Class<?> service) {
         register(new AbstractBinder() {
             @Override
             protected void configure() {
@@ -21,7 +21,7 @@ public class ApplicationConfig extends ResourceConfig {
         });
     }
 
-    private <T, K> void registerDependencyInjection(Class<T> implementation, Class<K> contract) {
+    private void registerDependencyInjection(Class<?> implementation, Class<?> contract) {
         register(new AbstractBinder() {
             @Override
             protected void configure() {
