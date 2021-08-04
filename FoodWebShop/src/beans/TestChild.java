@@ -4,6 +4,8 @@ public class TestChild extends Entity{
     private String child;
     private User user;
 
+    public TestChild() {
+    }
 
     public TestChild(String child, User user) {
         this.child = child;

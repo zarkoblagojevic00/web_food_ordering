@@ -24,4 +24,9 @@ public abstract class Entity {
         this.id = -1;
         this.deleted = false;
     }
+
+    public Entity(long id) {
+        this.id = id;
+        this.deleted = false;
+    }
 }

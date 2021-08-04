@@ -1,18 +1,18 @@
-package repositories.jsonconversion.serialize;
+package repositories.json.conversion.serialization;
 
 import beans.Entity;
 import com.fasterxml.jackson.databind.BeanDescription;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializationConfig;
 import com.fasterxml.jackson.databind.ser.BeanSerializerModifier;
+import repositories.json.conversion.ParametricTypeChecker;
 
 public class EntityBeanSerializerModifier<T extends Entity> extends BeanSerializerModifier {
-
-    final private Class<T> typeParameterClass;  // tracking runtime T
+    final private ParametricTypeChecker<T> checker;
 
     public EntityBeanSerializerModifier(Class<T> typeParameterClass) {
         super();
-        this.typeParameterClass = typeParameterClass;
+        this.checker = new ParametricTypeChecker<>(typeParameterClass);
     }
 
     @Override
@@ -20,14 +20,9 @@ public class EntityBeanSerializerModifier<T extends Entity> extends BeanSerializ
                                               BeanDescription beanDesc,
                                               JsonSerializer<?> serializer) {
         Class<?> beanClass = beanDesc.getBeanClass();
-        if (isEntityDifferentThanT(beanClass)) {
-            return new EntitySerializer<T>((Class<T>) beanClass);
+        if (checker.isEntityDifferentThanT(beanClass)) {
+            return new EntitySerializer<>((Class<Entity>) beanClass);
         }
         return super.modifySerializer(config, beanDesc, serializer);
-    }
-
-    private boolean isEntityDifferentThanT(Class<?> beanClass) {
-        return Entity.class.isAssignableFrom(beanClass) &&
-                !this.typeParameterClass.equals(beanClass);
     }
 }
