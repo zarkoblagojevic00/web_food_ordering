@@ -20,8 +20,6 @@ public class EntitySerializer<T extends Entity> extends StdSerializer<Entity> {
                           JsonGenerator jsonGenerator,
                           SerializerProvider serializerProvider)
             throws IOException, JsonGenerationException {
-        jsonGenerator.writeStartObject();
-        jsonGenerator.writeStringField("id", String.valueOf(entity.getId()));
-        jsonGenerator.writeEndObject();
+        jsonGenerator.writeNumber(entity.getId());
     }
 }

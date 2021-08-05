@@ -10,11 +10,6 @@ public class User extends Entity{
     private TestChild child;
 
     public User() {
-        this.firstName = "firstName";
-        this.lastName = "lastName";
-        this.points = 25;
-        this.dateOfBirth = new Date();
-        this.child = new TestChild("Test child", this);
     }
 
     public String getFirstName() {
@@ -37,10 +32,15 @@ public class User extends Entity{
         return child;
     }
 
+    public void setChild(TestChild child) {
+        this.child = child;
+    }
+
     public User(String firstName, String lastName, int points, Date dateOfBirth) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.points = points;
         this.dateOfBirth = dateOfBirth;
     }
+
 }
