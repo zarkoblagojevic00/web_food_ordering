@@ -2,12 +2,12 @@ package beans;
 
 public class TestChild extends Entity{
     private String text;
-    private User user;
+    private TestSerialUser user;
 
     public TestChild() {
     }
 
-    public TestChild(String text, User user) {
+    public TestChild(String text, TestSerialUser user) {
         this.text = text;
         this.user = user;
     }
@@ -20,7 +20,7 @@ public class TestChild extends Entity{
         return text;
     }
 
-    public User getUser() {
+    public TestSerialUser getUser() {
         return user;
     }
 }
