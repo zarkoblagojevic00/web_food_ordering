@@ -1,10 +1,14 @@
 package repositories;
 
 import beans.TestChild;
-import beans.TestUser;
 import beans.TestSerialUser;
+import beans.TestUser;
+import beans.users.base.Credentials;
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import repositories.json.conversion.deserialization.EntityBeanDeserializerModifier;
 import repositories.json.conversion.serialization.EntityBeanSerializerModifier;
@@ -72,6 +76,12 @@ public class TestRepository implements ITestRepository {
 		System.out.println(usersJson);
 		List<TestSerialUser>newUsers = mapper.readValue(usersJson,  new TypeReference<List<TestSerialUser>>() { });
 
+		ObjectMapper allMap = new ObjectMapper();
+		allMap.setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);
+		allMap.enable(SerializationFeature.INDENT_OUTPUT);
+		Credentials creds = new Credentials("test", "test");
+		String credJson = allMap.writeValueAsString(creds);
+		Credentials deser = allMap.readValue(credJson, Credentials.class);
 		System.out.println("Done");
 
 	}
