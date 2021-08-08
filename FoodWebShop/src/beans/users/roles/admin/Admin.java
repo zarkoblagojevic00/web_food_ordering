@@ -1,4 +1,4 @@
-package beans.users.roles;
+package beans.users.roles.admin;
 
 import beans.users.base.Credentials;
 import beans.users.base.PersonalData;

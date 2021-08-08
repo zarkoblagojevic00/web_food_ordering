@@ -5,7 +5,9 @@ import beans.users.base.Credentials;
 import beans.users.base.Gender;
 import beans.users.base.PersonalData;
 import beans.users.base.Role;
-import beans.users.roles.Admin;
+import beans.users.roles.admin.Admin;
+import beans.users.roles.customer.CustomerType;
+import beans.users.roles.customer.CustomerTypeFinder;
 import services.TestService;
 
 import javax.inject.Inject;
@@ -57,5 +59,13 @@ public class TestController {
 		if (admin.hasAuthority(Role.ADMIN))
 			System.out.println("I'm admin!");
 		return admin;
+	}
+
+	@Path("/typefinder/{points}")
+	@GET
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public CustomerType getType(@PathParam("points") double points) {
+		return new CustomerTypeFinder().findCustomerType(points);
 	}
 }
