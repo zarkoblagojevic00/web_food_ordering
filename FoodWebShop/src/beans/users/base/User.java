@@ -17,6 +17,22 @@ public abstract class User extends Entity implements Identifiable, Authorizable 
         this.role = role;
     }
 
+    public Credentials getCredentials() {
+        return credentials;
+    }
+
+    public void setCredentials(Credentials credentials) {
+        this.credentials = credentials;
+    }
+
+    public PersonalData getPersonalData() {
+        return personalData;
+    }
+
+    public void setPersonalData(PersonalData personalData) {
+        this.personalData = personalData;
+    }
+
     @Override
     public boolean isMyIdentity(Credentials credentials) {
         return this.credentials.isMyIdentity(credentials);

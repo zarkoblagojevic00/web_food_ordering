@@ -8,11 +8,11 @@ import com.fasterxml.jackson.databind.ser.BeanSerializerModifier;
 import repositories.json.conversion.ParametricTypeChecker;
 
 public class EntityBeanSerializerModifier<T extends Entity> extends BeanSerializerModifier {
-    final private ParametricTypeChecker<T> checker;
+    final private ParametricTypeChecker checker;
 
     public EntityBeanSerializerModifier(Class<T> typeParameterClass) {
         super();
-        this.checker = new ParametricTypeChecker<>(typeParameterClass);
+        this.checker = new ParametricTypeChecker(typeParameterClass);
     }
 
     @Override

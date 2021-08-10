@@ -6,26 +6,44 @@ import repositories.ITestRepository;
 import repositories.TestRepository;
 import services.TestService;
 
+import java.util.*;
+
 public class ApplicationConfig extends ResourceConfig {
+    final private Map<Class<?>, Class<?>> dependencyPairs;
+    final private List<Class<?>> concretes;
+
     public ApplicationConfig() {
-        registerDependencyInjection(TestRepository.class, ITestRepository.class);
-        registerService(TestService.class);
+        dependencyPairs = new HashMap<Class<?>, Class<?>>() {{
+            put(ITestRepository.class, TestRepository.class);
+        }};
+
+        concretes = Arrays.asList(
+                TestService.class
+        );
+
+        registerDependencyInjection();
+        registerConcretes();
+
     }
 
-    private void registerService(Class<?> service) {
+    private void registerConcretes() {
         register(new AbstractBinder() {
             @Override
             protected void configure() {
-                bindAsContract(service);
+                for (Class<?> concrete: concretes)
+                    bindAsContract(concrete);
             }
         });
     }
 
-    private void registerDependencyInjection(Class<?> implementation, Class<?> contract) {
+    private void registerDependencyInjection() {
         register(new AbstractBinder() {
             @Override
             protected void configure() {
-                bind(implementation).to(contract);
+                for (Class<?> contract : dependencyPairs.keySet()) {
+                    Class<?> implementation = dependencyPairs.get(contract);
+                    bind(implementation).to(contract);
+                }
             }
         });
     }

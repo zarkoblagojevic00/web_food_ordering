@@ -8,6 +8,8 @@ import beans.users.base.Role;
 import beans.users.roles.admin.Admin;
 import beans.users.roles.customer.CustomerType;
 import beans.users.roles.customer.CustomerTypeFinder;
+import repositories.interfaces.AdminRepository;
+import repositories.json.repos.AdminJsonFileRepository;
 import services.TestService;
 
 import javax.inject.Inject;
@@ -59,6 +61,51 @@ public class TestController {
 		if (admin.hasAuthority(Role.ADMIN))
 			System.out.println("I'm admin!");
 		return admin;
+	}
+
+	@Path("/repo")
+	@GET
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Admin saveAdmin() {
+		boolean update = true;
+		boolean delete = true;
+		boolean updateFail = true;
+		boolean deleteFail = true;
+
+		AdminRepository repo = new AdminJsonFileRepository();
+		PersonalData info = new PersonalData("Test", "Test", Gender.MALE, new Date());
+		Credentials creds = new Credentials("test", "test");
+		Admin admin = new Admin(creds, info);
+		Admin createdAdmin = repo.save(admin);
+
+		if (update) {
+			createdAdmin.setCredentials(new Credentials("Change", "Changed"));
+			repo.update(createdAdmin);
+		}
+
+		if (delete) {
+			repo.delete(createdAdmin.getId());
+		}
+
+		if (updateFail) {
+			try {
+				repo.update(createdAdmin);
+			} catch (RuntimeException e){
+				System.out.println("Failed to update! " + e.getMessage());
+			}
+		}
+
+		if (deleteFail) {
+			try {
+				repo.delete(createdAdmin.getId());
+			} catch (RuntimeException e){
+				System.out.println("Failed to delete! " + e.getMessage());
+			}
+		}
+
+		return createdAdmin;
+
 	}
 
 	@Path("/typefinder/{points}")

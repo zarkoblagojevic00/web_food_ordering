@@ -8,11 +8,11 @@ import com.fasterxml.jackson.databind.deser.BeanDeserializerModifier;
 import repositories.json.conversion.ParametricTypeChecker;
 
 public class EntityBeanDeserializerModifier<T extends Entity> extends BeanDeserializerModifier {
-    final private ParametricTypeChecker<T> checker;
+    final private ParametricTypeChecker checker;
 
     public EntityBeanDeserializerModifier(Class<T> typeParameterClass) {
         super();
-        this.checker = new ParametricTypeChecker<>(typeParameterClass);
+        this.checker = new ParametricTypeChecker(typeParameterClass);
     }
 
     @Override
@@ -21,7 +21,7 @@ public class EntityBeanDeserializerModifier<T extends Entity> extends BeanDeseri
                                                   JsonDeserializer<?> deserializer) {
         Class<?> beanClass = beanDesc.getBeanClass();
         if (checker.isEntityDifferentThanT(beanClass)) {
-            return new EntityDeserializer<>((Class<? extends T>) beanClass);
+            return new EntityDeserializer<T>((Class<? extends T>) beanClass);
         }
         return super.modifyDeserializer(config, beanDesc, deserializer);
     }

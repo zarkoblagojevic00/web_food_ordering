@@ -4,9 +4,13 @@ import beans.TestChild;
 import beans.TestSerialUser;
 import beans.TestUser;
 import beans.users.base.Credentials;
+import beans.users.base.Gender;
+import beans.users.base.PersonalData;
+import beans.users.roles.admin.Admin;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.module.SimpleModule;
@@ -14,10 +18,7 @@ import repositories.json.conversion.deserialization.EntityBeanDeserializerModifi
 import repositories.json.conversion.serialization.EntityBeanSerializerModifier;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 
 public class TestRepository implements ITestRepository {
@@ -45,8 +46,8 @@ public class TestRepository implements ITestRepository {
 	private void testMapper() throws IOException {
 		ObjectMapper mapper = new ObjectMapper();
 		SimpleModule module = new SimpleModule("SerUser");
-		module.setSerializerModifier(new EntityBeanSerializerModifier<TestSerialUser>(TestSerialUser.class));
-		module.setDeserializerModifier(new EntityBeanDeserializerModifier<TestSerialUser>(TestSerialUser.class));
+		module.setSerializerModifier(new EntityBeanSerializerModifier<>(TestSerialUser.class));
+		module.setDeserializerModifier(new EntityBeanDeserializerModifier<>(TestSerialUser.class));
 		mapper.registerModule(module);
 
 		TestSerialUser user = new TestSerialUser();
@@ -82,6 +83,28 @@ public class TestRepository implements ITestRepository {
 		Credentials creds = new Credentials("test", "test");
 		String credJson = allMap.writeValueAsString(creds);
 		Credentials deser = allMap.readValue(credJson, Credentials.class);
+
+		PersonalData info = new PersonalData("Test", "Testic", Gender.MALE, new Date());
+		Admin admin = new Admin(creds, info);
+		admin.setId(25);
+		admin.setDeleted(true);
+		ObjectMapper mappi = new ObjectMapper();
+
+		mappi.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.NONE);
+		mappi.setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);
+		mappi.enable(SerializationFeature.INDENT_OUTPUT);
+		mappi.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
+
+		SimpleModule modulo = new SimpleModule("proba");
+		modulo.setSerializerModifier(new EntityBeanSerializerModifier<>(Admin.class));
+		modulo.setDeserializerModifier(new EntityBeanDeserializerModifier<>(Admin.class));
+		mappi.registerModule(modulo);
+
+		String adminJson = mappi.writeValueAsString(admin);
+		Admin newAdmin = mappi.readValue(adminJson, Admin.class);
+
+		String adminsJson = mappi.writeValueAsString(Arrays.asList(admin, admin, admin));
+		Collection<Admin> admins = mappi.readValue(adminsJson, new TypeReference<Collection<Admin>>() {});
 		System.out.println("Done");
 
 	}

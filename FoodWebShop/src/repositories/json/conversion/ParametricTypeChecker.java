@@ -2,10 +2,10 @@ package repositories.json.conversion;
 
 import beans.Entity;
 
-public class ParametricTypeChecker<T> {
-    final private Class<T> typeParameterClass;
+public class ParametricTypeChecker {
+    final private Class<?> typeParameterClass;
 
-    public ParametricTypeChecker(Class<T> typeParameterClass) {
+    public ParametricTypeChecker(Class<?> typeParameterClass) {
         this.typeParameterClass = typeParameterClass;
     }
 
