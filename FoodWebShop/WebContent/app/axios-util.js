@@ -12,7 +12,7 @@ export default function init(endPoint) {
 const initRelativePathCreator = endPoint => (args='') => `${endPoint}/${args}`;
 
 const axiosInstance = axios.create({
-    baseURL: 'https://jsonplaceholder.typicode.com/',
+    baseURL: 'http://localhost:8080/FoodWebShop/rest/',
     headers: {
         'Content-Type': 'application/json',
         'Authentication': `Bearer ${localStorage.getItem('JWT')}`
