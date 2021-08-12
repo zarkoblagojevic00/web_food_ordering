@@ -16,4 +16,12 @@ public class Credentials implements Identifiable {
     public boolean isMyIdentity(Credentials credentials) {
         return username.equals(credentials.username) && password.equals(credentials.password);
     }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
 }

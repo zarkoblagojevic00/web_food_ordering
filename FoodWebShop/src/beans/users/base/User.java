@@ -2,7 +2,10 @@ package beans.users.base;
 
 import beans.Entity;
 
-public abstract class User extends Entity implements Identifiable, Authorizable {
+import javax.security.auth.Subject;
+import java.security.Principal;
+
+public abstract class User extends Entity implements Identifiable, Authorizable, Principal {
     private Credentials credentials;
     private PersonalData personalData;
     final private Role role;
@@ -46,5 +49,15 @@ public abstract class User extends Entity implements Identifiable, Authorizable 
     @Override
     public boolean hasAuthority(Role role) {
         return this.role.equals(role);
+    }
+
+    @Override
+    public String getName() {
+        return credentials.getUsername();
+    }
+
+    @Override
+    public boolean implies(Subject subject) {
+        return Principal.super.implies(subject);
     }
 }

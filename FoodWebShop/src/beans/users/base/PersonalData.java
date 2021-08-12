@@ -21,4 +21,16 @@ public class PersonalData {
     public String getFirstName() {
         return firstName;
     }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public Gender getGender() {
+        return gender;
+    }
+
+    public Date getDateOfBirth() {
+        return dateOfBirth;
+    }
 }

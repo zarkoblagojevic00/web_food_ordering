@@ -14,7 +14,13 @@
     <servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
     <init-param>
       <param-name>jersey.config.server.provider.packages</param-name>
-      <param-value>controllers,services,config,repositories,org.codehaus.jackson.jaxrs</param-value>
+      <param-value>
+        controllers,
+        services,
+        config,
+        repositories,
+        security,
+        org.codehaus.jackson.jaxrs</param-value>
     </init-param>
     <!-- Application configuration, used for registering resources like filters  -->
     <init-param>

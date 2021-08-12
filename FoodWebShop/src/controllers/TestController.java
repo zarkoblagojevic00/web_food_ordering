@@ -1,10 +1,7 @@
 package controllers;
 
 import beans.TestUser;
-import beans.users.base.Credentials;
-import beans.users.base.Gender;
-import beans.users.base.PersonalData;
-import beans.users.base.Role;
+import beans.users.base.*;
 import beans.users.roles.admin.Admin;
 import beans.users.roles.customer.CustomerType;
 import beans.users.roles.customer.CustomerTypeFinder;
@@ -12,12 +9,17 @@ import repositories.interfaces.AdminRepository;
 import repositories.json.repos.AdminJsonFileRepository;
 import services.TestService;
 
+import javax.annotation.security.PermitAll;
+import javax.annotation.security.RolesAllowed;
 import javax.inject.Inject;
 import javax.ws.rs.*;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.SecurityContext;
 import java.util.Date;
 
 @Path("/test")
+@PermitAll
 public class TestController {
 	@Inject
 	private TestService testService;
@@ -64,10 +66,13 @@ public class TestController {
 	}
 
 	@Path("/repo")
+	@RolesAllowed("ADMIN")
 	@GET
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Admin saveAdmin() {
+	public Admin saveAdmin(@Context SecurityContext sc) {
+		User user = (User) sc.getUserPrincipal();
+		System.out.println(user.getName());
 		boolean update = true;
 		boolean delete = true;
 		boolean updateFail = true;

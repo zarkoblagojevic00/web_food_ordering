@@ -40,6 +40,7 @@ export default Vue.component("login",{
 
             <input type="submit" value="Sign in" class="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2" @click.prevent='login'></input>
             <router-link :to="{ name: 'signup'}" class="medium" exact>Not Registered? Sign up for free!</router-link>
+            <button @click="testAxiosLocalStorage">Test axios util</button>
         </form>
     </div> 
     `,
@@ -56,7 +57,7 @@ export default Vue.component("login",{
                     this.message = message;
                     setTimeout(() => this.message = null, 10000);
                 }
-            }, 
+            },
         }
     },
 
@@ -77,15 +78,21 @@ export default Vue.component("login",{
             }
         },
         
+        async testAxiosLocalStorage() {
+            authService.axiosTest();
+        },
         $_login_validate: function() {
             this.validate();
         },
 
         $_login_authenticate: async function() {
-            const jwt = await authService.login(this.credentials);
+            const jwt = (await authService.login(this.credentials)).jwt;
             const payload = getJWTPayload(jwt); 
-            localStorage.setItem('JWT', jwt);
-            localStorage.setItem('claims', payload);
+            localStorage.setItem('jwt', jwt);
+            localStorage.setItem('role', payload.role);
+            localStorage.setItem('name', payload.name);
+            localStorage.setItem('username', payload.sub);
+            localStorage.setItem('id', payload.id);
             // should navigate to {name: 'homepage', params: {userId: payload.id }}
             this.$router.push({name: 'home'});
         },
@@ -100,8 +107,8 @@ export default Vue.component("login",{
 
 
 const getJWTPayload = (jwt) => {
-    base64Payload = jwt.split('.')[1];
-    stringPayload = base64ToString(base64Payload);
+    const base64Payload = jwt.split('.')[1];
+    const stringPayload = base64ToString(base64Payload);
     return JSON.parse(stringPayload);
 }
 

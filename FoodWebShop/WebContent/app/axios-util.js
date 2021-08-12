@@ -2,22 +2,26 @@ export default function init(endPoint) {
     const createRelativePath = initRelativePathCreator(endPoint);
     
     return {
-        get: async args => (await axiosInstance.get(createRelativePath(args))).data,
-        post: async (args, data) => (await axiosInstance.post(createRelativePath(args), data)).data,
-        put: async (args, data) => (await axiosInstance.put(createRelativePath(args), data)).data,
-        delete: async (args, data) => (await axiosInstance.delete(createRelativePath(args), data)).data,
+        get: async args => (await axios.get(createRelativePath(args), getRequestConfig())).data,
+        post: async (args, data) => (await axios.post(createRelativePath(args), data, getRequestConfig())).data,
+        put: async (args, data) => (await axios.put(createRelativePath(args), data, getRequestConfig())).data,
+        delete: async (args, data) => (await axios.delete(createRelativePath(args), data, getRequestConfig())).data,
     }
 } 
 
+
+
 const initRelativePathCreator = endPoint => (args='') => `${endPoint}/${args}`;
 
-const axiosInstance = axios.create({
-    baseURL: 'http://localhost:8080/FoodWebShop/rest/',
-    headers: {
-        'Content-Type': 'application/json',
-        'Authentication': `Bearer ${localStorage.getItem('JWT')}`
+const getRequestConfig = () => {
+    return {
+        baseURL: 'http://localhost:8080/FoodWebShop/rest/',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem('jwt') || ""}`
+        }
     }
-});
+}
 
 
 
