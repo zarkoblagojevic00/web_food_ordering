@@ -1,6 +1,6 @@
 [ {
   "id" : 1,
-  "deleted" : true,
+  "deleted" : false,
   "credentials" : {
     "username" : "Change",
     "password" : "Changed"

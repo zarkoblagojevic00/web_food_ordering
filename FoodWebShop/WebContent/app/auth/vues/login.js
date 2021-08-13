@@ -1,20 +1,21 @@
 import authService from '../axios-service.js'
-import formValidatorMixin from '../../mixins/form-validator-mixin.js';
+import requiredFieldValidatorMixin from '../../mixins/required-field-validator-mixin.js';
+import { saveClaimsToLocalStorage } from '../../local-storage-util.js';
 
 
 export default Vue.component("login",{
-    mixins: [formValidatorMixin],
+    mixins: [requiredFieldValidatorMixin],   // validate and checkInput
     template: `
     <div id="login">
         <form>
             <div>
                 <input 
-                    v-model.lazy="credentials.username" 
+                    v-model="credentials.username" 
                     placeholder="username" 
                     required>
                 </input>
                 <p 
-                    v-if="isInvalidCredentials['username']"
+                    v-hide="credentials.username"
                     class="small">
                     {{requiredFieldMsg}}
                 </p>
@@ -22,13 +23,13 @@ export default Vue.component("login",{
 
             <div>
                 <input 
-                    v-model.lazy="credentials.password" 
+                    v-model="credentials.password" 
                     type="password" 
                     placeholder="password" 
                     required>
                 </input>
                 <p 
-                    v-if="isInvalidCredentials['password']"
+                    v-hide="credentials.password"
                     class="small">
                     {{requiredFieldMsg}}
                 </p>
@@ -40,7 +41,6 @@ export default Vue.component("login",{
 
             <input type="submit" value="Sign in" class="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2" @click.prevent='login'></input>
             <router-link :to="{ name: 'signup'}" class="medium" exact>Not Registered? Sign up for free!</router-link>
-            <button @click="testAxiosLocalStorage">Test axios util</button>
         </form>
     </div> 
     `,
@@ -50,6 +50,7 @@ export default Vue.component("login",{
                 username: null,
                 password: null
             },
+            
             error: {
                 cause: null,
                 message: null,
@@ -61,40 +62,32 @@ export default Vue.component("login",{
         }
     },
 
-    computed: {
-        isInvalidCredentials() {
-           return this.isInvalidInput(this.credentials);
-        }
-    },
 
     methods: {
         async login() {
             try {
                 this.$_login_validate();
                 await this.$_login_authenticate();
+                this.$_login_navigate();
             } catch (e) {
                 console.error(e);
                 this.$_login_handleError(e);    
             }
         },
         
-        async testAxiosLocalStorage() {
-            authService.axiosTest();
-        },
-        $_login_validate: function() {
-            this.validate();
+        $_login_validate: function()  {
+            this.validate(this.credentials); // from mixin
         },
 
         $_login_authenticate: async function() {
             const jwt = (await authService.login(this.credentials)).jwt;
-            const payload = getJWTPayload(jwt); 
-            localStorage.setItem('jwt', jwt);
-            localStorage.setItem('role', payload.role);
-            localStorage.setItem('name', payload.name);
-            localStorage.setItem('username', payload.sub);
-            localStorage.setItem('id', payload.id);
+            saveClaimsToLocalStorage(jwt);
+        },
+
+        $_login_navigate: function() {
             // should navigate to {name: 'homepage', params: {userId: payload.id }}
             this.$router.push({name: 'home'});
+            location.reload();
         },
         
         $_login_handleError: function(e) {
@@ -104,14 +97,4 @@ export default Vue.component("login",{
 
     }
 })
-
-
-const getJWTPayload = (jwt) => {
-    const base64Payload = jwt.split('.')[1];
-    const stringPayload = base64ToString(base64Payload);
-    return JSON.parse(stringPayload);
-}
-
-const base64ToString = (base64str) => decodeURIComponent(escape(atob(base64str)))
-
 

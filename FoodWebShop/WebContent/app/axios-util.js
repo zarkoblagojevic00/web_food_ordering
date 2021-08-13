@@ -1,3 +1,5 @@
+import { getJwt } from "./local-storage-util.js";
+
 export default function init(endPoint) {
     const createRelativePath = initRelativePathCreator(endPoint);
     
@@ -9,8 +11,6 @@ export default function init(endPoint) {
     }
 } 
 
-
-
 const initRelativePathCreator = endPoint => (args='') => `${endPoint}/${args}`;
 
 const getRequestConfig = () => {
@@ -18,7 +18,7 @@ const getRequestConfig = () => {
         baseURL: 'http://localhost:8080/FoodWebShop/rest/',
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${localStorage.getItem('jwt') || ""}`
+            'Authorization': `Bearer ${getJwt() || ""}`
         }
     }
 }

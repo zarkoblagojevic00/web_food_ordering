@@ -30,7 +30,9 @@ public class JsonFileRepository<T extends Entity> implements Repository<T> {
 
     @Override
     public Collection<T> getAll() {
-        return entities.values();
+        return entities.values().stream()
+                .filter(entity -> !entity.isDeleted())
+                .collect(Collectors.toList());
     }
 
     @Override
