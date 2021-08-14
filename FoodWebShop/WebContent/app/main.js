@@ -17,6 +17,6 @@ Vue.directive("hide", {
 const app = new Vue({
     router,
     components : {
-        'the-navbar': NavBar
+        'the-navbar': NavBar,
     }
 }).$mount('#app');

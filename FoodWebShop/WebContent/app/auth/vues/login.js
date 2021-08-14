@@ -92,7 +92,15 @@ export default Vue.component("login",{
         
         $_login_handleError: function(e) {
             this.error.cause = e;
-            this.error.displayMessage('Wrong username or password. Please try again.');
+            const response = e.response;
+            if (!response) {
+                this.error.displayMessage('Please enter both username and password!');
+                return;
+            } 
+            if (response.status == 404) {
+                this.error.displayMessage('Wrong username or password. Please try again.');
+                return;
+            }
         },
 
     }

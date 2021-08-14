@@ -1,1 +1,18 @@
-[ ]
+[ {
+  "id" : 1,
+  "deleted" : false,
+  "credentials" : {
+    "username" : "username",
+    "password" : "password"
+  },
+  "personalData" : {
+    "firstName" : "User",
+    "lastName" : "Userov",
+    "gender" : "MALE",
+    "dateOfBirth" : 965898420000
+  },
+  "role" : "CUSTOMER",
+  "pointsEarned" : 0.0,
+  "type" : "BRONZE",
+  "cart" : null
+} ]

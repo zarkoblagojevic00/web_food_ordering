@@ -4,7 +4,7 @@ const axiosEndpoint = init('auth');
 
 const authService = {
         login: (credentials) => axiosEndpoint.post('login', credentials),
-        signup: (newUserInfo) => axiosEndpoint.post('signup', newUserInfo),
+        signup: (credentials, personalData) => axiosEndpoint.post('signup', {credentials, personalData}),
 }
 
 export {authService as default };

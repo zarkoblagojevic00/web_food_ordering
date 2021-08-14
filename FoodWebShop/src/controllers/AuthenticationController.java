@@ -1,6 +1,7 @@
 package controllers;
 
 import beans.users.base.Credentials;
+import beans.users.roles.customer.Customer;
 import services.auth.AuthenticationResponse;
 import services.auth.AuthenticationService;
 
@@ -23,6 +24,13 @@ public class AuthenticationController {
     @Path("/login")
     public Response login(Credentials credentials) {
         AuthenticationResponse authResponse = authService.login(credentials);
+        return Response.status(Response.Status.OK).entity(authResponse).build();
+    }
+
+    @POST
+    @Path("/signup")
+    public Response signup(Customer newCustomer) {
+        AuthenticationResponse authResponse = authService.createCustomer(newCustomer);
         return Response.status(Response.Status.OK).entity(authResponse).build();
     }
 

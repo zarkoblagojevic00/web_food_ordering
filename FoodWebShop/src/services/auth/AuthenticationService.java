@@ -2,12 +2,14 @@ package services.auth;
 
 import beans.users.base.Credentials;
 import beans.users.base.User;
+import beans.users.roles.customer.Customer;
 import repositories.interfaces.AdminRepository;
 import repositories.interfaces.CustomerRepository;
 import repositories.interfaces.DelivererRepository;
 import repositories.interfaces.ManagerRepository;
 import security.JwtUtil;
 import services.exceptions.BadCredentialsException;
+import services.exceptions.UsernameAlreadyExistsException;
 
 import javax.inject.Inject;
 
@@ -50,4 +52,21 @@ public class AuthenticationService {
     }
 
 
+    public AuthenticationResponse createCustomer(Customer newCustomer) {
+        Customer savedCustomer = saveCustomer(newCustomer);
+        String jwt = jwtUtil.generateToken(savedCustomer);
+        return new AuthenticationResponse(jwt);
+    }
+
+    private Customer saveCustomer(Customer newCustomer) {
+        String username = newCustomer.getCredentials().getUsername();
+        try {
+            findUserByUsername(username);
+        } catch (BadCredentialsException e) {
+            return customerRepo.save(newCustomer);
+        }
+
+        throw new UsernameAlreadyExistsException("User with username: " + username + " already exists.");
+
+    }
 }
