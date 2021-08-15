@@ -1,5 +1,7 @@
 import router from './router.js'
 import NavBar from './vues/the-navbar.js'
+import tab from './components/tab.js';
+import tabbedPane from './components/tabbed-pane.js';
 
 // Extract the function out, up here, so I'm not writing it twice
 const update = (el, binding, vnode, oldVnode) => el.style.visibility = (binding.value) ? "hidden" : "";
@@ -18,5 +20,7 @@ const app = new Vue({
     router,
     components : {
         'the-navbar': NavBar,
+        'tab': tab,
+        'tabbed-pane': tabbedPane
     }
 }).$mount('#app');

@@ -1,6 +1,6 @@
 import authService from '../axios-service.js'
 import requiredFieldValidatorMixin from '../../mixins/required-field-validator-mixin.js';
-import { saveClaimsToLocalStorage } from '../../local-storage-util.js';
+import {getRole, getId, saveClaimsToLocalStorage } from '../../local-storage-util.js';
 
 export default Vue.component("signup",{
     mixins: [requiredFieldValidatorMixin],
@@ -160,9 +160,7 @@ export default Vue.component("signup",{
         },
 
         $_signup_navigate: function() {
-            // should navigate to {name: 'homepage', params: {userId: payload.id }}
-            this.$router.push({name: 'home'});
-            location.reload();
+            this.$router.push({name: getRole(), params: { id: getId() }});
         },
         
         $_signup_handleError: function(e) {

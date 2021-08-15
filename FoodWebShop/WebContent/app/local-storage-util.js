@@ -27,6 +27,10 @@ export const saveClaimsToLocalStorage = (jwt) => {
     localStorage.setItem(NAME_KEY, payload.name);
     localStorage.setItem(USERNAME_KEY, payload.sub);
     localStorage.setItem(ID_KEY, payload.id);
+    dispatchEvent(new CustomEvent('user-logged-in', {
+        detail: {
+          role: getRole()
+        }}));
 }
 
 export const clearStorage = () => localStorage.clear();

@@ -1,6 +1,6 @@
 import authService from '../axios-service.js'
 import requiredFieldValidatorMixin from '../../mixins/required-field-validator-mixin.js';
-import { saveClaimsToLocalStorage } from '../../local-storage-util.js';
+import { getRole, getId, saveClaimsToLocalStorage } from '../../local-storage-util.js';
 
 
 export default Vue.component("login",{
@@ -85,9 +85,7 @@ export default Vue.component("login",{
         },
 
         $_login_navigate: function() {
-            // should navigate to {name: 'homepage', params: {userId: payload.id }}
-            this.$router.push({name: 'home'});
-            location.reload();
+            this.$router.push({name: getRole(), params: { id: getId() }});
         },
         
         $_login_handleError: function(e) {

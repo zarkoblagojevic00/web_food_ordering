@@ -20,18 +20,19 @@ export default Vue.component("the-navbar",{
     `,
     data() { 
         return {
-           
+           role: null
         }
     },
 
-    computed: {
-        role: () => getRole()
+    mounted() {
+        addEventListener('user-logged-in', event => this.role = event.detail.role);
+        this.role = getRole();
     },
 
     methods: {
         logout () {
             clearStorage();
-            location.reload();
+            this.role = null;
         }
     }
 })
