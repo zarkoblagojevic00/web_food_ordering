@@ -86,7 +86,7 @@ public class TestController {
 		Admin createdAdmin = repo.save(admin);
 
 		if (update) {
-			createdAdmin.setCredentials(new Credentials("Change", "Changed"));
+			//createdAdmin.setCredentials(new Credentials("Change", "Changed"));
 			repo.update(createdAdmin);
 		}
 

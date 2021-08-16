@@ -38,14 +38,14 @@ public class JwtUtil {
 
     public String generateToken(User user) {
         Map<String, Object> claims = issueClaims(user);
-        return createToken(claims, user.getCredentials().getUsername());
+        return createToken(claims, user.getUsername());
     }
 
     private Map<String, Object> issueClaims(User user) {
         return new HashMap<String, Object>() {{
            put("id", user.getId());
            put("role", user.getRole());
-           put("name", user.getPersonalData().getFirstName());
+           put("name", user.getFirstName());
         }};
     }
 

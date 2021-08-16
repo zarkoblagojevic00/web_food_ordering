@@ -59,7 +59,7 @@ public class AuthenticationService {
     }
 
     private Customer saveCustomer(Customer newCustomer) {
-        String username = newCustomer.getCredentials().getUsername();
+        String username = newCustomer.getUsername();
         try {
             findUserByUsername(username);
         } catch (BadCredentialsException e) {

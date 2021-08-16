@@ -4,6 +4,7 @@ import beans.Entity;
 
 import javax.security.auth.Subject;
 import java.security.Principal;
+import java.util.Date;
 
 public abstract class User extends Entity implements Identifiable, Authorizable, Principal {
     private Credentials credentials;
@@ -24,16 +25,28 @@ public abstract class User extends Entity implements Identifiable, Authorizable,
         return credentials;
     }
 
-    public void setCredentials(Credentials credentials) {
-        this.credentials = credentials;
-    }
-
-    public PersonalData getPersonalData() {
-        return personalData;
-    }
-
     public void setPersonalData(PersonalData personalData) {
         this.personalData = personalData;
+    }
+
+    public String getUsername() {
+        return credentials.getUsername();
+    }
+
+    public String getFirstName() {
+        return personalData.getFirstName();
+    }
+
+    public String getLastName() {
+        return personalData.getLastName();
+    }
+
+    public Gender getGender() {
+        return personalData.getGender();
+    }
+
+    public Date getDateOfBirth() {
+        return personalData.getDateOfBirth();
     }
 
     @Override
@@ -51,6 +64,7 @@ public abstract class User extends Entity implements Identifiable, Authorizable,
         return this.role.equals(role);
     }
 
+    // Principal - for security context
     @Override
     public String getName() {
         return credentials.getUsername();

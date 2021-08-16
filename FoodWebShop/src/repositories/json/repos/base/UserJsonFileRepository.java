@@ -11,7 +11,7 @@ public class UserJsonFileRepository<T extends User> extends JsonFileRepository<T
     @Override
     public T getUserByUsername(String username) {
         return getAll().stream()
-                .filter(user -> user.getCredentials().getUsername().equals(username))
+                .filter(user -> username.equals(user.getUsername()))
                 .findFirst()
                 .orElse(null);
     }

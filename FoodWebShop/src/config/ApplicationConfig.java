@@ -5,14 +5,10 @@ import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.server.filter.RolesAllowedDynamicFeature;
 import repositories.ITestRepository;
 import repositories.TestRepository;
-import repositories.interfaces.AdminRepository;
-import repositories.interfaces.CustomerRepository;
-import repositories.interfaces.DelivererRepository;
-import repositories.interfaces.ManagerRepository;
-import repositories.json.repos.AdminJsonFileRepository;
-import repositories.json.repos.CustomerJsonFileRepository;
-import repositories.json.repos.DelivererJsonFileRepository;
-import repositories.json.repos.ManagerJsonFileRepository;
+import repositories.interfaces.*;
+import repositories.json.repos.*;
+import services.ActivityService;
+import services.CustomerService;
 import services.TestService;
 import services.auth.AuthenticationService;
 
@@ -32,11 +28,14 @@ public class ApplicationConfig extends ResourceConfig {
             put(CustomerRepository.class, CustomerJsonFileRepository.class);
             put(ManagerRepository.class, ManagerJsonFileRepository.class);
             put(DelivererRepository.class, DelivererJsonFileRepository.class);
+            put(ActivityRepository.class, ActivityJsonFileRepository.class);
         }};
 
         concretes = Arrays.asList(
                 TestService.class,
-                AuthenticationService.class
+                AuthenticationService.class,
+                ActivityService.class,
+                CustomerService.class
         );
 
         registerDependencyInjection();

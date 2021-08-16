@@ -6,13 +6,14 @@
     "password" : "password"
   },
   "personalData" : {
-    "firstName" : "User",
-    "lastName" : "Userov",
+    "firstName" : "Test",
+    "lastName" : "Testov",
     "gender" : "MALE",
-    "dateOfBirth" : 965898420000
+    "dateOfBirth" : 1628100600000
   },
   "role" : "CUSTOMER",
   "pointsEarned" : 0.0,
   "type" : "BRONZE",
-  "cart" : null
+  "cart" : null,
+  "activityStatus" : "OK"
 } ]

@@ -10,11 +10,13 @@ public class Customer extends User {
     private double pointsEarned;
     private CustomerTypeName type;
     private ShoppingCart cart;
+    private UserActivityStatus activityStatus;
 
     public Customer() {
         super(Role.CUSTOMER);
         pointsEarned = 0;
         type = CustomerTypeName.BRONZE;
+        activityStatus = UserActivityStatus.OK;
     }
 
     public Customer(Credentials credentials, PersonalData personalData) {
@@ -45,7 +47,11 @@ public class Customer extends User {
         return this.type.equals(type);
     }
 
-    public void tryPromote(CustomerType type) {
+    public UserActivityStatus getActivityStatus() {
+        return activityStatus;
+    }
 
+    public void setActivityStatus(UserActivityStatus activityStatus) {
+        this.activityStatus = activityStatus;
     }
 }
