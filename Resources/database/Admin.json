@@ -1,1 +1,15 @@
-[ ]
+[ {
+  "id" : 1,
+  "deleted" : false,
+  "credentials" : {
+    "username" : "Change",
+    "password" : "Changed"
+  },
+  "personalData" : {
+    "firstName" : "Test",
+    "lastName" : "Test",
+    "gender" : "MALE",
+    "dateOfBirth" : 1628747125959
+  },
+  "role" : "ADMIN"
+}]

@@ -2,18 +2,55 @@
   "id" : 1,
   "deleted" : false,
   "credentials" : {
-    "username" : "username",
+    "username" : "aaa",
     "password" : "password"
   },
   "personalData" : {
-    "firstName" : "Test",
-    "lastName" : "Testov",
+    "firstName" : "Aaa",
+    "lastName" : "Aaa",
     "gender" : "MALE",
     "dateOfBirth" : 1628100600000
   },
   "role" : "CUSTOMER",
   "pointsEarned" : 0.0,
   "type" : "BRONZE",
+  "cart" : null,
+  "activityStatus" : "BANNED"
+}, {
+  "id" : 2,
+  "deleted" : false,
+  "credentials" : {
+    "username" : "bbb",
+    "password" : "pass"
+  },
+  "personalData" : {
+    "firstName" : "Bbb",
+    "lastName" : "Bbb",
+    "gender" : "MALE",
+    "dateOfBirth" : 1628100600000
+  },
+  "role" : "CUSTOMER",
+  "pointsEarned" : 20.0,
+  "type" : "SILVER",
+  "cart" : null,
+  "activityStatus" : "SUSPICIOUS"
+},
+{
+  "id" : 3,
+  "deleted" : false,
+  "credentials" : {
+    "username" : "zzz",
+    "password" : "pass"
+  },
+  "personalData" : {
+    "firstName" : "Zzz",
+    "lastName" : "Zzz",
+    "gender" : "MALE",
+    "dateOfBirth" : 1628100600000
+  },
+  "role" : "CUSTOMER",
+  "pointsEarned" : 100.0,
+  "type" : "GOLD",
   "cart" : null,
   "activityStatus" : "OK"
 } ]

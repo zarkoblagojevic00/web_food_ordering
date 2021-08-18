@@ -2,6 +2,7 @@ package services;
 
 import beans.users.roles.customer.Customer;
 import beans.users.roles.customer.CustomerActivityReport;
+import beans.users.roles.customer.UserActivityStatus;
 import dtos.CustomerOverviewDTO;
 import repositories.interfaces.CustomerRepository;
 
@@ -31,4 +32,9 @@ public class CustomerService {
     }
 
 
+    public void banCustomer(String username) {
+        Customer customer = customerRepo.getUserByUsername(username);
+        customer.setActivityStatus(UserActivityStatus.BANNED);
+        customerRepo.update(customer);
+    }
 }

@@ -7,7 +7,7 @@ import beans.users.base.Role;
 import beans.users.base.User;
 
 public class Customer extends User {
-    private double pointsEarned;
+    private int pointsEarned;
     private CustomerTypeName type;
     private ShoppingCart cart;
     private UserActivityStatus activityStatus;
@@ -27,11 +27,11 @@ public class Customer extends User {
         return cart;
     }
 
-    public double getPointsEarned() {
+    public int getPointsEarned() {
         return pointsEarned;
     }
 
-    public void setPointsEarned(double pointsEarned) {
+    public void setPointsEarned(int pointsEarned) {
         this.pointsEarned = pointsEarned;
     }
 
