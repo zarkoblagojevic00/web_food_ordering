@@ -16,4 +16,12 @@ public class Manager extends User {
     public Manager(Credentials credentials, PersonalData personalData) {
         super(credentials, personalData, Role.MANAGER);
     }
+
+    public Restaurant getRestaurant() {
+        return this.restaurant;
+    }
+
+    public void setRestaurant(Restaurant restaurant) {
+        this.restaurant = restaurant;
+    }
 }

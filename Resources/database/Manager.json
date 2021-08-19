@@ -1,1 +1,31 @@
-[ ]
+[ {
+  "id" : 1,
+  "deleted" : false,
+  "credentials" : {
+    "username" : "manager",
+    "password" : "managerpass"
+  },
+  "personalData" : {
+    "firstName" : "Jane",
+    "lastName" : "Doe",
+    "gender" : "FEMALE",
+    "dateOfBirth" : 1628100600000
+  },
+  "role" : "MANAGER",
+  "restaurant" : null
+}, {
+  "id" : 2,
+  "deleted" : false,
+  "credentials" : {
+    "username" : "mana",
+    "password" : "managerpass"
+  },
+  "personalData" : {
+    "firstName" : "John",
+    "lastName" : "Doe",
+    "gender" : "MALE",
+    "dateOfBirth" : 1628100600000
+  },
+  "role" : "MANAGER",
+  "restaurant" : null
+} ]

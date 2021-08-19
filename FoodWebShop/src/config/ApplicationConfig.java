@@ -9,6 +9,7 @@ import repositories.interfaces.*;
 import repositories.json.repos.*;
 import services.ActivityService;
 import services.CustomerService;
+import services.ManagerService;
 import services.TestService;
 import services.auth.AuthenticationService;
 
@@ -28,6 +29,7 @@ public class ApplicationConfig extends ResourceConfig {
             put(CustomerRepository.class, CustomerJsonFileRepository.class);
             put(ManagerRepository.class, ManagerJsonFileRepository.class);
             put(DelivererRepository.class, DelivererJsonFileRepository.class);
+            put(RestaurantRepository.class, RestaurantJsonFileRepository.class);
             put(ActivityRepository.class, ActivityJsonFileRepository.class);
         }};
 
@@ -35,7 +37,8 @@ public class ApplicationConfig extends ResourceConfig {
                 TestService.class,
                 AuthenticationService.class,
                 ActivityService.class,
-                CustomerService.class
+                CustomerService.class,
+                ManagerService.class
         );
 
         registerDependencyInjection();

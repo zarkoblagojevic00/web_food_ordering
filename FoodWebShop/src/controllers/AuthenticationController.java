@@ -31,7 +31,7 @@ public class AuthenticationController {
     @Path("/signup")
     public Response signup(Customer newCustomer) {
         AuthenticationResponse authResponse = authService.createCustomer(newCustomer);
-        return Response.status(Response.Status.OK).entity(authResponse).build();
+        return Response.status(Response.Status.CREATED).entity(authResponse).build();
     }
 
 }

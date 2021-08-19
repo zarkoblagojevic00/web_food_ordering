@@ -13,7 +13,7 @@ public abstract class UserOverviewDTO {
     final private Date dateOfBirth;
 
     public UserOverviewDTO(User user) {
-        this.username = user.getCredentials().getUsername();
+        this.username = user.getUsername();
         this.firstName = user.getFirstName();
         this.lastName = user.getLastName();
         this.gender = user.getGender();
