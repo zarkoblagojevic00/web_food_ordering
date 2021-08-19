@@ -1,6 +1,6 @@
 import customerService from "../customer-service-axios.js"
 import customer from "./customer.js"
-import finder from "../../../../components/finder.js";
+import finder from "../../../../components/finder/finder.js";
 
 export default Vue.component("customers-overview",{
     components: {
@@ -12,7 +12,8 @@ export default Vue.component("customers-overview",{
         <finder ref="finder"
             :items="customers"
             :sortBy="sortBy"
-            :filterBy="filterBy"/>
+            :filterByOptions="filterByOptions"
+            :searchByTextFields="searchByTextFields"/>
         </finder>
         <customer 
             v-for="customer in found" 
@@ -32,7 +33,7 @@ export default Vue.component("customers-overview",{
                 username: "Username",
                 pointsEarned: "Points earned"
             },
-            filterBy: {
+            filterByOptions: {
                 type: {
                     display: 'Type',
                     options: {
@@ -49,6 +50,11 @@ export default Vue.component("customers-overview",{
                         BANNED: 'Banned'
                     }
                 }
+            },
+            searchByTextFields: {
+                firstName: "First name",
+                lastName: "Last name",
+                username: "Username"
             }
         }
     },
@@ -59,7 +65,7 @@ export default Vue.component("customers-overview",{
 
     // referencing child's computed property as parents
     mounted() {
-        this.$watch(() => this.$refs.finder.found, (value) => this.found = value)
+        this.$watch(() => this.$refs.finder.found, (value) => this.found = value);
     },
 
     
