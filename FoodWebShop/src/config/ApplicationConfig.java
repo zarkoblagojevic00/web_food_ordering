@@ -35,6 +35,7 @@ public class ApplicationConfig extends ResourceConfig {
                 TestService.class,
                 AuthenticationService.class,
                 ActivityService.class,
+                AdminService.class,
                 CustomerService.class,
                 ManagerService.class,
                 DelivererService.class

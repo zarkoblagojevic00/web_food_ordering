@@ -12,4 +12,19 @@
     "dateOfBirth" : 1628747125959
   },
   "role" : "ADMIN"
+},
+{
+  "id" : 2,
+  "deleted" : false,
+  "credentials" : {
+    "username" : "admin-admin",
+    "password" : "password"
+  },
+  "personalData" : {
+    "firstName" : "Admin",
+    "lastName" : "Page",
+    "gender" : "FEMALE",
+    "dateOfBirth" : 1600747125959
+  },
+  "role" : "ADMIN"
 }]

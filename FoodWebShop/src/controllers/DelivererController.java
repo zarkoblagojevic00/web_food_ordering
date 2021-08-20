@@ -3,6 +3,7 @@ package controllers;
 import dtos.DelivererOverviewDTO;
 import services.DelivererService;
 
+import javax.annotation.security.RolesAllowed;
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -18,7 +19,7 @@ public class DelivererController {
 
     @GET
     @Path("overview")
-    //@RolesAllowed("ADMIN")
+    @RolesAllowed("ADMIN")
     public Response getAll() {
         Collection<DelivererOverviewDTO> deliverers = delivererService.getDeliverersOverview();
         return Response.ok(deliverers).build();
@@ -26,6 +27,7 @@ public class DelivererController {
 
     @PUT
     @Path("ban")
+    @RolesAllowed("ADMIN")
     public Response ban(String username) {
         delivererService.banDeliverer(username);
         return Response.noContent().build();
@@ -33,6 +35,7 @@ public class DelivererController {
 
     @DELETE
     @Path("{username}")
+    @RolesAllowed("ADMIN")
     public Response delete(@PathParam("username") String username) {
         delivererService.deleteDeliverer(username);
         return Response.noContent().build();

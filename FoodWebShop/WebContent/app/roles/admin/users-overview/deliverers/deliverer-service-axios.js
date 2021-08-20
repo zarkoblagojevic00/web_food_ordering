@@ -2,10 +2,10 @@ import init from "../../../../axios-util.js";
 
 const axiosEndpoint = init('deliverers');
 
-const managerService = {
+const delivererService = {
         getOverview: () => axiosEndpoint.get('overview'),
         ban: (username) => axiosEndpoint.put('ban', username),
         delete: (username) => axiosEndpoint.delete(username)
 }
 
-export { managerService as default };
+export { delivererService as default };

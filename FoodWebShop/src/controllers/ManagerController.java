@@ -3,6 +3,7 @@ package controllers;
 import dtos.ManagerOverviewDTO;
 import services.ManagerService;
 
+import javax.annotation.security.RolesAllowed;
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -18,7 +19,7 @@ public class ManagerController {
 
     @GET
     @Path("overview")
-    //@RolesAllowed("ADMIN")
+    @RolesAllowed("ADMIN")
     public Response getAll() {
         Collection<ManagerOverviewDTO> managers = managerService.getManagersOverview();
         return Response.ok(managers).build();
@@ -26,6 +27,7 @@ public class ManagerController {
 
     @PUT
     @Path("ban")
+    @RolesAllowed("ADMIN")
     public Response ban(String username) {
         managerService.banManager(username);
         return Response.noContent().build();
@@ -33,6 +35,7 @@ public class ManagerController {
 
     @DELETE
     @Path("{username}")
+    @RolesAllowed("ADMIN")
     public Response delete(@PathParam("username") String username) {
         managerService.deleteManager(username);
         return Response.noContent().build();
