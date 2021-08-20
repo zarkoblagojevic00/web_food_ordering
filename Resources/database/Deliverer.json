@@ -12,6 +12,24 @@
     "dateOfBirth" : 1628100600000
   },
   "role" : "DELIVERER",
-  "orders" : null,
-  "deliveryRequests" : null
+  "activityStatus" : "OK",
+  "orders" : [ ],
+  "deliveryRequests" : [ ]
+}, {
+  "id" : 2,
+  "deleted" : true,
+  "credentials" : {
+    "username" : "add-user",
+    "password" : "password"
+  },
+  "personalData" : {
+    "firstName" : "Add",
+    "lastName" : "User",
+    "gender" : "OTHER",
+    "dateOfBirth" : 668110020000
+  },
+  "role" : "DELIVERER",
+  "activityStatus" : "BANNED",
+  "orders" : [ ],
+  "deliveryRequests" : [ ]
 } ]

@@ -7,10 +7,7 @@ import repositories.ITestRepository;
 import repositories.TestRepository;
 import repositories.interfaces.*;
 import repositories.json.repos.*;
-import services.ActivityService;
-import services.CustomerService;
-import services.ManagerService;
-import services.TestService;
+import services.*;
 import services.auth.AuthenticationService;
 
 import java.util.Arrays;
@@ -31,6 +28,7 @@ public class ApplicationConfig extends ResourceConfig {
             put(DelivererRepository.class, DelivererJsonFileRepository.class);
             put(RestaurantRepository.class, RestaurantJsonFileRepository.class);
             put(ActivityRepository.class, ActivityJsonFileRepository.class);
+            put(OrderRepository.class, OrderJsonFileRepository.class);
         }};
 
         concretes = Arrays.asList(
@@ -38,7 +36,8 @@ public class ApplicationConfig extends ResourceConfig {
                 AuthenticationService.class,
                 ActivityService.class,
                 CustomerService.class,
-                ManagerService.class
+                ManagerService.class,
+                DelivererService.class
         );
 
         registerDependencyInjection();
