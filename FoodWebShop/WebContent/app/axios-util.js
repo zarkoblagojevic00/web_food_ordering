@@ -7,7 +7,7 @@ export default function init(endPoint) {
         get: async args => (await axios.get(createRelativePath(args), getRequestConfig())).data,
         post: async (args, data) => (await axios.post(createRelativePath(args), data, getRequestConfig())).data,
         put: async (args, data) => (await axios.put(createRelativePath(args), data, getRequestConfig())).data,
-        delete: async (args, data) => (await axios.delete(createRelativePath(args), data, getRequestConfig())).data,
+        delete: async args  => (await axios.delete(createRelativePath(args), getRequestConfig())).data,
     }
 } 
 

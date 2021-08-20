@@ -1,6 +1,9 @@
 import customerService from "../customer-service-axios.js";
+import formatDateMixin from "../../../../../mixins/format-date-mixin.js";
+import userActivityStatusMixin from "../../../../../mixins/user-activity-status-mixin.js";
 
 export default Vue.component("customer",{
+    mixins: [formatDateMixin, userActivityStatusMixin],
     props: {
         username: String,
         firstName: String,
@@ -11,7 +14,6 @@ export default Vue.component("customer",{
         type: String,
         pointsEarned: Number,
         activityReport: Object,
-        ban: Function
     },
 
     template: `
@@ -63,27 +65,6 @@ export default Vue.component("customer",{
     data() { 
         return {
            
-        }
-    },
-
-    filters: {
-        formatDate(value) {
-            return new Date(value).toLocaleDateString('sr')
-        }
-
-    },
-
-    computed: {
-        isOk() {
-            return this.activityStatus === 'OK';
-        },
-
-        isSuspicious() {
-            return this.activityStatus === 'SUSPICIOUS';
-        },
-
-        isBanned() {
-            return this.activityStatus === 'BANNED';
         }
     },
 

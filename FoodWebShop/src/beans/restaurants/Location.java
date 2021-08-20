@@ -7,4 +7,8 @@ public class Location {
     private String streetName;
     private String municipality;
     private String postalCode;
+
+    public Location() {
+
+    }
 }

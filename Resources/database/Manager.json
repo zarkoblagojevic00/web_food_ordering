@@ -1,6 +1,6 @@
 [ {
   "id" : 1,
-  "deleted" : false,
+  "deleted" : true,
   "credentials" : {
     "username" : "manager",
     "password" : "managerpass"
@@ -12,6 +12,7 @@
     "dateOfBirth" : 1628100600000
   },
   "role" : "MANAGER",
+  "activityStatus" : "BANNED",
   "restaurant" : null
 }, {
   "id" : 2,
@@ -27,5 +28,54 @@
     "dateOfBirth" : 1628100600000
   },
   "role" : "MANAGER",
+  "activityStatus" : "OK",
+  "restaurant" : null
+}, {
+  "id" : 3,
+  "deleted" : false,
+  "credentials" : {
+    "username" : "manamana",
+    "password" : "managerpass"
+  },
+  "personalData" : {
+    "firstName" : "Jessy",
+    "lastName" : "Doe",
+    "gender" : "MALE",
+    "dateOfBirth" : 1628100600000
+  },
+  "role" : "MANAGER",
+  "activityStatus" : "OK",
+  "restaurant" : null
+}, {
+  "id" : 4,
+  "deleted" : false,
+  "credentials" : {
+    "username" : "add-manager",
+    "password" : "managerpass"
+  },
+  "personalData" : {
+    "firstName" : "Add",
+    "lastName" : "Manager",
+    "gender" : "FEMALE",
+    "dateOfBirth" : 915193980000
+  },
+  "role" : "MANAGER",
+  "activityStatus" : "OK",
+  "restaurant" : null
+}, {
+  "id" : 5,
+  "deleted" : false,
+  "credentials" : {
+    "username" : "meenager",
+    "password" : "password"
+  },
+  "personalData" : {
+    "firstName" : "Meen",
+    "lastName" : "Mennie",
+    "gender" : "FEMALE",
+    "dateOfBirth" : 949415340000
+  },
+  "role" : "MANAGER",
+  "activityStatus" : "OK",
   "restaurant" : null
 } ]

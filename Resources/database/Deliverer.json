@@ -1,1 +1,17 @@
-[ ]
+[ {
+  "id" : 1,
+  "deleted" : false,
+  "credentials" : {
+    "username" : "delideli",
+    "password" : "delivererpass"
+  },
+  "personalData" : {
+    "firstName" : "James",
+    "lastName" : "Doe",
+    "gender" : "MALE",
+    "dateOfBirth" : 1628100600000
+  },
+  "role" : "DELIVERER",
+  "orders" : null,
+  "deliveryRequests" : null
+} ]

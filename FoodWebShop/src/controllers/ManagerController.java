@@ -1,6 +1,5 @@
 package controllers;
 
-import beans.users.roles.manager.Manager;
 import dtos.ManagerOverviewDTO;
 import services.ManagerService;
 
@@ -25,11 +24,17 @@ public class ManagerController {
         return Response.ok(managers).build();
     }
 
-    @POST
-    //@RolesAllowed("ADMIN")
-    public Response create(Manager newManager) {
-        Manager createdManager = managerService.save(newManager);
-        return Response.status(Response.Status.CREATED).entity(createdManager).build();
+    @PUT
+    @Path("ban")
+    public Response ban(String username) {
+        managerService.banManager(username);
+        return Response.noContent().build();
     }
 
+    @DELETE
+    @Path("{username}")
+    public Response delete(@PathParam("username") String username) {
+        managerService.deleteManager(username);
+        return Response.noContent().build();
+    }
 }

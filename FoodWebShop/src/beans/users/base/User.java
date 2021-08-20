@@ -1,6 +1,7 @@
 package beans.users.base;
 
 import beans.Entity;
+import beans.users.roles.customer.UserActivityStatus;
 
 import javax.security.auth.Subject;
 import java.security.Principal;
@@ -11,14 +12,23 @@ public abstract class User extends Entity implements Identifiable, Authorizable,
     private PersonalData personalData;
     final private Role role;
 
+    private UserActivityStatus activityStatus;
+
+
     public User(Role role) {
         this.role = role;
+        this.activityStatus = UserActivityStatus.OK;
     }
 
     public User(Credentials credentials, PersonalData personalData, Role role) {
         this.credentials = credentials;
         this.personalData = personalData;
         this.role = role;
+        this.activityStatus = UserActivityStatus.OK;
+    }
+
+    public PersonalData getPersonalData() {
+        return personalData;
     }
 
     public Credentials getCredentials() {
@@ -27,6 +37,14 @@ public abstract class User extends Entity implements Identifiable, Authorizable,
 
     public void setPersonalData(PersonalData personalData) {
         this.personalData = personalData;
+    }
+
+    public UserActivityStatus getActivityStatus() {
+        return activityStatus;
+    }
+
+    public void setActivityStatus(UserActivityStatus activityStatus) {
+        this.activityStatus = activityStatus;
     }
 
     public String getUsername() {
@@ -74,4 +92,5 @@ public abstract class User extends Entity implements Identifiable, Authorizable,
     public boolean implies(Subject subject) {
         return Principal.super.implies(subject);
     }
+
 }

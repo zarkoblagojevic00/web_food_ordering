@@ -1,14 +1,15 @@
-import authService from '../auth-service-axios.js'
-import requiredFieldValidatorMixin from '../../mixins/required-field-validator-mixin.js';
-import {getRole, getId, saveClaimsToLocalStorage } from '../../local-storage-util.js';
+import authService from "../../../auth/auth-service-axios.js";
+import requiredFieldValidatorMixin from "../../../mixins/required-field-validator-mixin.js";
 
-export default Vue.component("signup",{
+export default Vue.component("add-user",{
+    props: ['role'],
     mixins: [requiredFieldValidatorMixin],
     components: {
 		vuejsDatepicker
 	},
     template: `
-    <div id="signup">
+    <div id="add-user">
+        <h3>Add user</h3>
         <form>
             <div>
                 <input 
@@ -92,6 +93,15 @@ export default Vue.component("signup",{
                     {{requiredFieldMsg}}
                 </p>
             </div>
+
+            <div>
+                <input
+                    :value="role" 
+                    type="text" 
+                    disabled 
+                    >
+                </input>
+            </div>
             
             <div v-if="error"> 
                 {{error.message}} 
@@ -99,9 +109,9 @@ export default Vue.component("signup",{
 
             <input 
                 type="submit" 
-                value="Sign up" 
-                @click.prevent='signup' 
-                class="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2" ></input>
+                value="Submit" 
+                @click.prevent='add' 
+                class="btn btn-primary btn-block text-uppercase font-weight-bold mb-2" ></input>
         </form>
     </div> 
     `,
@@ -135,35 +145,32 @@ export default Vue.component("signup",{
             }
         }
     },
-
-
     methods: {
-        async signup() {
+        async add() {
             try {
-                this.$_signup_validate();
-                await this.$_signup_authenticate();
-                this.$_signup_navigate();
+                this.$_add_validate();
+                await this.$_add_send();
+                this.$_add_navigate_back();
             } catch (e) {
                 console.error(e);
-                this.$_signup_handleError(e);    
+                this.$_add_handleError(e);
             }
         },
         
-        $_signup_validate: function()  {
+        $_add_validate: function()  {
             this.validate(this.credentials); // from mixin
             this.validate(this.personalData);
         },
 
-        $_signup_authenticate: async function() {
-            const jwt = (await authService.signup(this.credentials, this.personalData)).jwt;
-            saveClaimsToLocalStorage(jwt);
+        $_add_send: async function() {
+            await authService.add(this.credentials, this.personalData, this.role);
         },
 
-        $_signup_navigate: function() {
-            this.$router.push({name: getRole(), params: { id: getId() }});
+        $_add_navigate_back: function() {
+            this.$router.go(-1);
         },
-        
-        $_signup_handleError: function(e) {
+
+        $_add_handleError: function(e) {
             this.error.cause = e;
             const response = e.response;
             if (!response) {
@@ -175,10 +182,9 @@ export default Vue.component("signup",{
                 return;
             }
             if (response.status == 500) {
-                this.error.displayMessage('Sorry! We were unable to fulfill your signup request!\nPlease try again later.');
+                this.error.displayMessage('Sorry! We were unable to fulfill your request!\nPlease try again later.');
                 return;
             }
         },
-
     }
 })

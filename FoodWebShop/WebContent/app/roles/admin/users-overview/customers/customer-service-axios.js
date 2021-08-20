@@ -1,4 +1,4 @@
-import init from "../../../axios-util.js";
+import init from "../../../../axios-util.js";
 
 const axiosEndpoint = init('customers');
 

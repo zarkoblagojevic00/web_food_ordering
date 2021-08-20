@@ -12,7 +12,7 @@
     "dateOfBirth" : 1628100600000
   },
   "role" : "CUSTOMER",
-  "pointsEarned" : 0.0,
+  "pointsEarned" : 0,
   "type" : "BRONZE",
   "cart" : null,
   "activityStatus" : "BANNED"
@@ -30,12 +30,11 @@
     "dateOfBirth" : 1628100600000
   },
   "role" : "CUSTOMER",
-  "pointsEarned" : 20.0,
+  "pointsEarned" : 20,
   "type" : "SILVER",
   "cart" : null,
   "activityStatus" : "SUSPICIOUS"
-},
-{
+}, {
   "id" : 3,
   "deleted" : false,
   "credentials" : {
@@ -49,8 +48,44 @@
     "dateOfBirth" : 1628100600000
   },
   "role" : "CUSTOMER",
-  "pointsEarned" : 100.0,
+  "pointsEarned" : 100,
   "type" : "GOLD",
+  "cart" : null,
+  "activityStatus" : "OK"
+}, {
+  "id" : 4,
+  "deleted" : false,
+  "credentials" : {
+    "username" : "custcust",
+    "password" : "customerpass"
+  },
+  "personalData" : {
+    "firstName" : "Johnny",
+    "lastName" : "Doe",
+    "gender" : "MALE",
+    "dateOfBirth" : 1628100600000
+  },
+  "role" : "CUSTOMER",
+  "pointsEarned" : 0,
+  "type" : "BRONZE",
+  "cart" : null,
+  "activityStatus" : "OK"
+}, {
+  "id" : 5,
+  "deleted" : false,
+  "credentials" : {
+    "username" : "marko",
+    "password" : "marko"
+  },
+  "personalData" : {
+    "firstName" : "Marko",
+    "lastName" : "Markovic",
+    "gender" : "MALE",
+    "dateOfBirth" : 946988760000
+  },
+  "role" : "CUSTOMER",
+  "pointsEarned" : 0,
+  "type" : "BRONZE",
   "cart" : null,
   "activityStatus" : "OK"
 } ]

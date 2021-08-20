@@ -1,8 +1,11 @@
 package services.auth;
 
 import beans.users.base.Credentials;
+import beans.users.base.PersonalData;
 import beans.users.base.User;
 import beans.users.roles.customer.Customer;
+import beans.users.roles.deliverer.Deliverer;
+import beans.users.roles.manager.Manager;
 import repositories.interfaces.AdminRepository;
 import repositories.interfaces.CustomerRepository;
 import repositories.interfaces.DelivererRepository;
@@ -52,21 +55,39 @@ public class AuthenticationService {
     }
 
 
-    public AuthenticationResponse createCustomer(Customer newCustomer) {
-        Customer savedCustomer = saveCustomer(newCustomer);
+    public AuthenticationResponse addCustomer(AuthenticationData authData) {
+        User savedCustomer = trySaveUser(authData);
         String jwt = jwtUtil.generateToken(savedCustomer);
         return new AuthenticationResponse(jwt);
     }
 
-    private Customer saveCustomer(Customer newCustomer) {
-        String username = newCustomer.getUsername();
+    private User trySaveUser(AuthenticationData authData) {
+        String username = authData.getCredentials().getUsername();
         try {
             findUserByUsername(username);
         } catch (BadCredentialsException e) {
-            return customerRepo.save(newCustomer);
+            return saveUser(authData);
         }
-
         throw new UsernameAlreadyExistsException("User with username: " + username + " already exists.");
+    }
 
+    private User saveUser(AuthenticationData authData) {
+        Credentials credentials = authData.getCredentials();
+        PersonalData personalData = authData.getPersonalData();
+
+        switch (authData.getRole()) {
+            case CUSTOMER:
+                return customerRepo.save(new Customer(credentials, personalData));
+            case MANAGER:
+                return managerRepo.save(new Manager(credentials, personalData));
+            case DELIVERER:
+                return delivererRepo.save(new Deliverer(credentials, personalData));
+            default:
+                return null;
+        }
+    }
+
+    public User addUser(AuthenticationData newUser) {
+        return trySaveUser(newUser);
     }
 }
