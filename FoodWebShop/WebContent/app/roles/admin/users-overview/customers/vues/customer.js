@@ -1,4 +1,4 @@
-import customerService from "../customer-service-axios.js";
+import customerService from "../../../../../services/customer-service.js";
 import formatDateMixin from "../../../../../mixins/format-date-mixin.js";
 import userActivityStatusMixin from "../../../../../mixins/user-activity-status-mixin.js";
 

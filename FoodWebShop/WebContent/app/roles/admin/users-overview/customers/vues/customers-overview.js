@@ -1,6 +1,6 @@
-import customerService from "../customer-service-axios.js"
-import customer from "./customer.js"
+import customerService from "../../../../../services/customer-service.js";
 import finder from "../../../../../components/finder/finder.js";
+import customer from "./customer.js"
 
 export default Vue.component("customers-overview",{
     components: {

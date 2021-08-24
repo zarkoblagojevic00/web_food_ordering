@@ -24,4 +24,8 @@ public class Manager extends User {
     public void setRestaurant(Restaurant restaurant) {
         this.restaurant = restaurant;
     }
+
+    public boolean isAvailable() {
+        return restaurant == null;
+    }
 }

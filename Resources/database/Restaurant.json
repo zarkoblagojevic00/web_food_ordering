@@ -1,1 +1,18 @@
-[ ]
+[ {
+  "id" : 1,
+  "deleted" : false,
+  "name" : "Pepe's",
+  "type" : "ITALIAN",
+  "logoPath" : "restaurants/1/pepe's_logo.png",
+  "opened" : true,
+  "location" : {
+    "longitude" : 45.32,
+    "latitude" : 19.23,
+    "streetNumber" : 32,
+    "streetName" : "Miše Ostroškog",
+    "municipality" : "Novi Sad",
+    "postalCode" : "21000"
+  },
+  "products" : [ ],
+  "comments" : [ ]
+} ]

@@ -30,7 +30,8 @@ export const saveClaimsToLocalStorage = (jwt) => {
     dispatchEvent(new CustomEvent('user-logged-in', {
         detail: {
           role: getRole()
-        }}));
+        }
+    }));
 }
 
 export const clearStorage = () => localStorage.clear();

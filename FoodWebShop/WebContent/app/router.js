@@ -7,6 +7,7 @@ import ManagersOverview from './roles/admin/users-overview/managers/vues/manager
 import DeliverersOverview from './roles/admin/users-overview/deliverers/vues/deliverers-overview.js'
 import AdminsOverview from './roles/admin/users-overview/admins/vues/admins-overview.js'
 import AddUser from './roles/admin/users-overview/add-user.js'
+import AddRestaurant from './roles/admin/restaurants/add-restaurant.js'
 
 const routes = [
     // {path: '/', component: Test},
@@ -15,11 +16,12 @@ const routes = [
     {path: '/signup',       name: 'signup',     component: SignUp},
     {path: '/admin/:id',    name: 'ADMIN',      component: HomeAdmin,
         children: [
-            { path: 'customers',    name: 'customers-overview',     component: CustomersOverview}, 
-            { path: 'managers',     name: 'managers-overview',      component: ManagersOverview}, 
-            { path: 'deliverers',   name: 'deliverers-overview',    component: DeliverersOverview}, 
-            { path: 'admins',       name: 'admins-overview',        component: AdminsOverview},
-            { path: 'add/:role',    name: 'add-user',               component: AddUser, props: true},
+            { path: 'customers',        name: 'customers-overview',     component: CustomersOverview}, 
+            { path: 'managers',         name: 'managers-overview',      component: ManagersOverview}, 
+            { path: 'deliverers',       name: 'deliverers-overview',    component: DeliverersOverview}, 
+            { path: 'admins',           name: 'admins-overview',        component: AdminsOverview},
+            { path: 'add/:role',        name: 'add-user',               component: AddUser, props: true},
+            { path: 'add-restaurant',   name: 'add-restaurant',         component: AddRestaurant}
             // { path: 'profile',   name: 'admin-profile',          component: AdminProfile} 
         ]
     },

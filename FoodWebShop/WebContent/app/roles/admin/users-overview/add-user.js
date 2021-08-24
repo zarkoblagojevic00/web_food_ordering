@@ -1,4 +1,4 @@
-import authService from "../../../auth/auth-service-axios.js";
+import authService from "../../../services/auth-service.js";
 import requiredFieldValidatorMixin from "../../../mixins/required-field-validator-mixin.js";
 
 export default Vue.component("add-user",{
@@ -167,7 +167,7 @@ export default Vue.component("add-user",{
         },
 
         $_add_navigate_back: function() {
-            this.$router.go(-1);
+            this.$router.back();
         },
 
         $_add_handleError: function(e) {

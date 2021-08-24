@@ -3,6 +3,7 @@ package beans.restaurants;
 import beans.Entity;
 import beans.restaurants.requests.Comment;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Restaurant extends Entity {
@@ -13,6 +14,12 @@ public class Restaurant extends Entity {
     private Location location;
     private List<Product> products;
     private List<Comment> comments;
+
+    public Restaurant () {
+        this.opened = true;
+        this.products = new ArrayList<>();
+        this.comments = new ArrayList<>();
+    }
 
     public String getName() {
         return name;
@@ -40,5 +47,9 @@ public class Restaurant extends Entity {
 
     public List<Comment> getComments() {
         return comments;
+    }
+
+    public void setLogoPath(String logoPath) {
+        this.logoPath = logoPath;
     }
 }

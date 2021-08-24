@@ -1,7 +1,6 @@
 package repositories.json.repos.base;
 
 import beans.Entity;
-import config.BasicRootPathFinder;
 import repositories.interfaces.base.Repository;
 
 import java.text.MessageFormat;
@@ -14,7 +13,7 @@ public class JsonFileRepository<T extends Entity> implements Repository<T> {
     final private JsonFileIOProxy<T> proxyIO;
 
     public JsonFileRepository(Class<T> entityClass) {
-        proxyIO = new JsonFileIOProxy<T>(entityClass, new BasicRootPathFinder());
+        proxyIO = new JsonFileIOProxy<T>(entityClass);
         this.entities = proxyIO.getEntities();
     }
 

@@ -1,4 +1,4 @@
-import authService from '../auth-service-axios.js'
+import authService from '../../services/auth-service.js';
 import requiredFieldValidatorMixin from '../../mixins/required-field-validator-mixin.js';
 import { getRole, getId, saveClaimsToLocalStorage } from '../../local-storage-util.js';
 

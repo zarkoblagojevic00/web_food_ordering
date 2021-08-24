@@ -1,4 +1,4 @@
-import delivererService from "../deliverer-service-axios.js"
+import delivererService from "../../../../../services/deliverer-service.js"
 import deliverer from "./deliverer.js"
 import finder from "../../../../../components/finder/finder.js"
 

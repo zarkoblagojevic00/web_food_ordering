@@ -1,4 +1,4 @@
-import delivererService from "../deliverer-service-axios.js";
+import delivererService from "../../../../../services/deliverer-service.js"
 import formatDateMixin from "../../../../../mixins/format-date-mixin.js";
 import userActivityStatusMixin from "../../../../../mixins/user-activity-status-mixin.js";
 

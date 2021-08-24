@@ -10,6 +10,7 @@ import repositories.interfaces.RestaurantRepository;
 import javax.inject.Inject;
 import java.util.Collection;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class ManagerService {
     final private ManagerRepository managerRepo;
@@ -22,18 +23,14 @@ public class ManagerService {
     }
 
     public Collection<ManagerOverviewDTO> getManagersOverview() {
-        return managerRepo.getAll().stream()
-                .map(this::createManagerOverviewDTO)
+        return getManagersOverviewStream()
                 .collect(Collectors.toList());
     }
 
-    private ManagerOverviewDTO createManagerOverviewDTO(Manager manager) {
-        try {
-            Restaurant restaurant = restaurantRepo.get(manager.getRestaurant().getId());
-            manager.setRestaurant(restaurant);
-        } catch (NullPointerException ignored) {
-        }
-        return new ManagerOverviewDTO(manager);
+    public Collection<ManagerOverviewDTO> getAvailableManagers() {
+        return getManagersOverviewStream()
+                .filter(overview -> overview.getRestaurant() == null)
+                .collect(Collectors.toList());
     }
 
     public void banManager(String username) {
@@ -45,5 +42,19 @@ public class ManagerService {
     public void deleteManager(String username) {
         Manager manager = managerRepo.getUserByUsername(username);
         managerRepo.delete(manager.getId());
+    }
+
+    private Stream<ManagerOverviewDTO> getManagersOverviewStream() {
+        return managerRepo.getAll().stream()
+                .map(this::createManagerOverviewDTO);
+    }
+
+    private ManagerOverviewDTO createManagerOverviewDTO(Manager manager) {
+        try {
+            Restaurant restaurant = restaurantRepo.get(manager.getRestaurant().getId());
+            manager.setRestaurant(restaurant);
+        } catch (NullPointerException ignored) {
+        }
+        return new ManagerOverviewDTO(manager);
     }
 }

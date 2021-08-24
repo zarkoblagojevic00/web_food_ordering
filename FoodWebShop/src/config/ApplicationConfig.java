@@ -1,19 +1,39 @@
 package config;
 
-import org.glassfish.hk2.utilities.binding.AbstractBinder;
-import org.glassfish.jersey.server.ResourceConfig;
-import org.glassfish.jersey.server.filter.RolesAllowedDynamicFeature;
-import repositories.ITestRepository;
-import repositories.TestRepository;
-import repositories.interfaces.*;
-import repositories.json.repos.*;
-import services.*;
-import services.auth.AuthenticationService;
-
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import org.glassfish.hk2.utilities.binding.AbstractBinder;
+import org.glassfish.jersey.media.multipart.MultiPartFeature;
+import org.glassfish.jersey.server.ResourceConfig;
+import org.glassfish.jersey.server.filter.RolesAllowedDynamicFeature;
+
+import repositories.ITestRepository;
+import repositories.TestRepository;
+import repositories.interfaces.ActivityRepository;
+import repositories.interfaces.AdminRepository;
+import repositories.interfaces.CustomerRepository;
+import repositories.interfaces.DelivererRepository;
+import repositories.interfaces.ManagerRepository;
+import repositories.interfaces.OrderRepository;
+import repositories.interfaces.RestaurantRepository;
+import repositories.json.repos.ActivityJsonFileRepository;
+import repositories.json.repos.AdminJsonFileRepository;
+import repositories.json.repos.CustomerJsonFileRepository;
+import repositories.json.repos.DelivererJsonFileRepository;
+import repositories.json.repos.ManagerJsonFileRepository;
+import repositories.json.repos.OrderJsonFileRepository;
+import repositories.json.repos.RestaurantJsonFileRepository;
+import services.ActivityService;
+import services.AdminService;
+import services.CustomerService;
+import services.DelivererService;
+import services.ManagerService;
+import services.RestaurantService;
+import services.TestService;
+import services.auth.AuthenticationService;
 
 public class ApplicationConfig extends ResourceConfig {
     final private Map<Class<?>, Class<?>> dependencyPairs;
@@ -38,12 +58,14 @@ public class ApplicationConfig extends ResourceConfig {
                 AdminService.class,
                 CustomerService.class,
                 ManagerService.class,
-                DelivererService.class
+                DelivererService.class,
+                RestaurantService.class
         );
 
         registerDependencyInjection();
         registerConcretes();
         register(RolesAllowedDynamicFeature.class);
+        register(MultiPartFeature.class);
     }
 
     private void registerConcretes() {

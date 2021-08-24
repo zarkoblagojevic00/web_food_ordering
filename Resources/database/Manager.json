@@ -29,7 +29,7 @@
   },
   "role" : "MANAGER",
   "activityStatus" : "OK",
-  "restaurant" : null
+  "restaurant" : 1
 }, {
   "id" : 3,
   "deleted" : false,
@@ -74,6 +74,22 @@
     "lastName" : "Mennie",
     "gender" : "FEMALE",
     "dateOfBirth" : 949415340000
+  },
+  "role" : "MANAGER",
+  "activityStatus" : "OK",
+  "restaurant" : null
+}, {
+  "id" : 6,
+  "deleted" : false,
+  "credentials" : {
+    "username" : "add-rest",
+    "password" : "password"
+  },
+  "personalData" : {
+    "firstName" : "Added",
+    "lastName" : "WithRest",
+    "gender" : "MALE",
+    "dateOfBirth" : 665768160000
   },
   "role" : "MANAGER",
   "activityStatus" : "OK",

@@ -12,10 +12,10 @@
     "dateOfBirth" : 1628100600000
   },
   "role" : "CUSTOMER",
+  "activityStatus" : "BANNED",
   "pointsEarned" : 0,
   "type" : "BRONZE",
-  "cart" : null,
-  "activityStatus" : "BANNED"
+  "cart" : null
 }, {
   "id" : 2,
   "deleted" : false,
@@ -30,10 +30,10 @@
     "dateOfBirth" : 1628100600000
   },
   "role" : "CUSTOMER",
+  "activityStatus" : "SUSPICIOUS",
   "pointsEarned" : 20,
   "type" : "SILVER",
-  "cart" : null,
-  "activityStatus" : "SUSPICIOUS"
+  "cart" : null
 }, {
   "id" : 3,
   "deleted" : false,
@@ -48,10 +48,10 @@
     "dateOfBirth" : 1628100600000
   },
   "role" : "CUSTOMER",
+  "activityStatus" : "OK",
   "pointsEarned" : 100,
   "type" : "GOLD",
-  "cart" : null,
-  "activityStatus" : "OK"
+  "cart" : null
 }, {
   "id" : 4,
   "deleted" : false,
@@ -66,10 +66,10 @@
     "dateOfBirth" : 1628100600000
   },
   "role" : "CUSTOMER",
+  "activityStatus" : "OK",
   "pointsEarned" : 0,
   "type" : "BRONZE",
-  "cart" : null,
-  "activityStatus" : "OK"
+  "cart" : null
 }, {
   "id" : 5,
   "deleted" : false,
@@ -84,8 +84,8 @@
     "dateOfBirth" : 946988760000
   },
   "role" : "CUSTOMER",
+  "activityStatus" : "OK",
   "pointsEarned" : 0,
   "type" : "BRONZE",
-  "cart" : null,
-  "activityStatus" : "OK"
-} ]
+  "cart" : null
+}]

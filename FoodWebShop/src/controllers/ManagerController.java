@@ -25,6 +25,14 @@ public class ManagerController {
         return Response.ok(managers).build();
     }
 
+    @GET
+    @Path("available")
+    @RolesAllowed("ADMIN")
+    public Response getAvailable() {
+        Collection<ManagerOverviewDTO> availableManagers = managerService.getAvailableManagers();
+        return Response.ok(availableManagers).build();
+    }
+
     @PUT
     @Path("ban")
     @RolesAllowed("ADMIN")

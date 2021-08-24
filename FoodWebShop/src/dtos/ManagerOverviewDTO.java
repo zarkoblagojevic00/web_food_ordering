@@ -11,4 +11,8 @@ public class ManagerOverviewDTO extends UserOverviewDTO {
         Restaurant restaurant = manager.getRestaurant();
         this.restaurant = (restaurant == null) ? null : new RestaurantOverviewDTO(restaurant);
     }
+
+    public RestaurantOverviewDTO getRestaurant() {
+        return restaurant;
+    }
 }

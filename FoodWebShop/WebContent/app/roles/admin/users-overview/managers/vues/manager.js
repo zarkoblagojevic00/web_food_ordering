@@ -1,9 +1,12 @@
-import managerService from "../manager-service-axios.js";
+import managerService from "../../../../../services/manager-service.js"
+import imageService from "../../../../../services/image-service.js";
+
 import formatDateMixin from "../../../../../mixins/format-date-mixin.js";
 import userActivityStatusMixin from "../../../../../mixins/user-activity-status-mixin.js";
+import createObjectUrlMixin from "../../../../../mixins/create-object-url-mixin.js";
 
 export default Vue.component("manager",{
-    mixins: [formatDateMixin, userActivityStatusMixin],
+    mixins: [formatDateMixin, userActivityStatusMixin, createObjectUrlMixin],
     props: {
         username: String,
         firstName: String,
@@ -42,32 +45,31 @@ export default Vue.component("manager",{
         
         <div v-if="restaurant" style="border: 1px solid indianred;">
             <div>
-                <label for="logo">Gender: </label>
-                <span>{{restaurant.logoPath}}</span>
+                <img :src="picturesSource['restaurantLogo']"></img>
             </div>
             
             <div>
-                <label for="restaurantName">Manages restaurant: </label>
+                <label for="restaurantName">Manager at: </label>
                 <span>{{restaurant.name}}</span>
             </div>
             
             <div>
-                <label for="restaurantType">Gender: </label>
+                <label for="restaurantType">Type: </label>
                 <span>{{restaurant.type}}</span>
             </div>
             
             <div v-if="restaurant.location" style="border: 1px dotted burlywood;" >
                 <div>
                     <label for="locationMunicipality">Municipality: </label>
-                    <span>{{location.municipality}}</span>
+                    <span>{{restaurant.location.municipality}}</span>
                 </div>
                 <div>
                     <label for="locationStreetName">Street name: </label>
-                    <span>{{location.streetName}}</span>
+                    <span>{{restaurant.location.streetName}}</span>
                 </div>
                 <div>
                     <label for="locationStreetNumber">Street number: </label>
-                    <span>{{location.streetNumber}}</span>
+                    <span>{{restaurant.location.streetNumber}}</span>
                 </div>
             </div>
         </div>
@@ -77,7 +79,16 @@ export default Vue.component("manager",{
     `,
     data() { 
         return {
-           isDeleted: false
+           isDeleted: false,
+           pictures: {
+                restaurantLogo: null
+           }
+        }
+    },
+
+    async created() {
+        if (this.restaurant) {
+            this.pictures.restaurantLogo = await imageService.getImage(this.restaurant.logoPath)
         }
     },
 

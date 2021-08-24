@@ -15,6 +15,7 @@ const requiredFieldValidatorMixin = {
  }
 
  const anyOmitted = (requiredFieldsObject) => {
+    if (!requiredFieldsObject) return false;
     const isOmitted = (value) => !value;
     return Object.values(requiredFieldsObject).some(isOmitted);
  }

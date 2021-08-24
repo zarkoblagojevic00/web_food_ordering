@@ -1,4 +1,4 @@
-import managerService from "../manager-service-axios.js"
+import managerService from "../../../../../services/manager-service.js"
 import manager from "./manager.js"
 import finder from "../../../../../components/finder/finder.js"
 

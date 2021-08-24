@@ -8,7 +8,7 @@ import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.module.SimpleModule;
-import config.RootPathFinder;
+import config.PathFinder;
 import repositories.json.conversion.deserialization.EntityBeanDeserializerModifier;
 import repositories.json.conversion.serialization.EntityBeanSerializerModifier;
 
@@ -24,12 +24,12 @@ public class JsonFileIOProxy<T extends Entity> {
     private File file;
     private Class<T> entityClass;
     private ObjectMapper mapper;
-    protected RootPathFinder pathFinder;
+    protected PathFinder pathFinder;
 
-    public JsonFileIOProxy(Class<T> entityClass, RootPathFinder pathFinder) {
+    public JsonFileIOProxy(Class<T> entityClass) {
         this.entityClass = entityClass;
         this.mapper = createObjectMapper();
-        this.pathFinder = pathFinder;
+        this.pathFinder = new PathFinder("Resources", "database");
         this.file = initializeFile();
     }
 
@@ -77,13 +77,14 @@ public class JsonFileIOProxy<T extends Entity> {
     }
 
     private String getFilePath() {
-        String separator = File.separator;
-
-        String root = pathFinder.getRoot();
-        String directoryName = separator + "Resources" + separator + "database";
+//        String separator = File.separator;
+//
+//        String root = pathFinder.getRoot();
+//        String directoryName = separator + "Resources" + separator + "database";
         String jsonFileName = entityClass.getSimpleName() + ".json";
-
-        return root + separator + directoryName + separator + jsonFileName;
+        pathFinder.appendToCurrentPath(jsonFileName);
+        return pathFinder.getCurrentPath();
+//        return root + separator + directoryName + separator + jsonFileName;
     }
 
     private File getEmptyJsonArrayInitializedFile(File file) {

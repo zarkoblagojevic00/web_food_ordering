@@ -1,4 +1,4 @@
-import adminService from "../admin-service-axios.js";
+import adminService from "../../../../../services/admin-service.js";
 import admin from "./admin.js";
 import finder from "../../../../../components/finder/finder.js";
 
