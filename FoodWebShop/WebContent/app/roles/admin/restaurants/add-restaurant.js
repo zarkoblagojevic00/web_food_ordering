@@ -2,10 +2,16 @@ import restaurantService from "../../../services/restaurant-service.js";
 import managerService from "../../../services/manager-service.js";
 import imageService from "../../../services/image-service.js";
 
+import olMap from "../../../components/map/ol-map.js";
+
 import requiredFieldValidatorMixin from "../../../mixins/required-field-validator-mixin.js";
 import createObjectUrlMixin from "../../../mixins/create-object-url-mixin.js";
 
 export default Vue.component("add-restaurant",{
+    components: {
+        'ol-map': olMap
+    },
+
     mixins: [requiredFieldValidatorMixin, createObjectUrlMixin],
     template: `
     <div id="add-restaurant">
@@ -86,7 +92,8 @@ export default Vue.component("add-restaurant",{
                 v-model="coordinates" 
                 type="text"
                 placeholder="Coordinates"
-                required>
+                required
+                readonly>
             </input>
             <p 
                 v-hide="coordinates"
@@ -108,6 +115,8 @@ export default Vue.component("add-restaurant",{
                 {{requiredFieldMsg}}
             </p>
         </div>
+
+        <ol-map ref="map"></ol-map>
 
         <div v-if="selectedManagerId">
             <select v-model="selectedManagerId" :required="true">
@@ -137,7 +146,7 @@ export default Vue.component("add-restaurant",{
                 required>
             </input>
             <p 
-                v-hide="restaurant.logoPicture"
+                v-hide="pictures.logoPicture"
                 class="small">
                 {{requiredFieldMsg}}
             </p>
@@ -169,9 +178,9 @@ export default Vue.component("add-restaurant",{
                     municipality: null,
                     streetName: null,
                     streetNumber: null,
-                    longitude: 45.32,
-                    latitude: 19.23,
-                    postalCode: 22400
+                    longitude: null,
+                    latitude: null,
+                    postalCode: null
                 },
             },
             selectedManagerId: null,
@@ -194,6 +203,16 @@ export default Vue.component("add-restaurant",{
         }
     },
 
+    computed: {
+        coordinates() {
+            const longitude = this.restaurant.location.longitude;
+            const latitude = this.restaurant.location.latitude;
+            if (longitude && latitude) {
+                return `${round(longitude)}, ${round(latitude)}`
+            }
+        },
+    },
+
     async created() {
         this.restaurantTypes = await restaurantService.getTypes();
         this.managers = await managerService.getAvailable();
@@ -202,16 +221,10 @@ export default Vue.component("add-restaurant",{
         }
     },
 
-    computed: {
-        coordinates() {
-            const longitude = this.restaurant.location.longitude;
-            const latitude = this.restaurant.location.latitude;
-            if (longitude && latitude) {
-                return `${longitude}, ${latitude}`
-            }
-        },
+    // listening to map change location
+    mounted() {
+        this.$watch(() => this.$refs.map.location, (value) => this.restaurant.location = value);
     },
-
 
     methods: {
         uploadFile() {
@@ -232,12 +245,12 @@ export default Vue.component("add-restaurant",{
         $_add_validate: function()  {
             this.validate(this.restaurant); // from mixin
             this.validate(this.restaurant.location);
-            this.validate(this.logoPicture);
+            this.validate(this.pictures.logoPicture);
             this.validate(this.selectedManagerId);
         },
 
         $_add_send: async function() {
-            const rest = await restaurantService.add(this.restaurant, this.logoPicture,  this.selectedManagerId,);
+            const rest = await restaurantService.add(this.restaurant, this.pictures.logoPicture,  this.selectedManagerId,);
             console.log(rest);
         },
 
@@ -264,3 +277,5 @@ export default Vue.component("add-restaurant",{
         },
     }
 })
+
+const round = (value, dec=5) => value.toFixed(dec);

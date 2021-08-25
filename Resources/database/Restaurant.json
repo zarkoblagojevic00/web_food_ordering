@@ -6,11 +6,28 @@
   "logoPath" : "restaurants/1/pepe's_logo.png",
   "opened" : true,
   "location" : {
-    "longitude" : 45.32,
-    "latitude" : 19.23,
-    "streetNumber" : 32,
-    "streetName" : "Miše Ostroškog",
-    "municipality" : "Novi Sad",
+    "longitude" : 19.84021,
+    "latitude" : 45.24718,
+    "streetNumber" : 115,
+    "streetName" : "Bulevar oslobodjenja",
+    "municipality" : "Novi Sad City",
+    "postalCode" : "21101"
+  },
+  "products" : [ ],
+  "comments" : [ ]
+}, {
+  "id" : 2,
+  "deleted" : false,
+  "name" : "MyBBQ",
+  "type" : "BBQ",
+  "logoPath" : "restaurants/2/mybbq_logo.jpg",
+  "opened" : true,
+  "location" : {
+    "longitude" : 19.82944746369153,
+    "latitude" : 45.25309504401335,
+    "streetNumber" : 12,
+    "streetName" : "Nenada Mitrova",
+    "municipality" : "Novi Sad City",
     "postalCode" : "21000"
   },
   "products" : [ ],

@@ -1,7 +1,5 @@
 export default {
     filters: {
-        formatDate(value) {
-            return new Date(value).toLocaleDateString('sr')
-        }
+        formatDate: (value) => new Date(value).toLocaleDateString('sr'),
     },
 }
