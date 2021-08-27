@@ -8,7 +8,7 @@
   "location" : {
     "longitude" : 19.84021,
     "latitude" : 45.24718,
-    "streetNumber" : 115,
+    "streetNumber" : "115",
     "streetName" : "Bulevar oslobodjenja",
     "municipality" : "Novi Sad City",
     "postalCode" : "21101"
@@ -25,10 +25,61 @@
   "location" : {
     "longitude" : 19.82944746369153,
     "latitude" : 45.25309504401335,
-    "streetNumber" : 12,
+    "streetNumber" : "12",
     "streetName" : "Nenada Mitrova",
     "municipality" : "Novi Sad City",
     "postalCode" : "21000"
+  },
+  "products" : [ ],
+  "comments" : [ ]
+}, {
+  "id" : 3,
+  "deleted" : false,
+  "name" : "Indian Flames",
+  "type" : "INDIAN",
+  "logoPath" : "restaurants/3/indian_flames_logo.jpg",
+  "opened" : true,
+  "location" : {
+    "longitude" : 20.456988090944773,
+    "latitude" : 44.81644298615009,
+    "streetNumber" : "9",
+    "streetName" : "Obilićev Venac",
+    "municipality" : "Belgrade",
+    "postalCode" : "11000"
+  },
+  "products" : [ ],
+  "comments" : [ ]
+}, {
+  "id" : 4,
+  "deleted" : false,
+  "name" : "Meraki",
+  "type" : "GREEK",
+  "logoPath" : "restaurants/4/meraki_logo.png",
+  "opened" : true,
+  "location" : {
+    "longitude" : 20.449022465140512,
+    "latitude" : 44.78351050678356,
+    "streetNumber" : "24",
+    "streetName" : "Толстојева",
+    "municipality" : "Belgrade",
+    "postalCode" : "11000"
+  },
+  "products" : [ ],
+  "comments" : [ ]
+}, {
+  "id" : 5,
+  "deleted" : false,
+  "name" : "Dagostino's",
+  "type" : "ITALIAN",
+  "logoPath" : "restaurants/5/dagostino's_logo.jpg",
+  "opened" : true,
+  "location" : {
+    "longitude" : 19.838063986216152,
+    "latitude" : 45.24661107670127,
+    "streetNumber" : "20",
+    "streetName" : "Lasla Gala",
+    "municipality" : "Novi Sad City",
+    "postalCode" : "21102"
   },
   "products" : [ ],
   "comments" : [ ]

@@ -1,11 +1,12 @@
 import authService from "../../../services/auth-service.js";
 import requiredFieldValidatorMixin from "../../../mixins/required-field-validator-mixin.js";
+import datePicker from "../../../components/date-picker/date-picker.js";
 
 export default Vue.component("add-user",{
     props: ['role'],
     mixins: [requiredFieldValidatorMixin],
     components: {
-		vuejsDatepicker
+		'date-picker': datePicker
 	},
     template: `
     <div id="add-user">
@@ -83,10 +84,7 @@ export default Vue.component("add-user",{
             </div>
 
             <div>
-                <vuejs-datepicker
-                    :inline="true" 
-                    v-model="personalData.dateOfBirth"> 
-                </vuejs-datepicker>
+                <date-picker v-model="personalData.dateOfBirth"></date-picker>
                 <p 
                     v-hide="personalData.dateOfBirth"
                     class="small">

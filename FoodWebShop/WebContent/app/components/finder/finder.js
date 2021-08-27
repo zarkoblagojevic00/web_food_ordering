@@ -4,10 +4,11 @@ import searchTextFields from "./subfinders/search-text-fields.js";
 
 export default Vue.component("finder",{
     props: {
+        component: Function,   
         items: Array,   // items to sort
         sortBy: Object, 
         filterByOptions: Object,  
-        searchByTextFields: Object
+        searchByTextFields: Object,
     },
 
     components: {
@@ -19,21 +20,33 @@ export default Vue.component("finder",{
     template: `
     <div id="finder">
         <div v-if='sortBy'>
-            <sorters :sortBy="sortBy"></sorters>
+            <sorters :sortBy="sortBy" ref="sorter"></sorters>
         </div>
         <div v-if="filterByOptions">
-            <filters-option :filterBy="filterByOptions"></filters-option>
+            <filters-option :filterBy="filterByOptions" ref="filters-option"></filters-option>
         </div>
         <div v-if="searchByTextFields">
-            <search-text-fields :filterBy="searchByTextFields"></search-text-fields>
+            <search-text-fields :filterBy="searchByTextFields" ref="search-text-fields"></search-text-fields>
+        </div>
+
+
+        <div id="display">
+            <component :is="component"
+                v-for="item in found"
+                :key="item.id"
+                v-bind="item"
+                >
+            </component>
         </div>
     </div> 
     `,
 
     computed: {
         found() {
-            const itemsCopy = this.items.slice(0);
-            return this.$children.reduce((prev, curr) => curr.apply(prev), itemsCopy);
+            const itemsCopy = copyArray(this.items);
+            return Object.values(this.$refs).reduce((prev, curr) => curr.apply(prev), itemsCopy);
         }
     },
 })
+
+const copyArray = (items) => items.slice(0); 

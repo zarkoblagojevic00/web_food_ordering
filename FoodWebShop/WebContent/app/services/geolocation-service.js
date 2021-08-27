@@ -1,12 +1,12 @@
 import init from "./http-utils/axios-util.js";
 
-const serverEndpoint = init('https://nominatim.openstreetmap.org/reverse');
+const serverEndpoint = init('https://nominatim.openstreetmap.org');
 
 const imageService = {
         getLocation: async ([lon, lat]) => {
             const location = initLocation(lon, lat);
             try {
-                const rawGeoJSON = await serverEndpoint.get({params: { format: 'json', lon, lat }});
+                const rawGeoJSON = await serverEndpoint.get({relPath: 'reverse', params: { format: 'json', lon, lat }});
                 return convertToLocation(rawGeoJSON, location);
             } catch(e) {
                 return location;

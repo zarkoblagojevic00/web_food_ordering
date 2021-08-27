@@ -1,16 +1,20 @@
+const appendSource = (prev, [key, value]) => ({...prev, [key]: getObjectAsSource(value)});
+const getObjectAsSource = (obj) => (obj) ? URL.createObjectURL(obj) : '';
+
 export default {
     data() {
         return {
-            pictures: {},
+            objects: {},
         }
     },
     
     computed: {
-        picturesSource() {
-            return Object.entries(this.pictures).reduce(appendSource, {});
+        objectsSource() {
+            return Object.entries(this.objects).reduce(appendSource, {});
         }
     },
+    
+    methods: {
+        getObjectAsSource
+    }
 }
-
-const appendSource = (prev, [key, value]) => ({...prev, [key]: getObjectAsSource(value)});
-const getObjectAsSource = (obj) => (obj) ? URL.createObjectURL(obj) : '';

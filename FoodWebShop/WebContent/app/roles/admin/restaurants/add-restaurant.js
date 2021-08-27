@@ -1,18 +1,18 @@
 import restaurantService from "../../../services/restaurant-service.js";
 import managerService from "../../../services/manager-service.js";
-import imageService from "../../../services/image-service.js";
 
 import olMap from "../../../components/map/ol-map.js";
+import imagePicker from "../../../components/image-picker/image-picker.js";
 
 import requiredFieldValidatorMixin from "../../../mixins/required-field-validator-mixin.js";
-import createObjectUrlMixin from "../../../mixins/create-object-url-mixin.js";
 
 export default Vue.component("add-restaurant",{
     components: {
-        'ol-map': olMap
+        'ol-map': olMap,
+        'image-picker': imagePicker
     },
 
-    mixins: [requiredFieldValidatorMixin, createObjectUrlMixin],
+    mixins: [requiredFieldValidatorMixin],
     template: `
     <div id="add-restaurant">
     <h3>Add restaurant</h3>
@@ -76,7 +76,7 @@ export default Vue.component("add-restaurant",{
         <div>
             <input 
                 v-model="restaurant.location.streetNumber" 
-                type="number" 
+                type="text" 
                 placeholder="Street number" 
                 required>
             </input>
@@ -116,7 +116,7 @@ export default Vue.component("add-restaurant",{
             </p>
         </div>
 
-        <ol-map ref="map"></ol-map>
+        <ol-map ref="map" v-model="restaurant.location"></ol-map>
 
         <div v-if="selectedManagerId">
             <select v-model="selectedManagerId" :required="true">
@@ -137,24 +137,14 @@ export default Vue.component("add-restaurant",{
             <router-link :to="{name: 'add-user', params: {role: 'MANAGER'}}">Add manager</router-link>
         </div>
 
+        
         <div>
-            <input
-                ref="file"
-                @change="uploadFile" 
-                type="file"
-                accept="image/*"
-                required>
-            </input>
+            <image-picker v-model="logoPicture"></image-picker>
             <p 
-                v-hide="pictures.logoPicture"
+                v-hide="logoPicture"
                 class="small">
                 {{requiredFieldMsg}}
             </p>
-        </div>
-
-        <div>
-            <h4>Preview</h4>
-            <img :src="picturesSource['logoPicture']" alt="">
         </div>
 
         <div v-if="error"> 
@@ -184,10 +174,7 @@ export default Vue.component("add-restaurant",{
                 },
             },
             selectedManagerId: null,
-           
-            pictures: {
-                logoPicture: null,
-            },
+            logoPicture: null,
             
             restaurantTypes: [],
             managers:[],
@@ -221,16 +208,7 @@ export default Vue.component("add-restaurant",{
         }
     },
 
-    // listening to map change location
-    mounted() {
-        this.$watch(() => this.$refs.map.location, (value) => this.restaurant.location = value);
-    },
-
     methods: {
-        uploadFile() {
-            this.pictures.logoPicture = this.$refs.file.files[0];
-        },
-
         async add() {
             try {
                 this.$_add_validate();
@@ -245,12 +223,12 @@ export default Vue.component("add-restaurant",{
         $_add_validate: function()  {
             this.validate(this.restaurant); // from mixin
             this.validate(this.restaurant.location);
-            this.validate(this.pictures.logoPicture);
+            this.validate(this.logoPicture);
             this.validate(this.selectedManagerId);
         },
 
         $_add_send: async function() {
-            const rest = await restaurantService.add(this.restaurant, this.pictures.logoPicture,  this.selectedManagerId,);
+            const rest = await restaurantService.add(this.restaurant, this.logoPicture,  this.selectedManagerId,);
             console.log(rest);
         },
 

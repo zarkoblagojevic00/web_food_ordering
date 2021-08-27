@@ -2,6 +2,9 @@ import geolocationService from "../../services/geolocation-service.js"
 
 export default Vue.component("ol-map",{
     props: {
+        value: {
+            type: Object
+        },
         readonly: {
             type: Boolean,
             default: false
@@ -18,40 +21,35 @@ export default Vue.component("ol-map",{
     `,
     data() { 
         return {
-           map: null,
            coordinates: null,
-           location: null
         }
     },
 
-    watch: {
-        coordinates: 
-        async function geoLocation() {
-            this.location = await geolocationService.getLocation(this.coordinates);
-        } 
-    },
-    
     async mounted() {
-        this.coordinates = this.coords;
-        this.map =  new ol.Map({
-            target: 'map-root',
-            view: getView(this.coordinates),
-            layers: [osmLayer],
-        });
-        addPinToMap(this.map, this.coordinates);
+        const map = initMap(this.coords)
+        const coordinate = ol.proj.fromLonLat(this.coords);
+        this.movePin({map, coordinate});
         if (!this.readonly) {
-            this.map.on('click', this.movePin) 
+            map.on('click', this.movePin) 
         }
     },
 
     methods: {
-        movePin ({map, coordinate}) {
+        // map on click sends event with 'Web Mercator' formatted coordinates
+        async movePin ({map, coordinate}) {
             this.coordinates = ol.proj.toLonLat(coordinate)
             removeExistingPinFromMap(map);
             addPinToMap(map, this.coordinates);
+            this.$emit('input', await geolocationService.getLocation(this.coordinates))
         }
     }
 })
+
+const initMap = (coordinates) => new ol.Map({
+    target: 'map-root',
+    view: getView(coordinates),
+    layers: [osmLayer],
+});
 
 const getView = (coordinates) => new ol.View( {
     zoom: 16,
@@ -60,7 +58,6 @@ const getView = (coordinates) => new ol.View( {
     center: ol.proj.fromLonLat(coordinates),
     constrainResolution: true
 });
-
 
 const osmLayer = new ol.layer.Tile({
     source: new ol.source.OSM()

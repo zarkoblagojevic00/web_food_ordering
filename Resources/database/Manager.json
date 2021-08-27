@@ -45,7 +45,7 @@
   },
   "role" : "MANAGER",
   "activityStatus" : "OK",
-  "restaurant" : null
+  "restaurant" : 3
 }, {
   "id" : 4,
   "deleted" : false,
@@ -61,7 +61,7 @@
   },
   "role" : "MANAGER",
   "activityStatus" : "OK",
-  "restaurant" : null
+  "restaurant" : 4
 }, {
   "id" : 5,
   "deleted" : false,
@@ -93,5 +93,5 @@
   },
   "role" : "MANAGER",
   "activityStatus" : "OK",
-  "restaurant" : null
+  "restaurant" : 5
 } ]

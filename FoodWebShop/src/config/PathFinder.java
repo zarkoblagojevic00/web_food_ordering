@@ -3,10 +3,9 @@ package config;
 
 import java.io.File;
 import java.util.regex.Matcher;
-import java.util.regex.PatternSyntaxException;
 
 public class PathFinder {
-    final private String CURRENT_SYSEM_SEPARATOR;
+    final private String CURRENT_SYSTEM_SEPARATOR;
     final private String SYSTEM_SEPARATOR_REGEX;
     final private String UNIX_SEPARATOR;
     final private String root;
@@ -14,7 +13,7 @@ public class PathFinder {
     private String appendedToSubRoot;
 
     public PathFinder(String... subRootParams) {
-        this.CURRENT_SYSEM_SEPARATOR = File.separator;
+        this.CURRENT_SYSTEM_SEPARATOR = File.separator;
         this.SYSTEM_SEPARATOR_REGEX = "[/\\\\]";
         this.UNIX_SEPARATOR = "/";
         this.root = findRoot();
@@ -41,8 +40,8 @@ public class PathFinder {
     private String appendedTo(String base, String... paths) {
         StringBuilder retVal = new StringBuilder(base);
         for (String path: paths) {
-            String currSystemPath = replaceSeparators(path, CURRENT_SYSEM_SEPARATOR);
-            retVal.append(CURRENT_SYSEM_SEPARATOR).append(currSystemPath);
+            String currSystemPath = replaceSeparators(path, CURRENT_SYSTEM_SEPARATOR);
+            retVal.append(CURRENT_SYSTEM_SEPARATOR).append(currSystemPath);
         }
         return retVal.toString();
     }

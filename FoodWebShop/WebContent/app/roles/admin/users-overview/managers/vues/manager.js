@@ -45,7 +45,7 @@ export default Vue.component("manager",{
         
         <div v-if="restaurant" style="border: 1px solid indianred;">
             <div>
-                <img :src="picturesSource['restaurantLogo']"></img>
+                <img :src="objectsSource['restaurantLogo']"></img>
             </div>
             
             <div>
@@ -80,7 +80,7 @@ export default Vue.component("manager",{
     data() { 
         return {
            isDeleted: false,
-           pictures: {
+           objects: {
                 restaurantLogo: null
            }
         }
@@ -88,7 +88,7 @@ export default Vue.component("manager",{
 
     async created() {
         if (this.restaurant) {
-            this.pictures.restaurantLogo = await imageService.getImage(this.restaurant.logoPath)
+            this.objects.restaurantLogo = await imageService.getImage(this.restaurant.logoPath)
         }
     },
 

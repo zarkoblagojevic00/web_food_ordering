@@ -1,11 +1,12 @@
 import authService from '../../services/auth-service.js';
 import requiredFieldValidatorMixin from '../../mixins/required-field-validator-mixin.js';
 import {getRole, getId, saveClaimsToLocalStorage } from '../../local-storage-util.js';
+import datePicker from '../../components/date-picker/date-picker.js';
 
 export default Vue.component("signup",{
     mixins: [requiredFieldValidatorMixin],
     components: {
-		vuejsDatepicker
+		'date-picker': datePicker
 	},
     template: `
     <div id="signup">
@@ -82,10 +83,7 @@ export default Vue.component("signup",{
             </div>
 
             <div>
-                <vuejs-datepicker
-                    :inline="true" 
-                    v-model="personalData.dateOfBirth"> 
-                </vuejs-datepicker>
+                <date-picker v-model="personalData.dateOfBirth"></date-picker>
                 <p 
                     v-hide="personalData.dateOfBirth"
                     class="small">
@@ -160,7 +158,8 @@ export default Vue.component("signup",{
         },
 
         $_signup_navigate: function() {
-            this.$router.push({name: getRole(), params: { id: getId() }});
+            const userHome = `${getRole().toLowerCase()}-home`
+            this.$router.push({name: userHome, params: { id: getId() }});
         },
         
         $_signup_handleError: function(e) {

@@ -4,29 +4,25 @@ import finder from "../../../../../components/finder/finder.js"
 
 export default Vue.component("managers-overview",{
     components: {
-        manager,
         finder,
     },
+
     template: `
     <div id="managers-overview">
         <router-link :to="{name: 'add-user', params: {role: 'MANAGER'}}">Add manager</router-link>
-        <finder ref="finder"
+        <finder
             :items="managers"
             :sortBy="sortBy"
-            :searchByTextFields="searchByTextFields"/>
+            :searchByTextFields="searchByTextFields"
+            :component="component">
         </finder>
-        <manager 
-            v-for="manager in found" 
-            :key="manager.username"
-            v-bind="manager"
-            >
-        </manager>
     </div> 
     `,
+
     data() { 
         return {
             managers: [],
-            found: [],
+            component: manager,
             sortBy: {
                 firstName: "First name",
                 lastName: "Last name",
@@ -43,10 +39,5 @@ export default Vue.component("managers-overview",{
 
     async created() {
         this.managers = await managerService.getOverview();
-    },
-
-    // referencing child's computed property as parents
-    mounted() {
-        this.$watch(() => this.$refs.finder.found, (value) => this.found = value);
     },
 })

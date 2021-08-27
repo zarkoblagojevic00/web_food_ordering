@@ -4,7 +4,6 @@ import finder from "../../../../../components/finder/finder.js"
 
 export default Vue.component("deliverers-overview",{
     components: {
-        deliverer,
         finder,
     },
     template: `
@@ -13,20 +12,15 @@ export default Vue.component("deliverers-overview",{
         <finder ref="finder"
             :items="deliverers"
             :sortBy="sortBy"
-            :searchByTextFields="searchByTextFields"/>
+            :searchByTextFields="searchByTextFields"
+            :component="component"/>
         </finder>
-        <deliverer 
-            v-for="deliverer in found" 
-            :key="deliverer.username"
-            v-bind="deliverer"
-            >
-        </deliverer>
     </div> 
     `,
     data() { 
         return {
             deliverers: [],
-            found: [],
+            component: deliverer,
             sortBy: {
                 firstName: "First name",
                 lastName: "Last name",
@@ -43,10 +37,5 @@ export default Vue.component("deliverers-overview",{
 
     async created() {
         this.deliverers = await delivererService.getOverview();
-    },
-
-    // referencing child's computed property as parents
-    mounted() {
-        this.$watch(() => this.$refs.finder.found, (value) => this.found = value);
     },
 })

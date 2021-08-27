@@ -4,7 +4,6 @@ import customer from "./customer.js"
 
 export default Vue.component("customers-overview",{
     components: {
-        customer,
         finder,
     },
     template: `
@@ -13,20 +12,15 @@ export default Vue.component("customers-overview",{
             :items="customers"
             :sortBy="sortBy"
             :filterByOptions="filterByOptions"
-            :searchByTextFields="searchByTextFields"/>
+            :searchByTextFields="searchByTextFields"
+            :component="component"/>
         </finder>
-        <customer 
-            v-for="customer in found" 
-            :key="customer.username"
-            v-bind="customer"
-            >
-        </customer> 
     </div> 
     `,
     data() { 
         return {
             customers: [],
-            found: [],
+            component: customer,
             sortBy: {
                 firstName: "First name",
                 lastName: "Last name",
@@ -61,12 +55,5 @@ export default Vue.component("customers-overview",{
 
     async created() {
         this.customers = await customerService.getOverview();
-    },
-
-    // referencing child's computed property as parents
-    mounted() {
-        this.$watch(() => this.$refs.finder.found, (value) => this.found = value);
-    },
-
-    
+    }, 
 })

@@ -1,6 +1,6 @@
-export default Vue.component("home-admin",{
+export default Vue.component("users-overview",{
     template: `
-    <div id="home-admin">
+    <div id="users-overview">
         <div class="tabs">
             <ul class='tabs__header'>
             <li><router-link :to="{name: 'customers-overview'}">Customers</router-link></li>
@@ -12,19 +12,21 @@ export default Vue.component("home-admin",{
             <!-- <li><router-link :to="profile">Profile</router-link></li> -->
             </ul>
         </div>
+
         <router-view></router-view>
     </div> 
     `,
     data() { 
         return {
+           
         }
     },
 
-    
+    computed: {
+        
+    },
 
     methods: {
         
     }
 })
-
-
