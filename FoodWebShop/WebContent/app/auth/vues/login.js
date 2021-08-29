@@ -1,12 +1,10 @@
 import authService from '../../services/auth-service.js';
-import requiredFieldValidatorMixin from '../../mixins/required-field-validator-mixin.js';
 import { getRole, getId, saveClaimsToLocalStorage } from '../../local-storage-util.js';
 
 import baseForm from '../../components/form/base-form.js';
 import baseField from '../../components/form/base-field.js';
 
 export default Vue.component("login",{
-    mixins: [requiredFieldValidatorMixin],   // validate and checkInput
     components: {
         'base-form': baseForm,
         'base-field': baseField
@@ -34,13 +32,8 @@ export default Vue.component("login",{
             <base-field
                 fieldName="Password"
                 required
-                :value="credentials.password"
-                >
-                <input 
-                    v-model="credentials.password" 
-                    type="password" 
-                    required>
-                </input>
+                :value="credentials.password">
+                <password-box v-model="credentials.password"></password-box>
             </base-field>
             
             <router-link :to="{ name: 'signup'}" class="medium" exact>Not Registered? Sign up for free!</router-link>
@@ -54,8 +47,6 @@ export default Vue.component("login",{
                 password: null
             },
 
-            test: "teest",
-           
             submit: {
                 display: "Log in",
                 invoke: this.login

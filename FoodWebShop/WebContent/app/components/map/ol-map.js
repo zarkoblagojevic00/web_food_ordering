@@ -1,11 +1,15 @@
-import geolocationService from "../../services/geolocation-service.js"
+import createMap from "./map-creator.js"
+
+import baseForm from "../form/base-form.js";
+import baseField from "../form/base-field.js";
 
 export default Vue.component("ol-map",{
     props: {
         value: {
-            type: Object
+            type: Object,
+            required: true
         },
-        readonly: {
+        isReadonly: {
             type: Boolean,
             default: false
         },
@@ -14,84 +18,111 @@ export default Vue.component("ol-map",{
             default: () => [19.841527, 45.244989]
         },
     },
+
+    components: {
+        'base-field': baseField,
+        'base-form': baseForm,
+    },
+
     template: `
     <div id="ol-map">
-        <div id="map-root" style="width: 400px; height: 400px;"></div>
+
+        <base-field
+            fieldName="City"
+            required
+            :value="location.municipality">
+            <input 
+                v-model="location.municipality" 
+                type="text"
+                :readonly="isReadonly" 
+                required>
+            </input>
+        </base-field>
+
+        <base-field
+            fieldName="Street name"
+            required
+            :value="location.streetName">
+            <input 
+                v-model="location.streetName" 
+                type="text"
+                :readonly="isReadonly" 
+                required>
+            </input>
+        </base-field>
+
+        <base-field
+            fieldName="House number"
+            required
+            :value="location.streetNumber">
+            <input 
+                v-model="location.streetNumber" 
+                type="text"
+                :readonly="isReadonly" 
+                required>
+            </input>
+        </base-field>
+        
+        <base-field
+            fieldName="Postal code"
+            required
+            :value="location.postalCode">
+            <input 
+                v-model="location.postalCode" 
+                type="text"
+                :readonly="isReadonly" 
+                required>
+            </input>
+        </base-field>
+
+        <base-field
+            fieldName="Coordinates"
+            :value="coordinates">
+            <input 
+                v-model="coordinates" 
+                type="text"
+                readonly>
+            </input>
+        </base-field>
+
+        <div :id="mapTarget" style="width: 400px; height: 400px;"></div>
     </div> 
     `,
     data() { 
         return {
-           coordinates: null,
+            mapTarget: 'map-root',
+            location: {
+                municipality: null,
+                streetName: null,
+                streetNumber: null,
+                longitude: null,
+                latitude: null,
+                postalCode: null
+            },
         }
     },
 
-    async mounted() {
-        const map = initMap(this.coords)
-        const coordinate = ol.proj.fromLonLat(this.coords);
-        this.movePin({map, coordinate});
-        if (!this.readonly) {
-            map.on('click', this.movePin) 
-        }
+    computed: {
+        coordinates() {
+            const longitude = this.location.longitude;
+            const latitude = this.location.latitude;
+            if (longitude && latitude) {
+                return `${round(longitude)}, ${round(latitude)}`
+            }
+        },
+    },
+
+    mounted() {
+        addEventListener('on-location-changed', this.locationChanged)
+        createMap(this.mapTarget, this.coords, this.isReadonly);
     },
 
     methods: {
-        // map on click sends event with 'Web Mercator' formatted coordinates
-        async movePin ({map, coordinate}) {
-            this.coordinates = ol.proj.toLonLat(coordinate)
-            removeExistingPinFromMap(map);
-            addPinToMap(map, this.coordinates);
-            this.$emit('input', await geolocationService.getLocation(this.coordinates))
-        }
+        async locationChanged(event) {
+            this.location = await event.detail.location;
+            this.$emit('input', this.location);
+        },
     }
 })
 
-const initMap = (coordinates) => new ol.Map({
-    target: 'map-root',
-    view: getView(coordinates),
-    layers: [osmLayer],
-});
-
-const getView = (coordinates) => new ol.View( {
-    zoom: 16,
-    minZoom: 8,
-    maxZoom: 18,
-    center: ol.proj.fromLonLat(coordinates),
-    constrainResolution: true
-});
-
-const osmLayer = new ol.layer.Tile({
-    source: new ol.source.OSM()
-});
-
-const createPinFeature = (coordinates) => new ol.Feature({
-    geometry: new ol.geom.Point(ol.proj.fromLonLat(coordinates)),
-});
-
-const pinStyle = new ol.style.Style({
-    image: new ol.style.Icon({
-      anchor: [0.5, 46],
-      anchorXUnits: 'fraction',
-      anchorYUnits: 'pixels',
-      src: '../../../img/icons/map-marker.png'
-    })
-});
-
-const pinLayerName = 'Pin';
-const createPinLayer = (coordinates) => new ol.layer.Vector({
-    name: pinLayerName,
-    source: new ol.source.Vector({
-        features: [createPinFeature(coordinates)],
-    }),
-    style: pinStyle,
-
-}); 
-
-const removeExistingPinFromMap = (map) => {
-    const pinLayer = map
-        .getLayers()
-        .getArray()
-        .find(layer => layer.get('name') === pinLayerName)
-    map.removeLayer(pinLayer);
-};
-
-const addPinToMap = (map, coordinates) => map.addLayer(createPinLayer(coordinates));
+const round = (value, dec=5) => value.toFixed(dec);

@@ -10,6 +10,7 @@ import ManagersOverview from './roles/admin/users-overview/managers/vues/manager
 import DeliverersOverview from './roles/admin/users-overview/deliverers/vues/deliverers-overview.js'
 import AdminsOverview from './roles/admin/users-overview/admins/vues/admins-overview.js'
 import AddUser from './roles/admin/users-overview/add-user.js'
+import RestaurantsOverview from './roles/admin/restaurants/restaurants-overview.js'
 import AddRestaurant from './roles/admin/restaurants/add-restaurant.js'
 
 const routes = [
@@ -19,23 +20,23 @@ const routes = [
     {path: '/signup',       name: 'signup',     component: SignUp},
     {path: '/admin/:id',                        component: AdminRoot,
         children: [
-            { path: '/',                name: 'admin-home',             component: AdminHome},
-            { path: 'users',            name: 'users-overview',         component: UsersOverview,   
+            { path: '/', name: 'admin-home',  component: AdminHome},
+            { path: 'users', component: UsersOverview,   
                 children: [
+                    { path: '/',                name: 'users-home',             redirect: 'customers'},
                     { path: 'customers',        name: 'customers-overview',     component: CustomersOverview}, 
                     { path: 'managers',         name: 'managers-overview',      component: ManagersOverview}, 
                     { path: 'deliverers',       name: 'deliverers-overview',    component: DeliverersOverview}, 
                     { path: 'admins',           name: 'admins-overview',        component: AdminsOverview},
                     { path: 'add/:role',        name: 'add-user',               component: AddUser, props: true},
-                    // TODO: Move to be child of restaurants
-                    { path: 'add-restaurant',   name: 'add-restaurant',         component: AddRestaurant}   
                 ]
             },
-            // { path: 'restaurants',       name: 'restaurants',            component: RestaurantsOverview ,    
-            //     children : [
-            //         { path: 'add-restaurant',   name: 'add-restaurant',         component: AddRestaurant}   
-            //     ]
-            // }, 
+            { path: 'restaurants',  component: RestaurantsOverview,   
+                children : [
+                    { path: '/',                name: 'restaurants-home',       redirect: 'add-restaurant'},
+                    { path: 'add-restaurant',   name: 'add-restaurant',         component: AddRestaurant}   
+                ]
+            }, 
             { path: 'profile',          name: 'admin-profile',          component: EditProfile} 
         ]
     },

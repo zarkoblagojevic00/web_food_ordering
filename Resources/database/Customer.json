@@ -88,4 +88,22 @@
   "pointsEarned" : 0,
   "type" : "BRONZE",
   "cart" : null
-}]
+}, {
+  "id" : 6,
+  "deleted" : false,
+  "credentials" : {
+    "username" : "pete123",
+    "password" : "petepete"
+  },
+  "personalData" : {
+    "firstName" : "Peter",
+    "lastName" : "Jackson",
+    "gender" : "MALE",
+    "dateOfBirth" : 699789780000
+  },
+  "role" : "CUSTOMER",
+  "activityStatus" : "OK",
+  "pointsEarned" : 0,
+  "type" : "BRONZE",
+  "cart" : null
+} ]

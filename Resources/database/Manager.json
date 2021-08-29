@@ -94,4 +94,20 @@
   "role" : "MANAGER",
   "activityStatus" : "OK",
   "restaurant" : 5
+}, {
+  "id" : 7,
+  "deleted" : false,
+  "credentials" : {
+    "username" : "meimei",
+    "password" : "passpass"
+  },
+  "personalData" : {
+    "firstName" : "April",
+    "lastName" : "Manson",
+    "gender" : "FEMALE",
+    "dateOfBirth" : 544291980000
+  },
+  "role" : "MANAGER",
+  "activityStatus" : "OK",
+  "restaurant" : null
 } ]

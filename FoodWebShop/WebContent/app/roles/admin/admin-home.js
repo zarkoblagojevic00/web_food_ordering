@@ -7,11 +7,11 @@ export default Vue.component("admin-home",{
             <h3>Welcome {{name}}</h3>
         </div>
         <div>
-            <router-link :to="{name: 'users-overview'}">Users</router-link>
+            <router-link :to="{name: 'users-home'}">Users</router-link>
         </div>
         
         <div>
-            <router-link :to="{name: 'users-overview'}">Users</router-link>
+            <router-link :to="{name: 'restaurants-home'}">Restaurants</router-link>
         </div>
 
         <div>

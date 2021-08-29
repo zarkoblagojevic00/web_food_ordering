@@ -1,106 +1,85 @@
 import authService from '../../services/auth-service.js';
-import requiredFieldValidatorMixin from '../../mixins/required-field-validator-mixin.js';
 import {getRole, getId, saveClaimsToLocalStorage } from '../../local-storage-util.js';
+
+import baseForm from '../../components/form/base-form.js';
+import baseField from '../../components/form/base-field.js';
+import passwordBox from '../../components/password-box/password-box.js';
 import datePicker from '../../components/date-picker/date-picker.js';
+import genderPicker from '../../components/entity-picker/gender-picker.js';
 
 export default Vue.component("signup",{
-    mixins: [requiredFieldValidatorMixin],
     components: {
-		'date-picker': datePicker
+        'base-form': baseForm,
+        'base-field': baseField,
+        'password-box': passwordBox,
+		'date-picker': datePicker,
+        'gender-picker': genderPicker,
 	},
+
     template: `
     <div id="signup">
-        <form>
-            <div>
+
+        <base-form
+            title="Registration"
+            :submit="submit"
+            :errorMap="errorMap">
+
+            <base-field
+                fieldName="Username"
+                required
+                :value="credentials.username">
                 <input 
-                    v-model="credentials.username" 
-                    placeholder="username" 
+                    v-model="credentials.username"
+                    type="text" 
                     required>
                 </input>
-                <p 
-                    v-hide="credentials.username"
-                    class="small">
-                    {{requiredFieldMsg}}
-                </p>
-            </div>
-
-            <div>
-                <input 
-                    v-model="credentials.password" 
-                    type="password" 
-                    placeholder="password" 
-                    required>
-                </input>
-                <p 
-                    v-hide="credentials.password"
-                    class="small">
-                    {{requiredFieldMsg}}
-                </p>
-            </div>
-
-            <div>
-                <input 
+            </base-field>
+            
+            <base-field
+                fieldName="Password"
+                required
+                :value="credentials.password">
+                <password-box v-model="credentials.password"></password-box>
+            </base-field>
+            
+            <base-field
+                fieldName="First name"
+                required
+                :value="personalData.firstName" >
+                 <input 
                     v-model="personalData.firstName" 
                     type="text" 
-                    placeholder="First name" 
                     required>
                 </input>
-                <p 
-                    v-hide="personalData.firstName"
-                    class="small">
-                    {{requiredFieldMsg}}
-                </p>
-            </div>
-
-            <div>
-                <input 
+            </base-field>
+            
+            <base-field
+                fieldName="Last name"
+                required
+                :value="personalData.lastName">
+                 <input 
                     v-model="personalData.lastName" 
                     type="text" 
-                    placeholder="Last name" 
                     required>
                 </input>
-                <p 
-                    v-hide="personalData.lastName"
-                    class="small">
-                    {{requiredFieldMsg}}
-                </p>
-            </div>
-
-            <div>
-                <select v-model="personalData.gender" :required="true">
-                    <option 
-                        v-for="(value, name) in genderOptions" 
-                        :key="name"
-                        :value="value">
-                        {{name}}
-                    </option> 
-                </select>
-                <p 
-                    v-hide="personalData.gender"
-                    class="small">
-                    {{requiredFieldMsg}}
-                </p>
-            </div>
-
-            <div>
-                <date-picker v-model="personalData.dateOfBirth"></date-picker>
-                <p 
-                    v-hide="personalData.dateOfBirth"
-                    class="small">
-                    {{requiredFieldMsg}}
-                </p>
-            </div>
+            </base-field>
             
-            <div v-if="error"> 
-                {{error.message}} 
-            </div>
+            <base-field
+                fieldName="Gender"
+                required
+                :value="personalData.gender">
+                <gender-picker v-model="personalData.gender"></gender-picker>
+            </base-field>
 
-            <input 
-                type="submit" 
-                value="Sign up" 
-                @click.prevent='signup' 
-                class="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2" ></input>
-        </form>
+            <base-field
+                fieldName="Date of birth"
+                required
+                :value="personalData.dateOfBirth">
+                <date-picker v-model="personalData.dateOfBirth"></date-picker>
+            </base-field>
+
+
+        </base-form>
     </div> 
     `,
     data() { 
@@ -111,45 +90,31 @@ export default Vue.component("signup",{
             },
 
             personalData: {
-                firstName: null,
-                lastName: null,
-                gender: "MALE",
+                firstName: '',
+                lastName: '',
+                gender: '',
                 dateOfBirth: null
             },
 
-            error: {
-                cause: null,
-                message: null,
-                displayMessage: function(message) {
-                    this.message = message;
-                    setTimeout(() => this.message = null, 10000);
-                }
+            submit: {
+                display: "Sign up",
+                invoke: this.signup
             },
 
-            genderOptions: {
-                male: "MALE",
-                female: "FEMALE",
-                other: "OTHER"
-            }
+            errorMap: {
+                '409': 'User with given username already exists.\nPlease enter another username.',
+                default: 'Sorry, we were unable to sign you up.\nPlease try again later.'
+            },
+
+            
         }
     },
 
 
     methods: {
         async signup() {
-            try {
-                this.$_signup_validate();
-                await this.$_signup_authenticate();
-                this.$_signup_navigate();
-            } catch (e) {
-                console.error(e);
-                this.$_signup_handleError(e);    
-            }
-        },
-        
-        $_signup_validate: function()  {
-            this.validate(this.credentials); // from mixin
-            this.validate(this.personalData);
+            await this.$_signup_authenticate();
+            this.$_signup_navigate();
         },
 
         $_signup_authenticate: async function() {
@@ -161,23 +126,5 @@ export default Vue.component("signup",{
             const userHome = `${getRole().toLowerCase()}-home`
             this.$router.push({name: userHome, params: { id: getId() }});
         },
-        
-        $_signup_handleError: function(e) {
-            this.error.cause = e;
-            const response = e.response;
-            if (!response) {
-                this.error.displayMessage('Please fill in all the data!');
-                return;
-            } 
-            if (response.status == 409) {
-                this.error.displayMessage('User with given username already exists.\nPlease enter another username.');
-                return;
-            }
-            if (response.status == 500) {
-                this.error.displayMessage('Sorry! We were unable to fulfill your signup request!\nPlease try again later.');
-                return;
-            }
-        },
-
     }
 })

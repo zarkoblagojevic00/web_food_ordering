@@ -29,7 +29,10 @@ export const saveClaimsToLocalStorage = (jwt) => {
     localStorage.setItem(ID_KEY, payload.id);
     dispatchEvent(new CustomEvent('user-logged-in', {
         detail: {
-          role: getRole()
+          creds: [
+            getRole(),
+            getId()
+          ]
         }
     }));
 }
