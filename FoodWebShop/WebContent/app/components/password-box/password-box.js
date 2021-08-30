@@ -1,3 +1,5 @@
+import { load } from "../../path-loader.js";
+
 export default Vue.component("password-box",{
     props: {
         value: String,
@@ -13,6 +15,7 @@ export default Vue.component("password-box",{
             required>
         </input>
         <img :src="activeMode['imgSrc']" @click="switchMode">
+
     </span> `,
     data() { 
         return {
@@ -20,17 +23,19 @@ export default Vue.component("password-box",{
             modes: [
                {
                    type: 'text',
-                   imgSrc: '../../../img/icons/pass-visible.png'
+                   imgSrc: load('img/icons/pass-visible.png')
                },
                {
                    type: 'password',
-                   imgSrc: '../../../img/icons/pass-hidden.png'
+                   imgSrc: load('img/icons/pass-hidden.png')
                }
             ],
            
             activeIndex: 1,
+            url: location.origin
         }
     },
+
 
     computed: {
         activeMode() {

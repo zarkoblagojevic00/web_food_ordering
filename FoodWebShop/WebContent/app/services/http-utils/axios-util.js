@@ -1,4 +1,5 @@
 import { getJwt } from '../../local-storage-util.js';
+import { api, initEndPointCreator } from '../../path-loader.js';
 
 export default function init(resource) {
     const createEndPoint = initEndPointCreator(resource);
@@ -47,7 +48,7 @@ export default function init(resource) {
 
 const request = async (config) => {
     const response = await axios({
-        baseURL,
+        baseURL: api,
         url: config.url,
         data: config.data,
         method: config.method,
@@ -61,10 +62,6 @@ const request = async (config) => {
     
     return (config.contentType === 'blob') ? new Blob([response.data]) : response.data;
 }
-
-const baseURL = 'http://localhost:8080/FoodWebShop/rest/';
-
-const initEndPointCreator = resource => relPath => `${resource}/${relPath}`;
 
 const jwtAuthorizationHeader = () => ({ 'Authorization': `Bearer ${getJwt() || ""}` }); 
 

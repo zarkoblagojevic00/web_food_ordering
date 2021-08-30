@@ -1,3 +1,5 @@
+// deprecated
+
 const requiredFieldValidatorMixin = {
     data() {
         return {

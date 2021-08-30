@@ -1,3 +1,4 @@
+import { load } from "../../path-loader.js";
 import geolocationService from "../../services/geolocation-service.js";
 
 export default function createMap(target, coordinates, readonly) {
@@ -46,7 +47,7 @@ const pinStyle = new ol.style.Style({
       anchor: [0.5, 46],
       anchorXUnits: 'fraction',
       anchorYUnits: 'pixels',
-      src: '../../../img/icons/map-marker.png'
+      src: load('img/icons/map-marker.png')
     })
 });
 
