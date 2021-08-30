@@ -1,6 +1,6 @@
 export default Vue.component("date-picker",{
     props: {
-        value: Date
+        value: [Date, Number]
     },
 
     components: {
@@ -8,18 +8,28 @@ export default Vue.component("date-picker",{
 	},
 
     template: `
-    <div id="date-picker">
+    <span id="date-picker">
         <vuejs-datepicker
-            :inline="true"
+            placeholder="Select date"
             v-model="date"
             @input="$emit('input', date)"
             > 
         </vuejs-datepicker>    
-    </div> 
+    </span> 
     `,
+    
     data() { 
         return {
            date: null
         }
     },
+
+    watch: {
+        value: {
+            handler() {
+                this.date = (typeof this.value === 'number') ? new Date(this.value) : this.value;
+            },
+            immediate: true
+        }
+    }
 })

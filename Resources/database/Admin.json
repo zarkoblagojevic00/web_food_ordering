@@ -2,18 +2,18 @@
   "id" : 1,
   "deleted" : false,
   "credentials" : {
-    "username" : "Change",
-    "password" : "Changed"
+    "username" : "admin",
+    "password" : "adminadmin"
   },
   "personalData" : {
-    "firstName" : "Test",
-    "lastName" : "Test",
+    "firstName" : "Michael",
+    "lastName" : "Thompson",
     "gender" : "MALE",
-    "dateOfBirth" : 1628747125959
+    "dateOfBirth" : 667896300000
   },
-  "role" : "ADMIN"
-},
-{
+  "role" : "ADMIN",
+  "activityStatus" : "OK"
+}, {
   "id" : 2,
   "deleted" : false,
   "credentials" : {
@@ -26,5 +26,6 @@
     "gender" : "FEMALE",
     "dateOfBirth" : 1600747125959
   },
-  "role" : "ADMIN"
-}]
+  "role" : "ADMIN",
+  "activityStatus" : "OK"
+} ]

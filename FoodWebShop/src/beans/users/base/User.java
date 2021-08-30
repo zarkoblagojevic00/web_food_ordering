@@ -7,14 +7,16 @@ import javax.security.auth.Subject;
 import java.security.Principal;
 import java.util.Date;
 
-public abstract class User extends Entity implements Identifiable, Authorizable, Principal {
+public class User extends Entity implements Identifiable, Authorizable, Principal {
     private Credentials credentials;
     private PersonalData personalData;
-    final private Role role;
+    private Role role;
 
     private UserActivityStatus activityStatus;
 
+    public User() {
 
+    }
     public User(Role role) {
         this.role = role;
         this.activityStatus = UserActivityStatus.OK;
@@ -93,4 +95,7 @@ public abstract class User extends Entity implements Identifiable, Authorizable,
         return Principal.super.implies(subject);
     }
 
+    public void setCredentials(Credentials newCredentials) {
+        this.credentials = newCredentials;
+    }
 }

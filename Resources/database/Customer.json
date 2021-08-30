@@ -2,14 +2,14 @@
   "id" : 1,
   "deleted" : false,
   "credentials" : {
-    "username" : "aaa",
+    "username" : "mike123",
     "password" : "password"
   },
   "personalData" : {
-    "firstName" : "Aaa",
-    "lastName" : "Aaa",
+    "firstName" : "Mike",
+    "lastName" : "May",
     "gender" : "MALE",
-    "dateOfBirth" : 1628100600000
+    "dateOfBirth" : 667809900000
   },
   "role" : "CUSTOMER",
   "activityStatus" : "BANNED",
@@ -100,6 +100,24 @@
     "lastName" : "Jackson",
     "gender" : "MALE",
     "dateOfBirth" : 699789780000
+  },
+  "role" : "CUSTOMER",
+  "activityStatus" : "OK",
+  "pointsEarned" : 0,
+  "type" : "BRONZE",
+  "cart" : null
+}, {
+  "id" : 7,
+  "deleted" : false,
+  "credentials" : {
+    "username" : "jake123",
+    "password" : "jakejake"
+  },
+  "personalData" : {
+    "firstName" : "Jake",
+    "lastName" : "Jones",
+    "gender" : "MALE",
+    "dateOfBirth" : 673558980000
   },
   "role" : "CUSTOMER",
   "activityStatus" : "OK",

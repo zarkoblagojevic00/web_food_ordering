@@ -110,4 +110,20 @@
   "role" : "MANAGER",
   "activityStatus" : "OK",
   "restaurant" : null
+}, {
+  "id" : 8,
+  "deleted" : false,
+  "credentials" : {
+    "username" : "newmanager",
+    "password" : "newnewnew"
+  },
+  "personalData" : {
+    "firstName" : "New",
+    "lastName" : "Manager",
+    "gender" : "OTHER",
+    "dateOfBirth" : 542148360000
+  },
+  "role" : "MANAGER",
+  "activityStatus" : "OK",
+  "restaurant" : null
 } ]

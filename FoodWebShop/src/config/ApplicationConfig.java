@@ -7,6 +7,7 @@ import java.util.Map;
 
 import org.glassfish.hk2.utilities.binding.AbstractBinder;
 import org.glassfish.jersey.media.multipart.MultiPartFeature;
+import org.glassfish.jersey.process.internal.RequestScoped;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.server.filter.RolesAllowedDynamicFeature;
 
@@ -26,13 +27,7 @@ import repositories.json.repos.DelivererJsonFileRepository;
 import repositories.json.repos.ManagerJsonFileRepository;
 import repositories.json.repos.OrderJsonFileRepository;
 import repositories.json.repos.RestaurantJsonFileRepository;
-import services.ActivityService;
-import services.AdminService;
-import services.CustomerService;
-import services.DelivererService;
-import services.ManagerService;
-import services.RestaurantService;
-import services.TestService;
+import services.*;
 import services.auth.AuthenticationService;
 
 public class ApplicationConfig extends ResourceConfig {
@@ -55,6 +50,7 @@ public class ApplicationConfig extends ResourceConfig {
                 TestService.class,
                 AuthenticationService.class,
                 ActivityService.class,
+                UserService.class,
                 AdminService.class,
                 CustomerService.class,
                 ManagerService.class,
@@ -68,12 +64,16 @@ public class ApplicationConfig extends ResourceConfig {
         register(MultiPartFeature.class);
     }
 
+
     private void registerConcretes() {
         register(new AbstractBinder() {
             @Override
             protected void configure() {
                 for (Class<?> concrete: concretes)
-                    bindAsContract(concrete);
+                    bindAsContract(concrete)
+                            .proxy(true)    // filters are created once on app startup (app scoped)
+                            .proxyForSameScope(false)  // use concrete for same request scope, use proxy for different scopes
+                            .in(RequestScoped.class);
             }
         });
     }

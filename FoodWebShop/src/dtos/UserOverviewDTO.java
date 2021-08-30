@@ -6,7 +6,7 @@ import beans.users.roles.customer.UserActivityStatus;
 
 import java.util.Date;
 
-public abstract class UserOverviewDTO {
+public class UserOverviewDTO {
     final private long id;
     final private String username;
     final private String firstName;

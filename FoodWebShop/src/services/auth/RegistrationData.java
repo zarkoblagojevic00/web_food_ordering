@@ -4,12 +4,12 @@ import beans.users.base.Credentials;
 import beans.users.base.PersonalData;
 import beans.users.base.Role;
 
-public class AuthenticationData {
+public class RegistrationData {
     private Credentials credentials;
     private PersonalData personalData;
     private Role role;
 
-    public AuthenticationData() {
+    public RegistrationData() {
 
     }
 

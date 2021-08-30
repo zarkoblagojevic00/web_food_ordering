@@ -2,10 +2,12 @@ package security;
 
 import beans.users.base.User;
 import beans.users.roles.Guest;
+import services.UserService;
 import services.auth.AuthenticationService;
 
 import javax.annotation.Priority;
 import javax.inject.Inject;
+import javax.inject.Scope;
 import javax.ws.rs.Priorities;
 import javax.ws.rs.container.ContainerRequestContext;
 import javax.ws.rs.container.ContainerRequestFilter;
@@ -17,7 +19,8 @@ import javax.ws.rs.ext.Provider;
 @Priority(Priorities.AUTHENTICATION)
 public class JWTAuthenticationFilter implements ContainerRequestFilter {
     @Inject
-    AuthenticationService authService;
+    private UserService userService;
+
     @Override
     public void filter(ContainerRequestContext requestContext) {
         if (isAuthRequest(requestContext))
@@ -64,7 +67,7 @@ public class JWTAuthenticationFilter implements ContainerRequestFilter {
             return createGuestUser();
         }
         String username = jwtUtil.extractUsername(token);
-        return authService.findUserByUsername(username);
+        return userService.findUserByUsername(username);
     }
 
     private String getScheme(ContainerRequestContext requestContext) {

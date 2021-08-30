@@ -1,4 +1,4 @@
-import authService from "../../../services/auth-service.js";
+import userService from "../../../services/user-service.js";
 
 import baseForm from "../../../components/form/base-form.js";
 import baseField from "../../../components/form/base-field.js";
@@ -124,7 +124,7 @@ export default Vue.component("add-user",{
         },
         
         $_add_send: async function() {
-            await authService.add(this.credentials, this.personalData, this.role);
+            await userService.add(this.credentials, this.personalData, this.role);
         },
 
         $_add_navigate_back: function() {
