@@ -15,20 +15,25 @@ export default Vue.component("the-navbar",{
             <span v-if="isAdmin">
                 <li><router-link :to="getRoleRoute('users-home')" exact>Users</router-link></li>
                 <li><router-link :to="getRoleRoute('restaurants-home')" exact>Restaurants</router-link></li>
-                <li><router-link :to="getRoleRoute('admin-profile')" exact>Profile</router-link></li>
             </span>
             <span v-if="isCustomer"></span>
             <span v-if="isDeliverer"></span>
-            <span v-if="isManager"></span>
-
-            <li v-if="!isGuest">
-                <router-link 
-                    :to="{ name: 'home'}" 
-                    @click.native="logout" 
-                    exact>
-                    Log out
-                </router-link>
-            </li>
+            
+            <span v-if="isManager">
+                <li><router-link :to="getRoleRoute('restaurant-root')" exact>Restaurant</router-link></li>
+            </span>
+            
+            <span v-if="!isGuest">
+                <li><router-link :to="userProfile" exact>Profile</router-link></li>
+                <li>
+                    <router-link
+                        :to="{ name: 'home'}"
+                        @click.native="logout"
+                        exact>
+                        Log out
+                    </router-link>
+                </li>
+            </span>
         </ul>
     </div> 
     `,
@@ -44,9 +49,23 @@ export default Vue.component("the-navbar",{
         userHome() {
             return (this.isGuest) ? this.guestHome : this.getRoleRoute(this.roleHome)
         },
+        
         roleHome() {
-            return `${this.role.toLowerCase()}-home`
+            return `${this.roleLowerCased}-home`
         },
+        
+        userProfile() {
+            return this.getRoleRoute(this.roleProfile)
+        },
+
+        roleProfile() {
+            return `${this.roleLowerCased}-profile`
+        },
+
+        roleLowerCased() {
+            return this.role.toLowerCase();
+        },
+
         isAdmin() { return this.role === "ADMIN"; },
         isCustomer() { return this.role === "CUSTOMER" },
         isDeliverer() { return this.role === "DELIVERER" },

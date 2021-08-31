@@ -12,13 +12,31 @@ import AdminsOverview from './roles/admin/users-overview/admins/vues/admins-over
 import AddUser from './roles/admin/users-overview/add-user.js'
 import RestaurantsOverview from './roles/admin/restaurants/restaurants-overview.js'
 import AddRestaurant from './roles/admin/restaurants/add-restaurant.js'
+import ManagerRoot from './roles/manager/manager-root.js'
+import ManagerHome from './roles/manager/manager-home.js'
+import RestaurantRoot from './restaurant/restaurant-root.js'
+import ProductsOverview from './restaurant/products/products-overview.js'
+import RestaurantInfo from './restaurant/restaurant-info.js'
+import RestaurantComments from './restaurant/restaurant-comments.js'
+
+const restaurantRoutes = {
+    path: '/restaurant', component: RestaurantRoot,
+        children: [
+            {path: '/',         name: 'restaurant-root',        redirect: 'products'},
+            {path: 'products',  name: 'restaurant-products',    component: ProductsOverview},
+            {path: 'info',      name: 'restaurant-info',        component: RestaurantInfo},
+            {path: 'comments',  name: 'restaurant-comments',    component: RestaurantComments},
+        ],
+}
+
 
 const routes = [
     // {path: '/', component: Test},
     {path: '/',             name: 'home',       component: Home},
     {path: '/login',        name: 'login',      component: Login},
     {path: '/signup',       name: 'signup',     component: SignUp},
-    {path: '/admin/:id',                        component: AdminRoot,
+    
+    {path: '/admin/:id', component: AdminRoot,
         children: [
             { path: '/', name: 'admin-home',  component: AdminHome},
             { path: 'users', component: UsersOverview,   
@@ -40,7 +58,19 @@ const routes = [
             { path: 'profile',          name: 'admin-profile',          component: EditProfile} 
         ]
     },
+
+    {path: '/manager/:id', component: ManagerRoot, 
+        children: [
+            {path: '/', name: 'manager-home', component: ManagerHome},
+            restaurantRoutes,
+        ] 
+    }
+
+
 ]
+
+
+
 
 export default new VueRouter({
 	routes
