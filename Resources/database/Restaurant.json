@@ -83,4 +83,21 @@
   },
   "products" : [ ],
   "comments" : [ ]
+}, {
+  "id" : 6,
+  "deleted" : false,
+  "name" : "Barbeque",
+  "type" : "BBQ",
+  "logoPath" : "restaurants/6/Barbeque.jpg",
+  "opened" : true,
+  "location" : {
+    "longitude" : 19.893642715525424,
+    "latitude" : 44.27253136255828,
+    "streetNumber" : "126",
+    "streetName" : "Пантићева",
+    "municipality" : "Valjevo City",
+    "postalCode" : "14000"
+  },
+  "products" : [ ],
+  "comments" : [ ]
 } ]

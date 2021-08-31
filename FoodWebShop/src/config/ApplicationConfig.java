@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import beans.restaurants.Product;
 import org.glassfish.hk2.utilities.binding.AbstractBinder;
 import org.glassfish.jersey.media.multipart.MultiPartFeature;
 import org.glassfish.jersey.process.internal.RequestScoped;
@@ -13,13 +14,7 @@ import org.glassfish.jersey.server.filter.RolesAllowedDynamicFeature;
 
 import repositories.ITestRepository;
 import repositories.TestRepository;
-import repositories.interfaces.ActivityRepository;
-import repositories.interfaces.AdminRepository;
-import repositories.interfaces.CustomerRepository;
-import repositories.interfaces.DelivererRepository;
-import repositories.interfaces.ManagerRepository;
-import repositories.interfaces.OrderRepository;
-import repositories.interfaces.RestaurantRepository;
+import repositories.interfaces.*;
 import repositories.json.repos.ActivityJsonFileRepository;
 import repositories.json.repos.AdminJsonFileRepository;
 import repositories.json.repos.CustomerJsonFileRepository;
@@ -37,12 +32,13 @@ public class ApplicationConfig extends ResourceConfig {
     public ApplicationConfig() {
         dependencyPairs = new HashMap<Class<?>, Class<?>>() {{
             put(ITestRepository.class, TestRepository.class);
+            put(ActivityRepository.class, ActivityJsonFileRepository.class);
             put(AdminRepository.class, AdminJsonFileRepository.class);
             put(CustomerRepository.class, CustomerJsonFileRepository.class);
             put(ManagerRepository.class, ManagerJsonFileRepository.class);
             put(DelivererRepository.class, DelivererJsonFileRepository.class);
             put(RestaurantRepository.class, RestaurantJsonFileRepository.class);
-            put(ActivityRepository.class, ActivityJsonFileRepository.class);
+            put(ProductRepository.class, ProductJsonFileRepository.class);
             put(OrderRepository.class, OrderJsonFileRepository.class);
         }};
 
@@ -55,7 +51,8 @@ public class ApplicationConfig extends ResourceConfig {
                 CustomerService.class,
                 ManagerService.class,
                 DelivererService.class,
-                RestaurantService.class
+                RestaurantService.class,
+                ProductService.class
         );
 
         registerDependencyInjection();

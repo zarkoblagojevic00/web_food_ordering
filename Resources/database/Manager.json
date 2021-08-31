@@ -109,7 +109,7 @@
   },
   "role" : "MANAGER",
   "activityStatus" : "OK",
-  "restaurant" : null
+  "restaurant" : 6
 }, {
   "id" : 8,
   "deleted" : false,

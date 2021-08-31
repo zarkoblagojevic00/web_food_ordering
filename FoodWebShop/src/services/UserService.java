@@ -18,7 +18,7 @@ import repositories.interfaces.base.UserRepository;
 import repositories.json.repos.base.EntityNotFoundException;
 import services.auth.RegistrationData;
 import services.exceptions.BadCredentialsException;
-import services.exceptions.UsernameAlreadyExistsException;
+import services.exceptions.FieldNotUniqueException;
 
 import javax.inject.Inject;
 import java.lang.reflect.Constructor;
@@ -99,7 +99,7 @@ public class UserService {
     private void checkUsernameExists(String username) {
         try {
             if (findUserByUsername(username) != null) {
-                throw new UsernameAlreadyExistsException("User with username: " + username + " already exists.");
+                throw new FieldNotUniqueException("User with username: " + username + " already exists.");
             }
         } catch (BadCredentialsException ignored) {
         }

@@ -21,6 +21,10 @@ public class Restaurant extends Entity {
         this.comments = new ArrayList<>();
     }
 
+    public Restaurant(long id) {
+        super(id);
+    }
+
     public String getName() {
         return name;
     }

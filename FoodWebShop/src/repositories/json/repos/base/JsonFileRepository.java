@@ -19,6 +19,11 @@ public class JsonFileRepository<T extends Entity> implements Repository<T> {
 
 
     @Override
+    public long size() {
+        return entities.size();
+    }
+
+    @Override
     public T get(Long id) {
         T entity = entities.get(id);
         if (entity == null || entity.isDeleted()) {

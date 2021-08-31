@@ -5,6 +5,7 @@ import beans.Entity;
 import java.util.Collection;
 
 public interface Repository<T extends Entity> {
+    public long size();
     public T get(Long id);
     public Collection<T> getAll();
     public Collection<T> getMultiple(Collection<Long> ids);

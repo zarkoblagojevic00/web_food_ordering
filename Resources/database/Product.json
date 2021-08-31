@@ -1,0 +1,31 @@
+[ {
+  "id" : 1,
+  "deleted" : false,
+  "name" : "Pizza Milano",
+  "price" : 1100.0,
+  "type" : "FOOD",
+  "restaurant" : 1,
+  "portion" : 800.0,
+  "description" : "Pepperoni, Italian sausage, ham, green peppers, onions and mozzarella cheese.",
+  "picturePath" : "restaurants/1/f0a10158-2468-4d4a-b61e-204009847153.jpg"
+}, {
+  "id" : 2,
+  "deleted" : false,
+  "name" : "Pizza Margherita",
+  "price" : 850.0,
+  "type" : "FOOD",
+  "restaurant" : 1,
+  "portion" : 800.0,
+  "description" : "A traditional pizza with fresh tomatoes, garlic, basil and fresh mozzarella.",
+  "picturePath" : "restaurants/1/e728d256-f3fe-4f43-8b3a-9e26e8f29629.form-data"
+}, {
+  "id" : 3,
+  "deleted" : false,
+  "name" : "Pizza Margherita - Grilled",
+  "price" : 900.0,
+  "type" : "FOOD",
+  "restaurant" : 1,
+  "portion" : 800.0,
+  "description" : "A traditional pizza with fresh tomatoes, garlic, basil and grilled mozzarella.",
+  "picturePath" : "restaurants/1/8cd0cc0a-a372-4200-8e09-bf64a92ab9b6.jpg"
+} ]

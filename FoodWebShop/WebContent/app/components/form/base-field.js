@@ -2,7 +2,7 @@ export default Vue.component("base-field",{
     props: {
         fieldName: String,
         
-        value: [Object, String, Number, Date],
+        value: [Object, String, Number, Date, File],
         
         validator: {
             type: Function,

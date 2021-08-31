@@ -4,6 +4,7 @@ import config.PathFinder;
 
 import javax.ws.rs.WebApplicationException;
 import java.io.*;
+import java.util.UUID;
 
 public class ImageFileIOProxy {
     final private PathFinder pathFinder;
@@ -12,9 +13,9 @@ public class ImageFileIOProxy {
         pathFinder = new PathFinder("Resources", "images");
     }
 
-    public String saveImage(InputStream fileInputStream, String folderName, long subfolderId, String filename) {
+    public String saveImage(FileUploadDTO fileUploadDTO) {
         try {
-            saveBinaryData(fileInputStream, folderName, subfolderId, filename);
+            saveBinaryData(fileUploadDTO);
         } catch (IOException e) {
             throw new WebApplicationException("Error while uploading file. Please try again !!");
         }
@@ -26,13 +27,13 @@ public class ImageFileIOProxy {
         return new File(pathFinder.getCurrentPath());
     }
 
-    private void saveBinaryData(InputStream fileInputStream, String folderName, long subfolderId, String filename) throws IOException {
-        tryCreateDirectory(folderName, subfolderId);
-        writeFile(fileInputStream, filename);
+    private void saveBinaryData(FileUploadDTO fileUploadDTO) throws IOException {
+        tryCreateDirectory(fileUploadDTO.getResourceFolderName(), fileUploadDTO.getResourceSubfolderName());
+        writeFile(fileUploadDTO.getFileInputStream(), fileUploadDTO.getFileName());
     }
 
-    private void tryCreateDirectory(String folderName, long subfolderId) throws IOException {
-        pathFinder.appendToCurrentPath(folderName, Long.toString(subfolderId));
+    private void tryCreateDirectory(String folderName, String subfolderName) throws IOException {
+        pathFinder.appendToCurrentPath(folderName, subfolderName);
         File newImage = new File(pathFinder.getCurrentPath());
         newImage.mkdirs();
     }
@@ -51,5 +52,6 @@ public class ImageFileIOProxy {
         out.flush();
         out.close();
     }
+
 
 }

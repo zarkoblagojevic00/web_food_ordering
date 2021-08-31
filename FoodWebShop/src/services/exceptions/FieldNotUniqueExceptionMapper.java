@@ -5,9 +5,9 @@ import javax.ws.rs.ext.ExceptionMapper;
 import javax.ws.rs.ext.Provider;
 
 @Provider
-public class UsernameAlreadyExistsExceptionMapper implements ExceptionMapper<UsernameAlreadyExistsException> {
+public class FieldNotUniqueExceptionMapper implements ExceptionMapper<FieldNotUniqueException> {
     @Override
-    public Response toResponse(UsernameAlreadyExistsException e) {
+    public Response toResponse(FieldNotUniqueException e) {
         return Response.status(Response.Status.CONFLICT).build();
     }
 }

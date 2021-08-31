@@ -1,23 +1,24 @@
 package controllers;
 
 import beans.restaurants.Restaurant;
-import beans.restaurants.RestaurantType;
 import dtos.RestaurantCreationDTO;
 import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
 import org.glassfish.jersey.media.multipart.FormDataParam;
 import services.RestaurantService;
+import services.util.FileUploadDTO;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.io.*;
-import java.util.Collection;
 
 @Path("restaurants")
 public class RestaurantController {
     @Inject
     private RestaurantService restaurantService;
+    @Inject
+    private ProductController productController;
 
     @GET
     @Path("types")
@@ -33,13 +34,19 @@ public class RestaurantController {
                         @FormDataParam("logoPicture") InputStream fileInputStream,
                         @FormDataParam("logoPicture") FormDataContentDisposition fileMetaData,
                         @FormDataParam("selectedManagerId") long managerId) {
-        RestaurantCreationDTO dto = new RestaurantCreationDTO(
-                restaurant,
-                fileInputStream,
-                fileMetaData.getFileName(),
-                managerId);
-        Restaurant savedRestaurant = restaurantService.saveRestaurant(dto);
+        FileUploadDTO fileUploadDto = new FileUploadDTO(
+          fileInputStream,
+          fileMetaData,
+          "restaurants",
+          false
+        );
+        Restaurant savedRestaurant = restaurantService.saveRestaurant(restaurant, managerId, fileUploadDto);
         return Response.ok(savedRestaurant).build();
+    }
+
+    @Path("{restaurantId}/products")
+    public ProductController getProductController() {
+        return productController;
     }
 
 }

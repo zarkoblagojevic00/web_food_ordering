@@ -6,6 +6,7 @@ import beans.users.roles.manager.Manager;
 import dtos.RestaurantCreationDTO;
 import repositories.interfaces.ManagerRepository;
 import repositories.interfaces.RestaurantRepository;
+import services.util.FileUploadDTO;
 import services.util.ImageFileIOProxy;
 
 import javax.inject.Inject;
@@ -26,10 +27,10 @@ public class RestaurantService {
         return RestaurantType.values();
     }
 
-    public Restaurant saveRestaurant(RestaurantCreationDTO creationDTO) {
-        Restaurant savedRestaurant = restaurantRepo.save(creationDTO.getRestaurant());
-        employManager(creationDTO.getSelectedManagerId(), savedRestaurant);
-        return getRestaurantWithSavedLogo(creationDTO, savedRestaurant);
+    public Restaurant saveRestaurant(Restaurant restaurant, long selectedManagerId, FileUploadDTO fileUploadDTO) {
+        Restaurant savedRestaurant = restaurantRepo.save(restaurant);
+        employManager(selectedManagerId, savedRestaurant);
+        return getRestaurantWithSavedLogo(fileUploadDTO, savedRestaurant);
     }
 
     private void employManager(long managerId, Restaurant restaurant) {
@@ -38,12 +39,9 @@ public class RestaurantService {
         managerRepo.update(manager);
     }
 
-    private Restaurant getRestaurantWithSavedLogo(RestaurantCreationDTO creationDTO, Restaurant savedRestaurant) {
-        String logoPath = ioProxy.saveImage(
-                creationDTO.getFileInputStream(),
-                "restaurants",
-                savedRestaurant.getId(),
-                creationDTO.getFilename());
+    private Restaurant getRestaurantWithSavedLogo(FileUploadDTO fileUploadDTO, Restaurant savedRestaurant) {
+        fileUploadDTO.setResourceSubfolderName(savedRestaurant.getId());
+        String logoPath = ioProxy.saveImage(fileUploadDTO);
         savedRestaurant.setLogoPath(logoPath);
         return restaurantRepo.update(savedRestaurant);
     }
