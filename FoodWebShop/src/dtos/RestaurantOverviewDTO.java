@@ -5,6 +5,7 @@ import beans.restaurants.Restaurant;
 import beans.restaurants.RestaurantType;
 
 public class RestaurantOverviewDTO {
+    final private long id;
     final private String name;
     final private RestaurantType type;
     final private String logoPath;
@@ -12,6 +13,7 @@ public class RestaurantOverviewDTO {
     final private Location location;
 
     public RestaurantOverviewDTO(Restaurant restaurant) {
+        this.id = restaurant.getId();
         this.name = restaurant.getName();
         this.type = restaurant.getType();
         this.logoPath = restaurant.getLogoPath();

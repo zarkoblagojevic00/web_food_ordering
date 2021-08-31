@@ -19,10 +19,16 @@ public class ManagerController {
 
     @GET
     @Path("overview")
-    @RolesAllowed("ADMIN")
+    @RolesAllowed({"ADMIN", "MANAGER"})
     public Response getAll() {
         Collection<ManagerOverviewDTO> managers = managerService.getManagersOverview();
         return Response.ok(managers).build();
+    }
+
+    @GET
+    @Path("overview/{id}")
+    public Response get(@PathParam("id") long managerId) {
+        return Response.ok(managerService.getManagerOverview(managerId)).build();
     }
 
     @GET

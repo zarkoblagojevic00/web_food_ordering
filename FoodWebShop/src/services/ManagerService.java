@@ -44,6 +44,10 @@ public class ManagerService {
         managerRepo.delete(manager.getId());
     }
 
+    public ManagerOverviewDTO getManagerOverview(long managerId) {
+        return createManagerOverviewDTO(managerRepo.get(managerId));
+    }
+
     private Stream<ManagerOverviewDTO> getManagersOverviewStream() {
         return managerRepo.getAll().stream()
                 .map(this::createManagerOverviewDTO);
@@ -57,4 +61,5 @@ public class ManagerService {
         }
         return new ManagerOverviewDTO(manager);
     }
+
 }

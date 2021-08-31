@@ -1,4 +1,4 @@
-import { getRole, getId, clearStorage } from "../local-storage-util.js"
+import { getRole, getId, clearStorage, getRestaurantId } from "../local-storage-util.js"
 
 export default Vue.component("the-navbar",{
     template: `
@@ -19,8 +19,11 @@ export default Vue.component("the-navbar",{
             <span v-if="isCustomer"></span>
             <span v-if="isDeliverer"></span>
             
-            <span v-if="isManager">
-                <li><router-link :to="getRoleRoute('restaurant-root')" exact>Restaurant</router-link></li>
+            <span v-if="isManager && managerRestaurantId">
+                <li><router-link :to="getManagerRoute('restaurant-root')" exact>Restaurant</router-link></li>
+                <!-- <li><router-link :to="getManagerRoute('restaurant-customers')" exact>Customers</router-link></li>
+                <li><router-link :to="getManagerRoute('restaurant-orders')" exact>Orders</router-link></li>
+                 -->
             </span>
             
             <span v-if="!isGuest">
@@ -40,8 +43,9 @@ export default Vue.component("the-navbar",{
     data() { 
         return {
             guestHome: { name: 'home' },
-            role: null,
-            id: null
+            role: getRole(),
+            id: getId(),
+            managerRestaurantId: getRestaurantId()
         }
     },
 
@@ -75,13 +79,16 @@ export default Vue.component("the-navbar",{
 
     mounted() {
         addEventListener('user-logged-in', event => [this.role, this.id] = event.detail.creds);
-        this.role = getRole();
-        this.id = getId();
+        addEventListener('manager-logged-in' , event => this.managerRestaurantId = event.detail.managerRestaurantId);
     },
 
     methods: {
         getRoleRoute(routeName) {
             return { name: routeName, params: { id: this.id }}
+        },
+
+        getManagerRoute(routeName) {
+            return { name: routeName, params: { id: this.id, restaurantId: this.managerRestaurantId}}
         },
 
         logout () {

@@ -3,6 +3,7 @@ const ROLE_KEY = 'role';
 const NAME_KEY = 'name';
 const USERNAME_KEY = 'username';
 const ID_KEY = 'id';
+const RESTAURANT_ID_KEY = "restaurantId"
 
 const getItem = (key) => localStorage.getItem(key);
 
@@ -19,6 +20,7 @@ export const getRole = () => getItem(ROLE_KEY);
 export const getName = () => getItem(NAME_KEY);
 export const getUsername = () => getItem(USERNAME_KEY);
 export const getId = () => getItem(ID_KEY);
+export const getRestaurantId = () => getItem(RESTAURANT_ID_KEY);
 
 export const saveClaimsToLocalStorage = (jwt) => {
     const payload = getJWTPayload(jwt);
@@ -35,6 +37,15 @@ export const saveClaimsToLocalStorage = (jwt) => {
           ]
         }
     }));
+}
+
+export const setRestaurantId = (id) => {
+  localStorage.setItem(RESTAURANT_ID_KEY, id);
+  dispatchEvent(new CustomEvent('manager-logged-in', {
+    detail: { 
+        managerRestaurantId: id
+    }
+  }))
 }
 
 export const clearStorage = () => localStorage.clear();

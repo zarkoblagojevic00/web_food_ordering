@@ -18,14 +18,15 @@ import RestaurantRoot from './restaurant/restaurant-root.js'
 import ProductsOverview from './restaurant/products/products-overview.js'
 import RestaurantInfo from './restaurant/restaurant-info.js'
 import RestaurantComments from './restaurant/restaurant-comments.js'
+import AddProduct from './restaurant/products/add-product.js'
 
 const restaurantRoutes = {
-    path: '/restaurant', component: RestaurantRoot,
+    path: 'restaurants/:restaurantId', component: RestaurantRoot, props: true,
         children: [
-            {path: '/',         name: 'restaurant-root',        redirect: 'products'},
-            {path: 'products',  name: 'restaurant-products',    component: ProductsOverview},
-            {path: 'info',      name: 'restaurant-info',        component: RestaurantInfo},
-            {path: 'comments',  name: 'restaurant-comments',    component: RestaurantComments},
+            {path: '/',         name: 'restaurant-root',        redirect: 'products',           props: true},
+            {path: 'products',  name: 'restaurant-products',    component: ProductsOverview,    props: true},
+            {path: 'info',      name: 'restaurant-info',        component: RestaurantInfo,      props: true},
+            {path: 'comments',  name: 'restaurant-comments',    component: RestaurantComments,  props: true},
         ],
 }
 
@@ -59,13 +60,13 @@ const routes = [
         ]
     },
 
-    {path: '/manager/:id', component: ManagerRoot, 
+    {path: '/manager/:id', component: ManagerRoot, props: true, 
         children: [
-            {path: '/', name: 'manager-home', component: ManagerHome},
+            {path: '/', name: 'manager-home', component: ManagerHome, props: true},
             restaurantRoutes,
+            {path: 'restaurant/:restaurantId/add-product', name: 'add-product', component: AddProduct, props: true},
         ] 
     }
-
 
 ]
 

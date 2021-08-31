@@ -17,6 +17,19 @@ const restaurantService = {
         return serverEndpoint.postFileForm({rawFormData});
     },
 
+
+    getProducts: (restaurantId) => serverEndpoint.get({relPath: `${restaurantId}/products`}),
+    addProduct: (restaurantId, product, picture) => {
+        const rawFormData = {
+            objects: {
+                product
+            },
+            files: {
+                picture,
+            }
+        }
+        return serverEndpoint.postFileForm({rawFormData, relPath: `${restaurantId}/products`})
+    }
 }
 
 export { restaurantService as default };

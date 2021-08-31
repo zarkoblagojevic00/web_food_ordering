@@ -17,7 +17,7 @@
   "restaurant" : 1,
   "portion" : 800.0,
   "description" : "A traditional pizza with fresh tomatoes, garlic, basil and fresh mozzarella.",
-  "picturePath" : "restaurants/1/e728d256-f3fe-4f43-8b3a-9e26e8f29629.form-data"
+  "picturePath" : "restaurants/1/e728d256-f3fe-4f43-8b3a-9e26e8f29629.jpg"
 }, {
   "id" : 3,
   "deleted" : false,
@@ -28,4 +28,14 @@
   "portion" : 800.0,
   "description" : "A traditional pizza with fresh tomatoes, garlic, basil and grilled mozzarella.",
   "picturePath" : "restaurants/1/8cd0cc0a-a372-4200-8e09-bf64a92ab9b6.jpg"
+}, {
+  "id" : 4,
+  "deleted" : false,
+  "name" : "Pizza Neapoli",
+  "price" : 960.0,
+  "type" : "FOOD",
+  "restaurant" : 1,
+  "portion" : 850.0,
+  "description" : "",
+  "picturePath" : "restaurants/1/81d27931-7f76-40c7-a643-90bc57cba1a9.jpg"
 } ]

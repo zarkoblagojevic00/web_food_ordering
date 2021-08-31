@@ -1,11 +1,13 @@
 export default Vue.component("restaurant-root",{
+    props: ['restaurantId'],
+
     template: `
     <div id="restaurant-root">
         <div class="tabs">
-            <ul class='tabs__header'>
-            <li><router-link :to="{name: 'restaurant-products'}">Products</router-link></li>
-            <li><router-link :to="{name: 'restaurant-info'}">Info</router-link></li>
-            <li><router-link :to="{name: 'restaurant-comments'}">Comments</router-link></li>
+            <ul v-if="restaurantId" class='tabs__header'>
+            <li><router-link :to="restaurantPath('restaurant-products')">Products</router-link></li>
+            <li><router-link :to="restaurantPath('restaurant-info')">Info</router-link></li>
+            <li><router-link :to="restaurantPath('restaurant-comments')">Comments</router-link></li>
             </ul>
 
             <router-view></router-view>
@@ -14,7 +16,6 @@ export default Vue.component("restaurant-root",{
     `,
     data() { 
         return {
-           
         }
     },
 
@@ -23,6 +24,8 @@ export default Vue.component("restaurant-root",{
     },
 
     methods: {
-        
+        restaurantPath(path) {
+            return {name: path, params: { restaurantId: this.restaurantId }};
+        }
     }
 })
