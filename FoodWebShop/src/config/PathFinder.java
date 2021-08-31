@@ -56,4 +56,8 @@ public class PathFinder {
         // TODO: Change to relative path - write on startup from one controller (context.getRealPath and write to file, read it from there)
         return "D:\\FTN\\E2 Predavanja - Vezbe\\3. godina\\2. semestar\\Web\\Projekat\\web_food_ordering";
     }
+
+    public void resetAppendedPath() {
+        this.appendedToSubRoot = "";
+    }
 }

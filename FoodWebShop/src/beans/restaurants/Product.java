@@ -15,7 +15,8 @@ public class Product extends Entity {
         super();
     }
 
-    public Product(Product newProduct, String picturePath, long restaurantId) {
+    public Product(long oldId, Product newProduct, String picturePath, long restaurantId) {
+        super(oldId);
         this.name = newProduct.name;
         this.price = newProduct.price;
         this.type = newProduct.type;
@@ -32,5 +33,13 @@ public class Product extends Entity {
 
     public String getName() {
         return this.name;
+    }
+
+    public String getPicturePath() {
+        return picturePath;
+    }
+
+    public void setPicturePath(String picturePath) {
+        this.picturePath = picturePath;
     }
 }

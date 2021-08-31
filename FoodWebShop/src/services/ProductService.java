@@ -28,7 +28,17 @@ public class ProductService {
     public Product saveProduct(Product newProduct, long restaurantId, FileUploadDTO fileUploadDto) {
         productRepo.checkUniqueName(newProduct.getName());
         String picturePath = ioProxy.saveImage(fileUploadDto);
-        Product toBeSaved = new Product(newProduct, picturePath, restaurantId);
+        Product toBeSaved = new Product(-1, newProduct, picturePath, restaurantId);
         return productRepo.save(toBeSaved);
+    }
+
+    public Product updateProduct(long productId, Product product, long restaurantId, FileUploadDTO fileUploadDTO) {
+        Product existing = productRepo.get(productId);
+        String productName = product.getName();
+        if (!existing.getName().equals(productName)) {
+            productRepo.checkUniqueName(productName);
+        }
+        String newPath = ioProxy.replaceImage(existing.getPicturePath(), fileUploadDTO);
+        return productRepo.update(new Product(existing.getId(), product, newPath, restaurantId));
     }
 }

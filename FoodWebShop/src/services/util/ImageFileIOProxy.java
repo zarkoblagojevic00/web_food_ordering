@@ -27,6 +27,17 @@ public class ImageFileIOProxy {
         return new File(pathFinder.getCurrentPath());
     }
 
+    public String replaceImage(String relPath, FileUploadDTO fileUploadDTO) {
+        deleteImage(relPath);
+        pathFinder.resetAppendedPath();
+        return saveImage(fileUploadDTO);
+    }
+
+    private void deleteImage(String relPath) {
+        pathFinder.appendToCurrentPath(relPath);
+        new File(pathFinder.getCurrentPath()).delete();
+    }
+
     private void saveBinaryData(FileUploadDTO fileUploadDTO) throws IOException {
         tryCreateDirectory(fileUploadDTO.getResourceFolderName(), fileUploadDTO.getResourceSubfolderName());
         writeFile(fileUploadDTO.getFileInputStream(), fileUploadDTO.getFileName());

@@ -43,4 +43,20 @@ public class ProductController {
         return Response.ok(savedProduct).build();
     }
 
+    @PUT
+    @Path("/{id}")
+    @Consumes({MediaType.MULTIPART_FORM_DATA})
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response update (@PathParam("id") long productId,
+                            @FormDataParam("product") Product product,
+                            @FormDataParam("picture") InputStream fileInputStream,
+                            @FormDataParam("picture") FormDataContentDisposition fileMetaData) {
+        Product updatedProduct = productService.updateProduct(
+                productId,
+                product,
+                restaurantId,
+                new FileUploadDTO(fileInputStream, fileMetaData, "restaurants", restaurantId, true));
+        return Response.ok(updatedProduct).build();
+    }
+
 }
