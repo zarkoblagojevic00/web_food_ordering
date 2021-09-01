@@ -17,7 +17,7 @@ import ManagerHome from './roles/manager/manager-home.js'
 import RestaurantRoot from './restaurant/restaurant-root.js'
 import ProductsOverview from './restaurant/products/products-overview.js'
 import RestaurantInfo from './restaurant/info/restaurant-info.js'
-import RestaurantComments from './restaurant/restaurant-comments.js'
+import CommentsOverview from './restaurant/comments/comments-overview.js'
 import AddProduct from './restaurant/products/add-product.js'
 import EditProduct from './restaurant/products/edit-product.js'
 
@@ -27,7 +27,7 @@ const restaurantRoutes = {
             {path: '/',         name: 'restaurant-root',        redirect: 'products',           props: true},
             {path: 'products',  name: 'restaurant-products',    component: ProductsOverview,    props: true},
             {path: 'info',      name: 'restaurant-info',        component: RestaurantInfo,      props: true},
-            {path: 'comments',  name: 'restaurant-comments',    component: RestaurantComments,  props: true},
+            {path: 'comments',  name: 'restaurant-comments',    component: CommentsOverview,    props: true},
         ],
 }
 
@@ -71,9 +71,6 @@ const routes = [
     }
 
 ]
-
-
-
 
 export default new VueRouter({
 	routes

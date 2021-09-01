@@ -19,8 +19,6 @@ const restaurantService = {
         return serverEndpoint.sendFileForm({rawFormData});
     },
 
-
-
     getProducts: (restaurantId) => serverEndpoint.get({relPath: getProductsPath(restaurantId)}),
     getProduct: (restaurantId, productId) => serverEndpoint.get({relPath: getProductPath(restaurantId, productId)}),
     addProduct: (restaurantId, product, picture) => {
@@ -44,10 +42,19 @@ const restaurantService = {
             }
         }
         return serverEndpoint.sendFileForm({rawFormData, method: "PUT", relPath: getProductPath(restaurantId, productId)}); 
-    }
+    },
+
+    getComments: (restaurantId) => serverEndpoint.get({relPath: getCommentsPath(restaurantId)}),
+    sendCommentApproval: (answer, restaurantId, commentId) => serverEndpoint.put({
+        relPath: `${getCommentPath(restaurantId, commentId)}/approval`, 
+        data: `"${answer}"`}) 
 }
 
 const getProductsPath = (restaurantId) => `${restaurantId}/products`;
-const getProductPath = (restaurantId, productId) => `${getProductsPath(restaurantId)}/${productId}`; 
+const getProductPath = (restaurantId, productId) => `${getProductsPath(restaurantId)}/${productId}`;
+
+const getCommentsPath = (restaurantId) => `${restaurantId}/comments`;
+const getCommentPath = (restaurantId, commentId) => `${getCommentsPath(restaurantId)}/${commentId}`;
+
 
 export { restaurantService as default };

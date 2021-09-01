@@ -16,6 +16,8 @@ Vue.directive("hide", {
     update: update
 })
 
+Vue.component('star-rating', VueStarRating.default);
+
 const app = new Vue({
     router,
     components : {

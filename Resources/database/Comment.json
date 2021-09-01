@@ -13,7 +13,7 @@
   "restaurant" : 1,
   "content" : "This place is amazing. Food, drinks, everything. It's a bit pricey but it's worth it.",
   "mark" : 4,
-  "status" : "PENDING"
+  "status" : "APPROVED"
 }, {
   "id" : 3,
   "deleted" : false,
