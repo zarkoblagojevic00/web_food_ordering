@@ -1,0 +1,25 @@
+[ {
+  "id" : 1,
+  "deleted" : false,
+  "author" : 6,
+  "restaurant" : 1,
+  "content" : "This place is beautiful and very comfortable. Food is delicious!!!",
+  "mark" : 5,
+  "status" : "APPROVED"
+}, {
+  "id" : 2,
+  "deleted" : false,
+  "author" : 7,
+  "restaurant" : 1,
+  "content" : "This place is amazing. Food, drinks, everything. It's a bit pricey but it's worth it.",
+  "mark" : 4,
+  "status" : "PENDING"
+}, {
+  "id" : 3,
+  "deleted" : false,
+  "author" : 6,
+  "restaurant" : 1,
+  "content" : "Food was really good, waiters were not. They mistook my order, two times. Two, frickin, times! By the time I got arround to eating I couldn't fully enjoy my meal.",
+  "mark" : 2,
+  "status" : "REJECTED"
+} ]

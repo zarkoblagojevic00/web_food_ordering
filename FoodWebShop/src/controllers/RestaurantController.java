@@ -19,6 +19,8 @@ public class RestaurantController {
     private RestaurantService restaurantService;
     @Inject
     private ProductController productController;
+    @Inject
+    private CommentController commentController;
 
     @GET
     @Path("types")
@@ -33,6 +35,7 @@ public class RestaurantController {
     public Response getRestaurant(@PathParam("id") long restaurantId) {
         return Response.ok(restaurantService.getRestaurantOverview(restaurantId)).build();
     }
+
     @POST
     @Consumes({MediaType.MULTIPART_FORM_DATA})
     @Produces(MediaType.APPLICATION_JSON)
@@ -54,5 +57,8 @@ public class RestaurantController {
     public ProductController getProductController() {
         return productController;
     }
+
+    @Path("{restaurantId}/comments")
+    public CommentController getCommentController() { return commentController;}
 
 }

@@ -6,6 +6,9 @@ import java.util.List;
 import java.util.Map;
 
 import beans.restaurants.Product;
+import beans.restaurants.requests.Comment;
+import beans.users.roles.customer.Customer;
+import controllers.CommentController;
 import controllers.ProductController;
 import org.glassfish.hk2.utilities.binding.AbstractBinder;
 import org.glassfish.jersey.media.multipart.MultiPartFeature;
@@ -16,13 +19,7 @@ import org.glassfish.jersey.server.filter.RolesAllowedDynamicFeature;
 import repositories.ITestRepository;
 import repositories.TestRepository;
 import repositories.interfaces.*;
-import repositories.json.repos.ActivityJsonFileRepository;
-import repositories.json.repos.AdminJsonFileRepository;
-import repositories.json.repos.CustomerJsonFileRepository;
-import repositories.json.repos.DelivererJsonFileRepository;
-import repositories.json.repos.ManagerJsonFileRepository;
-import repositories.json.repos.OrderJsonFileRepository;
-import repositories.json.repos.RestaurantJsonFileRepository;
+import repositories.json.repos.*;
 import services.*;
 import services.auth.AuthenticationService;
 
@@ -40,6 +37,7 @@ public class ApplicationConfig extends ResourceConfig {
             put(DelivererRepository.class, DelivererJsonFileRepository.class);
             put(RestaurantRepository.class, RestaurantJsonFileRepository.class);
             put(ProductRepository.class, ProductJsonFileRepository.class);
+            put(CommentRepository.class, CommentJsonFileRepository.class);
             put(OrderRepository.class, OrderJsonFileRepository.class);
         }};
 
@@ -54,7 +52,9 @@ public class ApplicationConfig extends ResourceConfig {
                 DelivererService.class,
                 RestaurantService.class,
                 ProductService.class,
-                ProductController.class
+                ProductController.class,
+                CommentService.class,
+                CommentController.class
         );
 
         registerDependencyInjection();
