@@ -53,20 +53,8 @@ export default Vue.component("base-form",{
         },
 
         async $_form_submit() {
-            this.$_form_validate();
+            validate(this);
             return this.submit.invoke();
-        },
-
-        $_form_validate() {
-            const isValid = this.$slots.default
-                .map(vnode => vnode.componentInstance)
-                .filter(component => component && component.validate)
-                .map(component => component.validate()) // mapping so that all validate functions run (side effects)
-                .every(isValid => isValid);
-            
-            if (!isValid) {
-                throw new Error ('Validation failed!');
-            }
         },
 
         $_form_handleError(e) {
@@ -82,3 +70,12 @@ export default Vue.component("base-form",{
         },
     }
 })
+
+const validate = (vnode) => {
+    if (!vnode) return;
+         
+    if (vnode.validate) {
+        if (!vnode.validate()) throw new Error ('Validation failed!'); 
+    }
+    vnode.$children.forEach(validate);
+}

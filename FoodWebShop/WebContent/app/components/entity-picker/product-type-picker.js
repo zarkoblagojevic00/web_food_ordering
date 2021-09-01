@@ -5,6 +5,10 @@ export default Vue.component("product-type-picker",{
         value: {
             type: String,
             required: true
+        },
+        isReadonly: {
+            type: Boolean,
+            default: false
         }
     },
 
@@ -18,6 +22,7 @@ export default Vue.component("product-type-picker",{
             v-model="selectedProductType"
             :options="productTypes"
             :display="(productType) => productType.display"
+            :isReadonly="isReadonly"
             selectedValuePath="value">
         </entity-picker>
     </span> 

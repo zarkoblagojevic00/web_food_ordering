@@ -5,6 +5,10 @@ export default Vue.component("gender-picker",{
         value: {
             type: String,
             required: true
+        },
+        isReadonly: {
+            type: Boolean,
+            default: false
         }
     },
 
@@ -18,6 +22,7 @@ export default Vue.component("gender-picker",{
             v-model="selectedGender"
             :options="genders"
             :display="(gender) => gender.display"
+            :isReadonly="isReadonly"
             selectedValuePath="value">
         </entity-picker>
     </span> 

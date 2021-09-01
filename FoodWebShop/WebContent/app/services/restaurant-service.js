@@ -3,19 +3,22 @@ import init from "./http-utils/axios-util.js";
 const serverEndpoint = init('restaurants');
 
 const restaurantService = {
+    get: (restaurantId) => serverEndpoint.get({relPath: `${restaurantId}`}),
     getTypes: () => serverEndpoint.get({relPath: 'types'}),
-    add: (restaurant, logoPicture, selectedManagerId) => {
+    add: (restaurantInfo, selectedManagerId) => {
+        const {logoPicture, ...restaurant} = restaurantInfo;
         const rawFormData = {
             objects: {
-                restaurant,
-                selectedManagerId
+                restaurant, 
+                selectedManagerId,
             },
             files: {
-                logoPicture
+                logoPicture,
             }
         }
         return serverEndpoint.sendFileForm({rawFormData});
     },
+
 
 
     getProducts: (restaurantId) => serverEndpoint.get({relPath: getProductsPath(restaurantId)}),

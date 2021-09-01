@@ -7,6 +7,10 @@ export default Vue.component("restaurant-type-picker",{
         value: {
             type: String,
             required: true
+        },
+        isReadonly: {
+            type: Boolean,
+            default: false
         }
     },
 
@@ -20,7 +24,8 @@ export default Vue.component("restaurant-type-picker",{
         <entity-picker v-if="restaurantTypes"
             v-model="selectedType"
             :options="restaurantTypes"
-            :display="(type) => type.toLowerCase()">
+            :display="(type) => type.toLowerCase()"
+            :isReadonly="isReadonly">
         </entity-picker>
     </span> 
     `,

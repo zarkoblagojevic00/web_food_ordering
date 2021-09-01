@@ -4,6 +4,7 @@ import beans.restaurants.Restaurant;
 import beans.restaurants.RestaurantType;
 import beans.users.roles.manager.Manager;
 import dtos.RestaurantCreationDTO;
+import dtos.RestaurantOverviewDTO;
 import repositories.interfaces.ManagerRepository;
 import repositories.interfaces.RestaurantRepository;
 import services.util.FileUploadDTO;
@@ -44,5 +45,9 @@ public class RestaurantService {
         String logoPath = ioProxy.saveImage(fileUploadDTO);
         savedRestaurant.setLogoPath(logoPath);
         return restaurantRepo.update(savedRestaurant);
+    }
+
+    public RestaurantOverviewDTO getRestaurantOverview(long restaurantId) {
+        return new RestaurantOverviewDTO(restaurantRepo.get(restaurantId));
     }
 }

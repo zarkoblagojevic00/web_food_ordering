@@ -16,11 +16,17 @@ export default Vue.component("entity-picker",{
             type: String,
             default: ''
         },
+        isReadonly: {
+            type: Boolean,
+            default: false
+        }
     },
 
     template: `
     <span id="entity-picker">
-        <select v-model="selectedOption">
+        <select
+            v-if="!isReadonly" 
+            v-model="selectedOption">
             <option 
                 v-for="option in options" 
                 :key="toValue(option)"
@@ -28,6 +34,9 @@ export default Vue.component("entity-picker",{
                 {{display(option)}}
             </option> 
         </select>
+        <input v-else 
+            :value="display(selectedOption)"
+            readonly>
     </span> 
     `,
 

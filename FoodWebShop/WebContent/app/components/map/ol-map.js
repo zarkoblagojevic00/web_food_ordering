@@ -6,7 +6,6 @@ import baseField from "../form/base-field.js";
 export default Vue.component("ol-map",{
     props: {
         value: {
-            type: Object,
             required: true
         },
         isReadonly: {
@@ -26,7 +25,6 @@ export default Vue.component("ol-map",{
 
     template: `
     <div id="ol-map">
-
         <base-field
             fieldName="City"
             required
@@ -91,14 +89,7 @@ export default Vue.component("ol-map",{
     data() { 
         return {
             mapTarget: 'map-root',
-            location: {
-                municipality: null,
-                streetName: null,
-                streetNumber: null,
-                longitude: null,
-                latitude: null,
-                postalCode: null
-            },
+            location: this.value,
         }
     },
 
@@ -114,7 +105,7 @@ export default Vue.component("ol-map",{
 
     mounted() {
         addEventListener('on-location-changed', this.locationChanged)
-        createMap(this.mapTarget, this.coords, this.isReadonly);
+        createMap(this.mapTarget, this.location, this.coords, this.isReadonly);
     },
 
     methods: {

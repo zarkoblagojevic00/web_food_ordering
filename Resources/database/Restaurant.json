@@ -100,4 +100,21 @@
   },
   "products" : [ ],
   "comments" : [ ]
+}, {
+  "id" : 7,
+  "deleted" : false,
+  "name" : "Chinese Cuisine",
+  "type" : "CHINESE",
+  "logoPath" : "restaurants/7/chinese-food.jpg",
+  "opened" : true,
+  "location" : {
+    "longitude" : 19.821601406685133,
+    "latitude" : 45.244807707745935,
+    "streetNumber" : "22",
+    "streetName" : "Olge Petrov",
+    "municipality" : "Novi Sad City",
+    "postalCode" : "21102"
+  },
+  "products" : [ ],
+  "comments" : [ ]
 } ]

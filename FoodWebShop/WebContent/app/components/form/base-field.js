@@ -35,6 +35,7 @@ export default Vue.component("base-field",{
 
     methods: {
         validate() {
+            console.log(this.fieldName);
             return this.validator() && ((this.required) ? this.value: true);
         }
     }

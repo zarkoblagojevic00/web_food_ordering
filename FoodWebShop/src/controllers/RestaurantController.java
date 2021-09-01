@@ -27,6 +27,12 @@ public class RestaurantController {
         return Response.ok(restaurantService.getTypes()).build();
     }
 
+    @GET
+    @Path("{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getRestaurant(@PathParam("id") long restaurantId) {
+        return Response.ok(restaurantService.getRestaurantOverview(restaurantId)).build();
+    }
     @POST
     @Consumes({MediaType.MULTIPART_FORM_DATA})
     @Produces(MediaType.APPLICATION_JSON)

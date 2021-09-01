@@ -7,6 +7,10 @@ export default Vue.component("manager-picker",{
         value: {
             type: Number,
             required: true
+        },
+        isReadonly: {
+            type: Boolean,
+            default: false
         }
     },
 
@@ -21,6 +25,7 @@ export default Vue.component("manager-picker",{
             v-model="selectedManagerId"
             :options="managers"
             :display="displayManager"
+            :isReadonly="isReadonly"
             selectedValuePath="id">
         </entity-picker>
     </span> 
