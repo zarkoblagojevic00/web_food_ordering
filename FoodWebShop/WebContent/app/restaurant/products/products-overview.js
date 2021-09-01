@@ -15,7 +15,8 @@ export default Vue.component("products-overview",{
         <router-link :to="{name: 'add-product', params: {restaurantId}}">Add product</router-link>
         <product v-for="product in products"
             :key="product.id"
-            v-bind="product"
+            :product="product"
+            :restaurantId="restaurantId"
             >
         </product> 
     </div> 

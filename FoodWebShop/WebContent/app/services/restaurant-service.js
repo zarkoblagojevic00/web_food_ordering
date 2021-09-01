@@ -14,11 +14,12 @@ const restaurantService = {
                 logoPicture
             }
         }
-        return serverEndpoint.postFileForm({rawFormData});
+        return serverEndpoint.sendFileForm({rawFormData});
     },
 
 
-    getProducts: (restaurantId) => serverEndpoint.get({relPath: `${restaurantId}/products`}),
+    getProducts: (restaurantId) => serverEndpoint.get({relPath: getProductsPath(restaurantId)}),
+    getProduct: (restaurantId, productId) => serverEndpoint.get({relPath: getProductPath(restaurantId, productId)}),
     addProduct: (restaurantId, product, picture) => {
         const rawFormData = {
             objects: {
@@ -28,8 +29,22 @@ const restaurantService = {
                 picture,
             }
         }
-        return serverEndpoint.postFileForm({rawFormData, relPath: `${restaurantId}/products`})
+        return serverEndpoint.sendFileForm({rawFormData, relPath: getProductsPath(restaurantId)})
+    },
+    editProduct: (restaurantId, productId, product, picture) => {
+        const rawFormData = {
+            objects: {
+                product
+            },
+            files: {
+                picture,
+            }
+        }
+        return serverEndpoint.sendFileForm({rawFormData, method: "PUT", relPath: getProductPath(restaurantId, productId)}); 
     }
 }
+
+const getProductsPath = (restaurantId) => `${restaurantId}/products`;
+const getProductPath = (restaurantId, productId) => `${getProductsPath(restaurantId)}/${productId}`; 
 
 export { restaurantService as default };

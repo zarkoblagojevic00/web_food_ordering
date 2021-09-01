@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import beans.restaurants.Product;
+import controllers.ProductController;
 import org.glassfish.hk2.utilities.binding.AbstractBinder;
 import org.glassfish.jersey.media.multipart.MultiPartFeature;
 import org.glassfish.jersey.process.internal.RequestScoped;
@@ -52,7 +53,8 @@ public class ApplicationConfig extends ResourceConfig {
                 ManagerService.class,
                 DelivererService.class,
                 RestaurantService.class,
-                ProductService.class
+                ProductService.class,
+                ProductController.class
         );
 
         registerDependencyInjection();

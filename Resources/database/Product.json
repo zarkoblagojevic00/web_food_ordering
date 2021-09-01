@@ -22,12 +22,12 @@
   "id" : 3,
   "deleted" : false,
   "name" : "Pizza Margherita - Grilled",
-  "price" : 900.0,
+  "price" : 930.0,
   "type" : "FOOD",
   "restaurant" : 1,
-  "portion" : 800.0,
+  "portion" : 850.0,
   "description" : "A traditional pizza with fresh tomatoes, garlic, basil and grilled mozzarella.",
-  "picturePath" : "restaurants/1/663750f6-2412-4103-b7b2-a35b0a7ace45.jpg"
+  "picturePath" : "restaurants/1/e0fc0eb6-658e-42ba-8253-44fcf695ce3a."
 }, {
   "id" : 4,
   "deleted" : false,

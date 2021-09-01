@@ -3,7 +3,7 @@ import createObjectUrlMixin from "../../mixins/create-object-url-mixin.js";
 export default Vue.component("image-picker",{
     mixins: [createObjectUrlMixin],
     props: {
-        value: File,
+        value: {File, Blob}
     },
 
     template: `

@@ -41,4 +41,8 @@ public class ProductService {
         String newPath = ioProxy.replaceImage(existing.getPicturePath(), fileUploadDTO);
         return productRepo.update(new Product(existing.getId(), product, newPath, restaurantId));
     }
+
+    public Product getProduct(long productId) {
+        return productRepo.get(productId);
+    }
 }

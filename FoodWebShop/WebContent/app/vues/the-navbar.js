@@ -1,6 +1,8 @@
 import { getRole, getId, clearStorage, getRestaurantId } from "../local-storage-util.js"
+import authMixin from "../mixins/auth-mixin.js"
 
 export default Vue.component("the-navbar",{
+    mixins: [authMixin],
     template: `
     <div id="the-navbar" style="border-bottom: 3px  solid blueviolet;">
         <h2 >FeastNow.io</h2>
@@ -43,8 +45,6 @@ export default Vue.component("the-navbar",{
     data() { 
         return {
             guestHome: { name: 'home' },
-            role: getRole(),
-            id: getId(),
             managerRestaurantId: getRestaurantId()
         }
     },
@@ -69,12 +69,6 @@ export default Vue.component("the-navbar",{
         roleLowerCased() {
             return this.role.toLowerCase();
         },
-
-        isAdmin() { return this.role === "ADMIN"; },
-        isCustomer() { return this.role === "CUSTOMER" },
-        isDeliverer() { return this.role === "DELIVERER" },
-        isManager() { return this.role === "MANAGER" },
-        isGuest() { return !this.role } 
     },
 
     mounted() {

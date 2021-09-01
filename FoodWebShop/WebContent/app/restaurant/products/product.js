@@ -1,44 +1,41 @@
 import imageService from "../../services/image-service.js"
 
 import createObjectUrlMixin from "../../mixins/create-object-url-mixin.js"
+import authMixin from "../../mixins/auth-mixin.js";
 
 export default Vue.component("product",{
-    mixins: [createObjectUrlMixin],
+    mixins: [createObjectUrlMixin, authMixin],
     props :{
-        id: Number,
-        name: String, 
-        price: Number,
-        productType: String, 
-        portion: Number,
-        description: String,
-        picturePath: String,
+        product: Object,
+        restaurantId: String,
     },
 
     template: `
     <div id="product" style="border: 1px solid black;">
+        <router-link v-if="isManager" :to="editProductRoute">Edit product</router-link>
         <div>
             <label for="name">Name: </label>
-            <span>{{name}}</span>
+            <span>{{product.name}}</span>
         </div>
         
         <div>
             <label for="price">Price: </label>
-            <span>{{price}}</span>
+            <span>{{product.price}}</span>
         </div>
 
         <div>
             <label for="productType">Type: </label>
-            <span>{{productType}}</span>
+            <span>{{product.type}}</span>
         </div>
         
         <div>
             <label for="portion">Portion: </label>
-            <span>{{portion}}</span>
+            <span>{{product.portion}}</span>
         </div>
         
         <div>
             <label for="description">Description: </label>
-            <span>{{description}}</span>
+            <span>{{product.description}}</span>
         </div>
 
         <div>
@@ -51,11 +48,15 @@ export default Vue.component("product",{
         return {
            objects: {
                picture: null
-           }
+           },
+           editProductRoute: {name: 'edit-product', params: {
+                restaurantId: this.restaurantId,
+                productId: this.product.id,
+           }},
         }
     },
 
     async created() {
-        this.objects.picture = await imageService.getImage(this.picturePath);
+        this.objects.picture = await imageService.getImage(this.product.picturePath);
     }
 })

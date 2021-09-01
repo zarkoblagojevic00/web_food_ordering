@@ -30,6 +30,11 @@ public class ProductController {
         return Response.ok(products).build();
     }
 
+    @GET
+    @Path("{productId}")
+    public Response getProduct(@PathParam("productId") long productId) {
+        return Response.ok(productService.getProduct(productId)).build();
+    }
     @POST
     @Consumes({MediaType.MULTIPART_FORM_DATA})
     @Produces(MediaType.APPLICATION_JSON)

@@ -18,7 +18,7 @@ export default Vue.component("add-product",{
     template: `
     <div id="add-product">
         <base-form
-            title="New product"
+            :title="title"
             :submit="submit"
             :errorMap="errorMap">
 
@@ -84,6 +84,7 @@ export default Vue.component("add-product",{
     `,
     data() { 
         return {
+            title: "New Product",
             product: {
                 name: '',
                 price: 0,

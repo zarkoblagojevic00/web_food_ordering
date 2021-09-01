@@ -36,9 +36,9 @@ export default function init(resource) {
             responseType
         }),
 
-        postFileForm: ({rawFormData, relPath='', responseType='json'} = {}) => request({
+        sendFileForm: ({rawFormData, relPath='', responseType='json', method='POST'} = {}) => request({
             url: createEndPoint(relPath),
-            method: 'POST',
+            method,
             data: createFormData(rawFormData),
             contentType : 'multipart/form-data',
             responseType           

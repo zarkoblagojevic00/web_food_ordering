@@ -19,6 +19,7 @@ import ProductsOverview from './restaurant/products/products-overview.js'
 import RestaurantInfo from './restaurant/restaurant-info.js'
 import RestaurantComments from './restaurant/restaurant-comments.js'
 import AddProduct from './restaurant/products/add-product.js'
+import EditProduct from './restaurant/products/edit-product.js'
 
 const restaurantRoutes = {
     path: 'restaurants/:restaurantId', component: RestaurantRoot, props: true,
@@ -64,7 +65,8 @@ const routes = [
         children: [
             {path: '/', name: 'manager-home', component: ManagerHome, props: true},
             restaurantRoutes,
-            {path: 'restaurant/:restaurantId/add-product', name: 'add-product', component: AddProduct, props: true},
+            {path: 'restaurant/:restaurantId/add-product',              name: 'add-product',  component: AddProduct,  props: true},
+            {path: 'restaurant/:restaurantId/edit-product/:productId',  name: 'edit-product', component: EditProduct, props: true},
         ] 
     }
 
