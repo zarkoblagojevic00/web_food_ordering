@@ -10,6 +10,7 @@ public interface Repository<T extends Entity> {
     public Collection<T> getAll();
     public Collection<T> getMultiple(Collection<Long> ids);
     public T save(T entity);
+    public Collection<T> saveAll(Collection<T> entities);
     public T update(T entity);
     public void delete(Long id);
 }

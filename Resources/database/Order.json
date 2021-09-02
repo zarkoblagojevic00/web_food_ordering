@@ -1,1 +1,61 @@
-[ ]
+[ {
+  "id" : 1,
+  "deleted" : false,
+  "code" : "JMZ5wpSN2y",
+  "items" : [ 1, 2 ],
+  "restaurant" : 1,
+  "creationDate" : 1630575641828,
+  "customer" : 7,
+  "totalPrice" : 2500.0,
+  "status" : "PROCESSING"
+}, {
+  "id" : 2,
+  "deleted" : false,
+  "code" : "7PBuzeGRgE",
+  "items" : [ 3, 4 ],
+  "restaurant" : 1,
+  "creationDate" : 1630579431336,
+  "customer" : 6,
+  "totalPrice" : 2400.0,
+  "status" : "IN_PREPARATION"
+}, {
+  "id" : 3,
+  "deleted" : false,
+  "code" : "CV4yAh3EsQ",
+  "items" : [ 5, 6 ],
+  "restaurant" : 1,
+  "creationDate" : 1630579542753,
+  "customer" : 5,
+  "totalPrice" : 1600.0,
+  "status" : "WAITING_ON_DELIVERY"
+}, {
+  "id" : 4,
+  "deleted" : false,
+  "code" : "C4sOPQwbkK",
+  "items" : [ 7, 8 ],
+  "restaurant" : 1,
+  "creationDate" : 1630582242950,
+  "customer" : 6,
+  "totalPrice" : 2000.0,
+  "status" : "IN_TRANSPORT"
+}, {
+  "id" : 5,
+  "deleted" : false,
+  "code" : "XZE8rRGXEM",
+  "items" : [ 9, 10 ],
+  "restaurant" : 1,
+  "creationDate" : 1630582276432,
+  "customer" : 6,
+  "totalPrice" : 3350.0,
+  "status" : "DELIVERED"
+}, {
+  "id" : 6,
+  "deleted" : false,
+  "code" : "5tnpoSZfCB",
+  "items" : [ 11, 12, 13 ],
+  "restaurant" : 1,
+  "creationDate" : 1630582311207,
+  "customer" : 5,
+  "totalPrice" : 4500.0,
+  "status" : "CANCELED"
+} ]

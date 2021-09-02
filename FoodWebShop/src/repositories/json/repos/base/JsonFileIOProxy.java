@@ -77,14 +77,9 @@ public class JsonFileIOProxy<T extends Entity> {
     }
 
     private String getFilePath() {
-//        String separator = File.separator;
-//
-//        String root = pathFinder.getRoot();
-//        String directoryName = separator + "Resources" + separator + "database";
         String jsonFileName = entityClass.getSimpleName() + ".json";
         pathFinder.appendToCurrentPath(jsonFileName);
         return pathFinder.getCurrentPath();
-//        return root + separator + directoryName + separator + jsonFileName;
     }
 
     private File getEmptyJsonArrayInitializedFile(File file) {

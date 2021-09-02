@@ -5,10 +5,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import beans.ecommerce.ShoppingItem;
 import beans.restaurants.Product;
 import beans.restaurants.requests.Comment;
 import beans.users.roles.customer.Customer;
 import controllers.CommentController;
+import controllers.OrderController;
 import controllers.ProductController;
 import org.glassfish.hk2.utilities.binding.AbstractBinder;
 import org.glassfish.jersey.media.multipart.MultiPartFeature;
@@ -39,6 +41,7 @@ public class ApplicationConfig extends ResourceConfig {
             put(ProductRepository.class, ProductJsonFileRepository.class);
             put(CommentRepository.class, CommentJsonFileRepository.class);
             put(OrderRepository.class, OrderJsonFileRepository.class);
+            put(ShoppingItemRepository.class, ShoppingItemJsonFileRepository.class);
         }};
 
         concretes = Arrays.asList(
@@ -54,7 +57,9 @@ public class ApplicationConfig extends ResourceConfig {
                 ProductService.class,
                 ProductController.class,
                 CommentService.class,
-                CommentController.class
+                CommentController.class,
+                OrderService.class,
+                OrderController.class
         );
 
         registerDependencyInjection();

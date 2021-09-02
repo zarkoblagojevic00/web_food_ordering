@@ -31,17 +31,19 @@ public class CommentController {
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
     public Response postCommentForRestaurant(Comment newComment) {
-        commentService.postComment(restaurantId, newComment);
-        return Response.noContent().build();
+        Comment posted = commentService.postComment(restaurantId, newComment);
+        return Response.ok(posted).build();
     }
 
     @PUT
     @Path("{commentId}/approval")
     @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
     public Response answerPendingComment(@PathParam("commentId") long commentId,  RequestStatus status) {
-        commentService.answerPendingComment(commentId, status);
-        return Response.noContent().build();
+        Comment answered = commentService.answerPendingComment(commentId, status);
+        return Response.ok(answered).build();
     }
 
 }

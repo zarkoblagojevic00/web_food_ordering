@@ -54,6 +54,13 @@ public class JsonFileRepository<T extends Entity> implements Repository<T> {
     }
 
     @Override
+    public Collection<T> saveAll(Collection<T> entities) {
+        return entities.stream()
+                .map(this::save)
+                .collect(Collectors.toList());
+    }
+
+    @Override
     public T update(T entity) {
         T oldEntity = get(entity.getId());
         persistChanges(entity);

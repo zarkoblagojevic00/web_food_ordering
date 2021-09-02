@@ -1,5 +1,6 @@
 package controllers;
 
+import beans.ecommerce.Order;
 import beans.restaurants.Restaurant;
 import dtos.RestaurantCreationDTO;
 import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
@@ -21,6 +22,8 @@ public class RestaurantController {
     private ProductController productController;
     @Inject
     private CommentController commentController;
+    @Inject
+    private OrderController orderController;
 
     @GET
     @Path("types")
@@ -61,4 +64,6 @@ public class RestaurantController {
     @Path("{restaurantId}/comments")
     public CommentController getCommentController() { return commentController;}
 
+    @Path("{restaurantId}/orders")
+    public OrderController getOrderController() { return orderController;}
 }

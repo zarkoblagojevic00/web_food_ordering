@@ -9,7 +9,6 @@ import repositories.interfaces.CustomerRepository;
 
 import javax.inject.Inject;
 import java.util.Collection;
-import java.util.List;
 import java.util.stream.Collectors;
 
 public class CommentService {
@@ -35,8 +34,8 @@ public class CommentService {
                 .collect(Collectors.toList());
     }
 
-    public void postComment(long restaurantId, Comment newComment) {
-        commentRepo.save(new Comment(restaurantId, newComment));
+    public Comment postComment(long restaurantId, Comment newComment) {
+        return commentRepo.save(new Comment(restaurantId, newComment));
     }
 
     private CommentOverviewDTO createCommentOverviewDTO(Comment comment) {
@@ -44,14 +43,14 @@ public class CommentService {
         return new CommentOverviewDTO(comment, author);
     }
 
-    public void answerPendingComment(long commentId, RequestStatus status) {
+    public Comment answerPendingComment(long commentId, RequestStatus status) {
         Comment existing = commentRepo.get(commentId);
         if (status == RequestStatus.APPROVED) {
             existing.approve();
         } else {
             existing.reject();
         }
-        commentRepo.update(existing);
+        return commentRepo.update(existing);
     }
 
 }
