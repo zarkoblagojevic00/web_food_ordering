@@ -1,7 +1,7 @@
-import filterTextFieldMixin from "./filter-text-field-mixin.js"
+import filterText from "./filter-text.js"
 
 export default Vue.component("filters-option",{
-    mixins: [filterTextFieldMixin],
+    extends: filterText,
     template: `
     <div id="filters-option">
         <div 

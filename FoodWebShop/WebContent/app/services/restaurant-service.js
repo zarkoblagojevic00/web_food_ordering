@@ -47,7 +47,15 @@ const restaurantService = {
     getComments: (restaurantId) => serverEndpoint.get({relPath: getCommentsPath(restaurantId)}),
     sendCommentApproval: (answer, restaurantId, commentId) => serverEndpoint.put({
         relPath: `${getCommentPath(restaurantId, commentId)}/approval`, 
-        data: `"${answer}"`}) 
+        data: `"${answer}"`}),
+    
+    getOrders: (restaurantId) => serverEndpoint.get({relPath: getOrdersPath(restaurantId)}),
+    getManagerOrderOverview: (restaurantId, orderId) => serverEndpoint.get({
+        relPath: `${getOrderPath(restaurantId, orderId)}/overview/manager`}),
+    setOrderStatus: (restaurantId, orderId, status) => serverEndpoint.put({
+        relPath: `${getOrderPath(restaurantId, orderId)}/status`,
+        data: `"${status}"`
+    }) 
 }
 
 const getProductsPath = (restaurantId) => `${restaurantId}/products`;
@@ -56,5 +64,7 @@ const getProductPath = (restaurantId, productId) => `${getProductsPath(restauran
 const getCommentsPath = (restaurantId) => `${restaurantId}/comments`;
 const getCommentPath = (restaurantId, commentId) => `${getCommentsPath(restaurantId)}/${commentId}`;
 
+const getOrdersPath = (restaurantId) => `${restaurantId}/orders`;
+const getOrderPath = (restaurantId, orderId) => `${getOrdersPath(restaurantId)}/${orderId}`;
 
 export { restaurantService as default };

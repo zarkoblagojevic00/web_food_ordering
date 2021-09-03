@@ -1,6 +1,9 @@
+import { minDate, maxDate } from "../../local-storage-util.js";
+
 export default Vue.component("date-picker",{
     props: {
-        value: [Date, Number]
+        value: [Date, Number],
+        disabledDates: Object
     },
 
     components: {
@@ -11,6 +14,7 @@ export default Vue.component("date-picker",{
     <span id="date-picker">
         <vuejs-datepicker
             placeholder="Select date"
+            :disabledDates="disabledDates"
             v-model="date"
             @input="$emit('input', date)"
             > 

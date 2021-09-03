@@ -24,7 +24,7 @@ public class OrderController {
     }
 
     @GET
-    @Path("{orderId}/overview")
+    @Path("{orderId}/overview/manager")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getOrder(@PathParam("orderId") long orderId) {
         return Response.ok( orderService.getManagerOrderOverview(orderId)).build();

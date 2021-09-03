@@ -50,6 +50,5 @@ export const setRestaurantId = (id) => {
 
 export const clearStorage = () => localStorage.clear();
 
-
-
-
+export const minDate = new Date(-8640000000000000);
+export const maxDate = new Date(8640000000000000);

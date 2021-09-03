@@ -1,3 +1,5 @@
+import { parseProperty } from "../../../property-parser.js";
+
 export default Vue.component("sorters",{
     props: {
         sortBy: Object, // object {fieldName: "displayName"} e.g {firstName: "First name"}
@@ -19,7 +21,7 @@ export default Vue.component("sorters",{
                 id: field, 
                 order: -1,
                 getSortFunction() {
-                    return (a, b) => a[field] < b[field] ? this.order : -this.order
+                    return (a, b) => parseProperty(a, field) < parseProperty(b, field) ? this.order : -this.order
                 }
             })),
             activeSorterIndex: -1

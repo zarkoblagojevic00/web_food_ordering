@@ -1,7 +1,7 @@
-import filterTextFieldMixin from "./filter-text-field-mixin.js"
+import filterText from "./filter-text.js"
 
 export default Vue.component("search-text-fields",{
-    mixins: [filterTextFieldMixin],
+    extends: filterText,
     template: `
     <div id="search-text-fields">
        <div v-for="(value, key, index) in filterBy"

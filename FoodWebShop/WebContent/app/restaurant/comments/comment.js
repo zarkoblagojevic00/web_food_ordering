@@ -39,8 +39,6 @@ export default Vue.component("comment",{
                 showRating>
             </rating-picker>
         </div>
-
-        
         
         <div>
             <label for="status">Status: </label>

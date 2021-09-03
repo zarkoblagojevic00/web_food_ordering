@@ -22,10 +22,9 @@ export default Vue.component("the-navbar",{
             <span v-if="isDeliverer"></span>
             
             <span v-if="isManager && managerRestaurantId">
-                <li><router-link :to="getManagerRoute('restaurant-root')" exact>Restaurant</router-link></li>
-                <!-- <li><router-link :to="getManagerRoute('restaurant-customers')" exact>Customers</router-link></li>
-                <li><router-link :to="getManagerRoute('restaurant-orders')" exact>Orders</router-link></li>
-                 -->
+                <li><router-link :to="getManagerRoute('restaurantId','restaurant-root')" exact>Restaurant</router-link></li>
+                <!-- <li><router-link :to="getManagerRoute('restaurant-customers')" exact>Customers</router-link></li> -->
+                <li><router-link :to="getManagerRoute('parentResourceId','restaurant-orders-overview')" exact>Orders</router-link></li>
             </span>
             
             <span v-if="!isGuest">
@@ -81,8 +80,8 @@ export default Vue.component("the-navbar",{
             return { name: routeName, params: { id: this.id }}
         },
 
-        getManagerRoute(routeName) {
-            return { name: routeName, params: { id: this.id, restaurantId: this.managerRestaurantId}}
+        getManagerRoute(resourceId, routeName) {
+            return { name: routeName, params: { id: this.id, [resourceId]: this.managerRestaurantId}}
         },
 
         logout () {
