@@ -62,8 +62,12 @@ public class Order extends Entity {
         return totalPrice;
     }
 
-    public boolean belongsTo(long restaurantId) {
+    public boolean belongsToRestaurant(long restaurantId) {
         return restaurant.getId() == restaurantId;
+    }
+
+    public boolean belongsToCustomer(long customerId) {
+        return customer.getId() == customerId;
     }
 
     private String generateRandomAlphanumericString(long length) {

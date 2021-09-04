@@ -2,6 +2,7 @@ package controllers;
 
 import dtos.CustomerOverviewDTO;
 import services.CustomerService;
+import services.OrderService;
 
 import javax.annotation.security.RolesAllowed;
 import javax.inject.Inject;
@@ -15,7 +16,10 @@ import java.util.Collection;
 @Produces(MediaType.APPLICATION_JSON)
 public class CustomerController {
     @Inject
-    CustomerService customerService;
+    private CustomerService customerService;
+
+    @Inject
+    private OrderService orderService;
 
     @GET
     @Path("overview")
@@ -32,5 +36,11 @@ public class CustomerController {
     public Response ban(String username) {
         customerService.banCustomer(username);
         return Response.noContent().build();
+    }
+
+    @GET
+    @Path("{id}/orders")
+    public Response getOrdersForCustomer(@PathParam("id") long id) {
+        return Response.ok(orderService.getOrdersForCustomer(id)).build();
     }
 }

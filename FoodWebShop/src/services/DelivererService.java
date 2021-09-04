@@ -5,6 +5,7 @@ import beans.users.roles.customer.UserActivityStatus;
 import beans.users.roles.deliverer.Deliverer;
 import beans.users.roles.deliverer.DelivererActivityReport;
 import dtos.DelivererOverviewDTO;
+import dtos.OrderOverviewDTO;
 import repositories.interfaces.DelivererRepository;
 import repositories.interfaces.OrderRepository;
 

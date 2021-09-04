@@ -35,11 +35,15 @@ public class OrderController {
     @Path("{orderId}/overview/manager")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getOrder(@PathParam("orderId") long orderId) {
-        return Response.ok( orderService.getManagerOrderOverview(orderId)).build();
+        return Response.ok(orderService.getManagerOrderOverview(orderId)).build();
     }
 
-
-
+    @GET
+    @Path("get")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getOrdersByStatus(@QueryParam("status") OrderStatus status) {
+        return Response.ok(orderService.getOrdersByStatus(status)).build();
+    }
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
@@ -56,5 +60,4 @@ public class OrderController {
         Order changed = orderService.changeOrderStatus(orderId, status);
         return Response.ok(changed).build();
     }
-
 }

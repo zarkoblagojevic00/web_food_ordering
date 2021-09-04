@@ -4,6 +4,7 @@ import beans.Entity;
 import repositories.interfaces.base.Repository;
 
 import java.text.MessageFormat;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -41,7 +42,7 @@ public class JsonFileRepository<T extends Entity> implements Repository<T> {
 
     @Override
     public Collection<T> getMultiple(Collection<Long> ids) {
-        return ids.stream()
+        return (entities.isEmpty()) ? new ArrayList<>() : ids.stream()
                 .map(this::get)
                 .collect(Collectors.toList());
     }

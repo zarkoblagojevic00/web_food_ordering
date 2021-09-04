@@ -1,5 +1,6 @@
 package beans.users.roles.deliverer;
 
+import beans.Entity;
 import beans.ecommerce.Order;
 import beans.restaurants.requests.DeliveryRequest;
 import beans.users.base.Credentials;
@@ -8,7 +9,9 @@ import beans.users.base.Role;
 import beans.users.base.User;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Deliverer extends User {
     List<Order> orders;
@@ -35,5 +38,11 @@ public class Deliverer extends User {
     private void initCollections() {
         this.orders = new ArrayList<>();
         this.deliveryRequests = new ArrayList<>();
+    }
+
+    public Collection<Long> getOrdersIds () {
+        return orders.stream()
+                .map(Entity::getId)
+                .collect(Collectors.toList());
     }
 }

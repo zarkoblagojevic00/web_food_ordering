@@ -6,13 +6,11 @@ import beans.ecommerce.OrderStatus;
 import beans.ecommerce.ShoppingItem;
 import beans.restaurants.Restaurant;
 import beans.users.roles.customer.Customer;
+import beans.users.roles.deliverer.Deliverer;
 import dtos.CustomerOverviewDTO;
 import dtos.ManagerOrderOverviewDTO;
 import dtos.OrderOverviewDTO;
-import repositories.interfaces.CustomerRepository;
-import repositories.interfaces.OrderRepository;
-import repositories.interfaces.RestaurantRepository;
-import repositories.interfaces.ShoppingItemRepository;
+import repositories.interfaces.*;
 
 import javax.inject.Inject;
 import java.util.Collection;
@@ -23,16 +21,19 @@ public class OrderService {
     final private CustomerRepository customerRepo;
     final private RestaurantRepository restaurantRepo;
     final private ShoppingItemRepository shoppingItemRepo;
+    final private DelivererRepository delivererRepo;
 
     @Inject
     public OrderService(OrderRepository orderRepo,
                         CustomerRepository customerRepo,
                         RestaurantRepository restaurantRepo,
-                        ShoppingItemRepository shoppingItemRepo) {
+                        ShoppingItemRepository shoppingItemRepo,
+                        DelivererRepository delivererRepo) {
         this.orderRepo = orderRepo;
         this.customerRepo = customerRepo;
         this.restaurantRepo = restaurantRepo;
         this.shoppingItemRepo = shoppingItemRepo;
+        this.delivererRepo = delivererRepo;
     }
 
     public Collection<OrderOverviewDTO> getOrdersForRestaurant(long restaurantId) {
@@ -74,6 +75,25 @@ public class OrderService {
                 .collect(Collectors.toList());
         return customerRepo.getMultiple(customerIds).stream()
                 .map(CustomerOverviewDTO::new)
+                .collect(Collectors.toList());
+    }
+
+    public Collection<OrderOverviewDTO> getOrdersForCustomer(long customerId) {
+        return orderRepo.getOrdersForCustomer(customerId).stream()
+                .map(this::createOrderOverviewDTO)
+                .collect(Collectors.toList());
+    }
+
+    public Collection<OrderOverviewDTO> getOrdersForDeliverer(long id) {
+        Deliverer deliverer = delivererRepo.get(id);
+        return orderRepo.getMultiple(deliverer.getOrdersIds()).stream()
+                .map(this::createOrderOverviewDTO)
+                .collect(Collectors.toList());
+    }
+
+    public Collection<OrderOverviewDTO> getOrdersByStatus(OrderStatus status) {
+        return orderRepo.getOrdersByStatus(status).stream()
+                .map(this::createOrderOverviewDTO)
                 .collect(Collectors.toList());
     }
 }

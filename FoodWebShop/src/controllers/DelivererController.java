@@ -2,6 +2,7 @@ package controllers;
 
 import dtos.DelivererOverviewDTO;
 import services.DelivererService;
+import services.OrderService;
 
 import javax.annotation.security.RolesAllowed;
 import javax.inject.Inject;
@@ -16,6 +17,8 @@ import java.util.Collection;
 public class DelivererController {
     @Inject
     private DelivererService delivererService;
+    @Inject
+    private OrderService orderService;
 
     @GET
     @Path("overview")
@@ -40,4 +43,11 @@ public class DelivererController {
         delivererService.deleteDeliverer(username);
         return Response.noContent().build();
     }
+
+    @GET
+    @Path("{id}/orders")
+    public Response getOrdersForDeliverer(@PathParam("id") long id) {
+        return Response.ok(orderService.getOrdersForDeliverer(id)).build();
+    }
+
 }
