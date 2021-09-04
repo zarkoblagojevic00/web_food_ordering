@@ -23,7 +23,7 @@ export default Vue.component("the-navbar",{
             
             <span v-if="isManager && managerRestaurantId">
                 <li><router-link :to="getManagerRoute('restaurantId','restaurant-root')" exact>Restaurant</router-link></li>
-                <!-- <li><router-link :to="getManagerRoute('restaurant-customers')" exact>Customers</router-link></li> -->
+                <li><router-link :to="getManagerRoute('restaurantId', 'restaurant-customers')" exact>Customers</router-link></li>
                 <li><router-link :to="getManagerRoute('parentResourceId','restaurant-orders-overview')" exact>Orders</router-link></li>
             </span>
             

@@ -55,7 +55,9 @@ const restaurantService = {
     setOrderStatus: (restaurantId, orderId, status) => serverEndpoint.put({
         relPath: `${getOrderPath(restaurantId, orderId)}/status`,
         data: `"${status}"`
-    }) 
+    }),
+    
+    getCustomers: (restaurantId) => serverEndpoint.get({relPath: `${getOrdersPath(restaurantId)}/customers`})
 }
 
 const getProductsPath = (restaurantId) => `${restaurantId}/products`;

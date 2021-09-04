@@ -10,6 +10,6 @@ export default Vue.component("filter-text",{
                 return parseProperty(item, field).toLowerCase().includes(this.value.toLowerCase());
             }
         }),
-        getInitFilterValues: () => ({value: ""}),
+        getInitFilterValues: (field) => ({value: ""}),
     }
 })

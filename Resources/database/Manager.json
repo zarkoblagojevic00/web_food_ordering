@@ -18,14 +18,14 @@
   "id" : 2,
   "deleted" : false,
   "credentials" : {
-    "username" : "mana",
+    "username" : "manager",
     "password" : "managerpass"
   },
   "personalData" : {
     "firstName" : "John",
     "lastName" : "Doe",
     "gender" : "MALE",
-    "dateOfBirth" : 1628100600000
+    "dateOfBirth" : 586635000000
   },
   "role" : "MANAGER",
   "activityStatus" : "OK",

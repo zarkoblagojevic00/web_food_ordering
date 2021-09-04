@@ -53,7 +53,7 @@ export default Vue.component("customer",{
             <span>{{pointsEarned}}</span>
         </div>
         
-        <div>
+        <div v-if="activityReport">
             <label for="numOfCanceledOrdersInPastMonth">Canceled orders: </label>
             <span>{{activityReport.numOfCanceledOrdersInPastMonth}}</span>
         </div>

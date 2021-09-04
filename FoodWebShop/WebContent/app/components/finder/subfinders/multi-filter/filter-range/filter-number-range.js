@@ -43,7 +43,7 @@ export default Vue.component("filter-number-range",{
     </div>`,
 
     methods: {
-        getInitFilterValues:() => ({
+        getInitFilterValues:(field) => ({
             from: 0,
             to: Number.POSITIVE_INFINITY
         }),

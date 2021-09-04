@@ -12,9 +12,9 @@ export default Vue.component("manager-home",{
             <div>
                 <router-link :to="restaurantPath('restaurantId', 'restaurant-root')">Restaurant</router-link>
             </div>
-            <!-- <div>
-                <router-link :to="restaurantPath('restaurant-customers')">Customers</router-link>
-            </div> -->
+            <div>
+                <router-link :to="restaurantPath('restaurantId','restaurant-customers')">Customers</router-link>
+            </div>
             <div>
                 <router-link :to="restaurantPath('parentResourceId', 'restaurant-orders-overview')">Orders</router-link>
             </div>

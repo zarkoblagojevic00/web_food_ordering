@@ -41,7 +41,7 @@ export default Vue.component("filter-date-range",{
     `,
     
     methods: {
-        getInitFilterValues:() => ({
+        getInitFilterValues:(field) => ({
             from: getPastDay(30),
             to: new Date()
         }),

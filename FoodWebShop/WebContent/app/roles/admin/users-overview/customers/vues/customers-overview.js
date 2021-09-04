@@ -1,8 +1,12 @@
 import customerService from "../../../../../services/customer-service.js";
+import restaurantService from "../../../../../services/restaurant-service.js";
+
 import finder from "../../../../../components/finder/finder.js";
 import customer from "./customer.js"
 
 export default Vue.component("customers-overview",{
+    props: ['restaurantId'],
+
     components: {
         finder,
     },
@@ -54,6 +58,6 @@ export default Vue.component("customers-overview",{
     },
 
     async created() {
-        this.customers = await customerService.getOverview();
+        this.customers = await ((this.restaurantId) ? restaurantService.getCustomers(this.restaurantId) : customerService.getOverview());
     }, 
 })

@@ -64,12 +64,14 @@ const routes = [
 
     {path: '/manager/:id', component: ManagerRoot, props: true, 
         children: [
-            {path: '/', name: 'manager-home', component: ManagerHome, props: true},
+            {path: '/',         name: 'manager-home',           component: ManagerHome,     props: true},
+            {path: 'profile',   name: 'manager-profile',        component: EditProfile},
             restaurantRoutes,
-            {path: 'restaurant/:restaurantId/add-product',              name: 'add-product',                   component: AddProduct,      props: true},
-            {path: 'restaurant/:restaurantId/edit-product/:productId',  name: 'edit-product',                  component: EditProduct,     props: true},
-            {path: 'restaurant/:parentResourceId/orders',               name: 'restaurant-orders-overview',    component: OrdersOverview,  props: true},
-            {path: 'restaurant/:parentResourceId/orders/:orderId',      name: 'restaurant-order-details',      component: OrderDetails,    props: true},
+            {path: 'restaurant/:restaurantId/add-product',              name: 'add-product',                   component: AddProduct,           props: true},
+            {path: 'restaurant/:restaurantId/edit-product/:productId',  name: 'edit-product',                  component: EditProduct,          props: true},
+            {path: 'restaurant/:parentResourceId/orders',               name: 'restaurant-orders-overview',    component: OrdersOverview,       props: true},
+            {path: 'restaurant/:parentResourceId/orders/:orderId',      name: 'restaurant-order-details',      component: OrderDetails,         props: true},
+            {path: 'restaurant/:restaurantId/customers',                name: 'restaurant-customers',          component: CustomersOverview,    props: true}
         ] 
     }
 

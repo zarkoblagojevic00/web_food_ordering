@@ -6,6 +6,7 @@ import beans.users.roles.customer.Customer;
 import services.OrderService;
 
 import javax.inject.Inject;
+import javax.print.attribute.standard.Media;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -24,11 +25,20 @@ public class OrderController {
     }
 
     @GET
+    @Path("customers")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getRestaurantCustomersOverview() {
+        return Response.ok(orderService.getRestaurantCustomersOverview(restaurantId)).build();
+    }
+
+    @GET
     @Path("{orderId}/overview/manager")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getOrder(@PathParam("orderId") long orderId) {
         return Response.ok( orderService.getManagerOrderOverview(orderId)).build();
     }
+
+
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)

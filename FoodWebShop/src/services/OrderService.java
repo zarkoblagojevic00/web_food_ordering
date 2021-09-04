@@ -1,10 +1,12 @@
 package services;
 
+import beans.Entity;
 import beans.ecommerce.Order;
 import beans.ecommerce.OrderStatus;
 import beans.ecommerce.ShoppingItem;
 import beans.restaurants.Restaurant;
 import beans.users.roles.customer.Customer;
+import dtos.CustomerOverviewDTO;
 import dtos.ManagerOrderOverviewDTO;
 import dtos.OrderOverviewDTO;
 import repositories.interfaces.CustomerRepository;
@@ -62,5 +64,16 @@ public class OrderService {
         Order existing = orderRepo.get(orderId);
         existing.setStatus(status);
         return orderRepo.update(existing);
+    }
+
+    public Collection<CustomerOverviewDTO> getRestaurantCustomersOverview(long restaurantId) {
+        Collection<Long> customerIds = orderRepo.getOrdersForRestaurant(restaurantId).stream()
+                .map(Order::getCustomer)
+                .map(Entity::getId)
+                .distinct()
+                .collect(Collectors.toList());
+        return customerRepo.getMultiple(customerIds).stream()
+                .map(CustomerOverviewDTO::new)
+                .collect(Collectors.toList());
     }
 }

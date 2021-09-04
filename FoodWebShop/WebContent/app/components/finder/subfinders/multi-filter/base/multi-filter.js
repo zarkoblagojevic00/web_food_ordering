@@ -15,12 +15,12 @@ export default Vue.component("multi-filter",{
             return items.filter(applyFilters);
         },
         createFilter(field) {
-            const initValues = this.getInitFilterValues();
+            const initValues = this.getInitFilterValues(field);
             const filter = this.getFilter(field);
             return {...filter, ...initValues};
         },
         
-        getInitFilterValues: () => console.warn('Mulit-Filter: Must implement getInitFilterValues'), 
+        getInitFilterValues: (field) => console.warn('Mulit-Filter: Must implement getInitFilterValues'), 
         getFilter:(field) => console.warn(`Multi-Filter: Must implement getFilter for field: ${field}`), 
     }
 })

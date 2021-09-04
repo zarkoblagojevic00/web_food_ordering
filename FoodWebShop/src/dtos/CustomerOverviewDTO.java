@@ -6,9 +6,15 @@ import beans.users.roles.customer.CustomerTypeName;
 import beans.users.roles.customer.UserActivityStatus;
 
 public class CustomerOverviewDTO extends UserOverviewDTO {
-    final private CustomerActivityReport activityReport;
+    private CustomerActivityReport activityReport;
     final private CustomerTypeName type;
     final private int pointsEarned;
+
+    public CustomerOverviewDTO(Customer customer) {
+        super(customer);
+        this.type = customer.getCustomerTypeName();
+        this.pointsEarned = customer.getPointsEarned();
+    }
 
     public CustomerOverviewDTO(Customer customer, CustomerActivityReport activityReport) {
         super(customer);

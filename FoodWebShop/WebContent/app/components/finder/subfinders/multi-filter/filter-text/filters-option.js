@@ -22,4 +22,9 @@ export default Vue.component("filters-option",{
         </div> 
     </div> 
     `,
+    methods: {
+        getInitFilterValues(field) {
+            return  {value: this.filterBy[field].init || ""}
+        },
+    }
 })
