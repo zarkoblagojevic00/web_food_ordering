@@ -8,7 +8,7 @@ import beans.restaurants.Restaurant;
 import beans.users.roles.customer.Customer;
 import beans.users.roles.deliverer.Deliverer;
 import dtos.CustomerOverviewDTO;
-import dtos.ManagerOrderOverviewDTO;
+import dtos.OrderDetailsDTO;
 import dtos.OrderOverviewDTO;
 import repositories.interfaces.*;
 
@@ -53,12 +53,12 @@ public class OrderService {
         return orderRepo.save(new Order(restaurantId, newOrder, items));
     }
 
-    public ManagerOrderOverviewDTO getManagerOrderOverview(long orderId) {
+    public OrderDetailsDTO getOrderDetails(long orderId) {
         Order order = orderRepo.get(orderId);
         OrderOverviewDTO orderDto = createOrderOverviewDTO(order);
         Collection<ShoppingItem> items = shoppingItemRepo.getMultipleWithProducts(order.getItemsIds());
         // TODO: Should get DeliveryRequests also
-        return new ManagerOrderOverviewDTO(orderDto, items);
+        return new OrderDetailsDTO(orderDto, items);
     }
 
     public Order changeOrderStatus(long orderId, OrderStatus status) {

@@ -19,7 +19,11 @@ export default Vue.component("the-navbar",{
                 <li><router-link :to="getRoleRoute('restaurants-home')" exact>Restaurants</router-link></li>
             </span>
             <span v-if="isCustomer"></span>
-            <span v-if="isDeliverer"></span>
+            
+            <span v-if="isDeliverer">
+                <li><router-link :to="getDelivererRoute('deliverer-orders', 'available')" exact>Available orders</router-link></li>
+                <li><router-link :to="getDelivererRoute('deliverer-orders', 'mine')" exact>My orders</router-link></li>
+            </span>
             
             <span v-if="isManager && managerRestaurantId">
                 <li><router-link :to="getManagerRoute('restaurantId','restaurant-root')" exact>Restaurant</router-link></li>
@@ -82,6 +86,10 @@ export default Vue.component("the-navbar",{
 
         getManagerRoute(resourceId, routeName) {
             return { name: routeName, params: { id: this.id, [resourceId]: this.managerRestaurantId}}
+        },
+
+        getDelivererRoute(routeName, type) {
+            return { name: routeName, params: { id: this.id, type}};
         },
 
         logout () {

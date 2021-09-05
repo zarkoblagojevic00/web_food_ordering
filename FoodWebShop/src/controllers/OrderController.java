@@ -2,11 +2,9 @@ package controllers;
 
 import beans.ecommerce.Order;
 import beans.ecommerce.OrderStatus;
-import beans.users.roles.customer.Customer;
 import services.OrderService;
 
 import javax.inject.Inject;
-import javax.print.attribute.standard.Media;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -32,10 +30,10 @@ public class OrderController {
     }
 
     @GET
-    @Path("{orderId}/overview/manager")
+    @Path("{orderId}/details")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getOrder(@PathParam("orderId") long orderId) {
-        return Response.ok(orderService.getManagerOrderOverview(orderId)).build();
+    public Response getOrderDetails(@PathParam("orderId") long orderId) {
+        return Response.ok(orderService.getOrderDetails(orderId)).build();
     }
 
     @GET
@@ -44,6 +42,7 @@ public class OrderController {
     public Response getOrdersByStatus(@QueryParam("status") OrderStatus status) {
         return Response.ok(orderService.getOrdersByStatus(status)).build();
     }
+
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)

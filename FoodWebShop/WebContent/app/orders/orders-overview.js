@@ -3,10 +3,13 @@ import restaurantService from "../services/restaurant-service.js";
 
 import authMixin from "../mixins/auth-mixin.js";
 import order from "./order.js";
+import delivererService from "../services/deliverer-service.js";
+import customerService from "../services/customer-service.js";
+import orderService from "../services/order-service.js";
 
 export default Vue.component("orders-overview",{
     mixins: [authMixin],
-    props: ['parentResourceId'],
+    props: ['parentResourceId', 'type'],
     components: {
         finder,
         order,
@@ -14,7 +17,7 @@ export default Vue.component("orders-overview",{
 
     template: `
     <div id="orders-overview">
-        <h2>ORDERS</h2>
+        <h2>{{title}}</h2>
         <finder
             :items="orders"
             :sortBy="sortBy"
@@ -23,20 +26,14 @@ export default Vue.component("orders-overview",{
             :filterByNumberRange="filterByNumberRange"
             :filterByDateRange="filterByDateRange"
             :component="component"
-            :componentProps="props">
+            :componentProps="{name: 'order'}">
         </finder>
     </div> 
     `,
     data() { 
         return {
-            restaurantId: this.parentResourceId,
             orders: [],
             component: order,
-
-            props: {
-                name: "order",
-                parentResourceId: this.parentResourceId,
-            },
 
             sortBy: {
                 totalPrice: "Total price",
@@ -55,34 +52,61 @@ export default Vue.component("orders-overview",{
     },
 
     computed: {
+        title() {
+            if (this.isManager) return "Restaurant orders";
+            if (this.isDeliverer && this.isAvailableOrders) return "Orders waiting on delivery";
+            return "My orders"
+        },
+
         filterByOptions() {
-            const filterBy = getFilterByStatus();
+            const filterBy = getFilterByStatus(this.isAvailableOrders,this.isDeliverer, this.orderStatusFilterInitVal);
             return (this.isManager) ? filterBy : {...filterBy, ...getFilterByType()}; 
         },
 
         searchByTextFields() {
             return (this.isManager) ?  null : {'restaurant.name': "Restuarant name"};
+        },
+
+        getOrders() {
+            if (this.isManager) return () => restaurantService.getOrders(this.parentResourceId);
+            if (this.isDeliverer) return this.getOrdersForDeliverer;
+            if (this.isCustomer) return () => customerService.getOrders(this.id);  
+        },
+
+        getOrdersForDeliverer() {
+            if (this.isAvailableOrders) return () => orderService.getAvailableOrders();
+            return () => delivererService.getOrders(this.id);
+        },
+
+        orderStatusFilterInitVal() {
+            return (!this.isManager) ? "IN_TRANSPORT" : "";
+        },
+
+        isAvailableOrders() {
+            return this.type === "available";
         }
     },
 
     async created() {
-        this.orders = await restaurantService.getOrders(this.restaurantId);
+        this.orders = await this.getOrders();
     },
 })
 
-const getFilterByStatus = () => ({
+const getFilterByStatus = (isAvailablePage, isDeliverer, init) => (isAvailablePage) ? {} : {
     status: {
         display: 'Status',
+        init,
         options: {
-            PROCESSING: 'Processing',
-            IN_PREPARATION: 'In preparation',
-            WAITING_ON_DELIVERY: 'Waiting on delivery',
+            ...(!isDeliverer && {
+                PROCESSING: 'Processing',
+                IN_PREPARATION: 'In preparation',
+                WAITING_ON_DELIVERY: 'Waiting on delivery',
+                CANCELED: 'Canceled',
+            }),
             IN_TRANSPORT: 'In transport',
             DELIVERED: 'Delivered',
-            CANCELED: 'Canceled',
-        },
-    }
-});
+        },}
+    };
 
 const getFilterByType = function() {
     return {'restaurant.type': {

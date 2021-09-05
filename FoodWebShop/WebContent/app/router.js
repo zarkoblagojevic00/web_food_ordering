@@ -22,6 +22,8 @@ import AddProduct from './restaurant/products/add-product.js'
 import EditProduct from './restaurant/products/edit-product.js'
 import OrdersOverview from './orders/orders-overview.js'
 import OrderDetails from './orders/order-details.js'
+import DelivererRoot from './roles/deliverer/deliverer-root.js'
+import DelivererHome from './roles/deliverer/deliverer-home.js'
 
 const restaurantRoutes = {
     path: 'restaurants/:restaurantId', component: RestaurantRoot, props: true,
@@ -34,7 +36,6 @@ const restaurantRoutes = {
 }
 
 const routes = [
-    // {path: '/', component: Test},
     {path: '/',             name: 'home',       component: Home},
     {path: '/login',        name: 'login',      component: Login},
     {path: '/signup',       name: 'signup',     component: SignUp},
@@ -73,7 +74,15 @@ const routes = [
             {path: 'restaurant/:parentResourceId/orders/:orderId',      name: 'restaurant-order-details',      component: OrderDetails,         props: true},
             {path: 'restaurant/:restaurantId/customers',                name: 'restaurant-customers',          component: CustomersOverview,    props: true}
         ] 
-    }
+    },
+    {path: '/deliverer/:id', component: DelivererRoot, props: true,
+        children: [
+            {path: '/',                         name: 'deliverer-home',      component: DelivererHome,     props: true},
+            {path: 'profile',                   name: 'deliverer-profile',   component: EditProfile},
+            {path: 'orders/:type',              name: 'deliverer-orders',    component: OrdersOverview,    props: true},
+            {path: 'orders/:type/:orderId',     name: 'order-details',       component: OrderDetails,      props: true},   
+        ]
+    },
 
 ]
 

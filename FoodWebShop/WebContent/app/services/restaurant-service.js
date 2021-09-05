@@ -50,13 +50,6 @@ const restaurantService = {
         data: `"${answer}"`}),
     
     getOrders: (restaurantId) => serverEndpoint.get({relPath: getOrdersPath(restaurantId)}),
-    getManagerOrderOverview: (restaurantId, orderId) => serverEndpoint.get({
-        relPath: `${getOrderPath(restaurantId, orderId)}/overview/manager`}),
-    setOrderStatus: (restaurantId, orderId, status) => serverEndpoint.put({
-        relPath: `${getOrderPath(restaurantId, orderId)}/status`,
-        data: `"${status}"`
-    }),
-    
     getCustomers: (restaurantId) => serverEndpoint.get({relPath: `${getOrdersPath(restaurantId)}/customers`})
 }
 

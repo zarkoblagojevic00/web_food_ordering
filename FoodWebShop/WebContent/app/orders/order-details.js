@@ -1,10 +1,12 @@
-import restaurantService from "../services/restaurant-service.js"
+import authMixin from "../mixins/auth-mixin.js";
+import orderService from "../services/order-service.js";
 
 import order from "./order.js";
 import shoppingItemsOverview from "./shopping-items-overview.js";
 
 export default Vue.component("order-details",{
-    props: ['parentResourceId', 'orderId'],
+    mixins: [authMixin],
+    props: ['orderId'],
     component: {
         order,
         'shopping-items-overview' : shoppingItemsOverview,
@@ -14,7 +16,6 @@ export default Vue.component("order-details",{
     <div id="order-details">
         <order v-if="order"
             :order="order"
-            :parentResourceId="parentResourceId"
             :showDetailsNav="false">
         </order>
 
@@ -23,6 +24,10 @@ export default Vue.component("order-details",{
             :totalPrice="order.totalPrice"
             isReadonly>
         </shopping-items-overview>
+
+        <div v-if=isManager>
+            <h5>Delivery requests</h5>
+        </div>
 
     </div> 
     `,
@@ -34,15 +39,15 @@ export default Vue.component("order-details",{
     },
 
     async created() {
-        const orderOverview = await restaurantService.getManagerOrderOverview(
-            this.parentResourceId,
-            this.orderId,);
+        const orderOverview = await orderService.getOrderOverview(this.orderId);
         this.order = orderOverview.base.order;
         this.items = orderOverview.base.items;
     },
 
+
+
     computed: {
-        
+            
     },
 
     methods: {
