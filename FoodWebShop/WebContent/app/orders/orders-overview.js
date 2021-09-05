@@ -35,11 +35,6 @@ export default Vue.component("orders-overview",{
             orders: [],
             component: order,
 
-            sortBy: {
-                totalPrice: "Total price",
-                creationDate: "Creation date",
-            },
-
             filterByNumberRange: {
                 totalPrice: "Total price"
             },
@@ -53,9 +48,17 @@ export default Vue.component("orders-overview",{
 
     computed: {
         title() {
-            if (this.isManager) return "Restaurant orders";
-            if (this.isDeliverer && this.isAvailableOrders) return "Orders waiting on delivery";
-            return "My orders"
+            if (this.isManager) return 'Restaurant orders';
+            if (this.isDeliverer && this.isAvailableOrders) return 'Orders waiting on delivery';
+            return 'My orders'
+        },
+
+        sortBy() {
+            return {
+                totalPrice: 'Total price',
+                creationDate: 'Creation date',
+				...(!this.isManager && {'restaurant.name': 'Restaurant name'})
+            }
         },
 
         filterByOptions() {
@@ -64,7 +67,7 @@ export default Vue.component("orders-overview",{
         },
 
         searchByTextFields() {
-            return (this.isManager) ?  null : {'restaurant.name': "Restuarant name"};
+            return (this.isManager) ?  null : {'restaurant.name': 'Restuarant name'};
         },
 
         getOrders() {
@@ -79,11 +82,11 @@ export default Vue.component("orders-overview",{
         },
 
         orderStatusFilterInitVal() {
-            return (!this.isManager) ? "IN_TRANSPORT" : "";
+            return (!this.isManager) ? 'IN_TRANSPORT' : '';
         },
 
         isAvailableOrders() {
-            return this.type === "available";
+            return this.type === 'available';
         }
     },
 

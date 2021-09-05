@@ -7,7 +7,7 @@
   "creationDate" : 1630575641828,
   "customer" : 7,
   "totalPrice" : 2500.0,
-  "status" : "PROCESSING"
+  "status" : "WAITING_ON_DELIVERY"
 }, {
   "id" : 2,
   "deleted" : false,
@@ -47,7 +47,7 @@
   "creationDate" : 1630582276432,
   "customer" : 6,
   "totalPrice" : 3350.0,
-  "status" : "DELIVERED"
+  "status" : "WAITING_ON_DELIVERY"
 }, {
   "id" : 6,
   "deleted" : false,
