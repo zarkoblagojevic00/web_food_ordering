@@ -50,4 +50,9 @@ public class DelivererController {
         return Response.ok(orderService.getOrdersForDeliverer(id)).build();
     }
 
+    @GET
+    @Path("{id}/orders/available")
+    public Response getAvailableOrdersForDeliverer(@PathParam("id") long id) {
+        return Response.ok(orderService.getAvailableOrdersForDeliverer(id)).build();
+    }
 }

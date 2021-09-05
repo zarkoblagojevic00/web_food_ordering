@@ -1,9 +1,10 @@
 import delivererService from "../../../../../services/deliverer-service.js"
 import formatDateMixin from "../../../../../mixins/format-date-mixin.js";
 import userActivityStatusMixin from "../../../../../mixins/user-activity-status-mixin.js";
+import authMixin from "../../../../../mixins/auth-mixin.js";
 
 export default Vue.component("deliverer",{
-    mixins: [formatDateMixin, userActivityStatusMixin],
+    mixins: [formatDateMixin, userActivityStatusMixin, authMixin],
     props: {
         username: String,
         firstName: String,
@@ -50,8 +51,11 @@ export default Vue.component("deliverer",{
             <span>{{activityReport.numOfInTransportOrders}}</span>
         </div>
 
-        <button v-if="isOk" @click="banDeliverer">Ban</button>
-        <button @click="deleteDeliverer">Delete</button>
+        <span v-if="isAdmin">
+            <button v-if="isOk" @click="banDeliverer">Ban</button>
+            <button @click="deleteDeliverer">Delete</button>
+        </span>
+        
     </div> 
     `,
     data() { 

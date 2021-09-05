@@ -17,7 +17,7 @@
   "creationDate" : 1630579431336,
   "customer" : 6,
   "totalPrice" : 2400.0,
-  "status" : "WAITING_ON_DELIVERY"
+  "status" : "DELIVERED"
 }, {
   "id" : 3,
   "deleted" : false,

@@ -8,6 +8,7 @@ import java.util.Map;
 import beans.ecommerce.ShoppingItem;
 import beans.restaurants.Product;
 import beans.restaurants.requests.Comment;
+import beans.restaurants.requests.DeliveryRequest;
 import beans.users.roles.customer.Customer;
 import controllers.CommentController;
 import controllers.OrderController;
@@ -21,6 +22,7 @@ import org.glassfish.jersey.server.filter.RolesAllowedDynamicFeature;
 import repositories.ITestRepository;
 import repositories.TestRepository;
 import repositories.interfaces.*;
+import repositories.interfaces.base.DeliveryRequestRepository;
 import repositories.json.repos.*;
 import services.*;
 import services.auth.AuthenticationService;
@@ -42,6 +44,7 @@ public class ApplicationConfig extends ResourceConfig {
             put(CommentRepository.class, CommentJsonFileRepository.class);
             put(OrderRepository.class, OrderJsonFileRepository.class);
             put(ShoppingItemRepository.class, ShoppingItemJsonFileRepository.class);
+            put(DeliveryRequestRepository.class, DeliveryRequestJsonFileRepository.class);
         }};
 
         concretes = Arrays.asList(

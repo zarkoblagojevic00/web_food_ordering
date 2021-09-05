@@ -2,6 +2,7 @@ package controllers;
 
 import beans.ecommerce.Order;
 import beans.ecommerce.OrderStatus;
+import beans.restaurants.requests.DeliveryRequest;
 import services.OrderService;
 
 import javax.inject.Inject;
@@ -43,6 +44,13 @@ public class OrderController {
         return Response.ok(orderService.getOrdersByStatus(status)).build();
     }
 
+    @GET
+    @Path("{orderId}/requests")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getDeliveryRequestsForOrder(@PathParam("orderId") long orderId) {
+        return Response.ok(orderService.getDeliveryRequestsForOrder(orderId)).build();
+    }
+
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
@@ -59,4 +67,22 @@ public class OrderController {
         Order changed = orderService.changeOrderStatus(orderId, status);
         return Response.ok(changed).build();
     }
+
+    @POST
+    @Path("delivery-request")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response addDeliveryRequest(DeliveryRequest deliveryRequest) {
+        DeliveryRequest savedRequest = orderService.addDeliveryRequest(deliveryRequest);
+        return Response.ok(savedRequest).build();
+    }
+
+    @POST
+    @Path("delivery-request/{id}/accept")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response acceptDeliveryRequest(@PathParam("id") long id) {
+        DeliveryRequest savedRequest = orderService.acceptDeliveryRequest(id);
+        return Response.ok(savedRequest).build();
+    }
+
 }

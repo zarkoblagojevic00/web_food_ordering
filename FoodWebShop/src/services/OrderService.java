@@ -5,12 +5,15 @@ import beans.ecommerce.Order;
 import beans.ecommerce.OrderStatus;
 import beans.ecommerce.ShoppingItem;
 import beans.restaurants.Restaurant;
+import beans.restaurants.requests.DeliveryRequest;
 import beans.users.roles.customer.Customer;
 import beans.users.roles.deliverer.Deliverer;
 import dtos.CustomerOverviewDTO;
+import dtos.DeliveryRequestDTO;
 import dtos.OrderDetailsDTO;
 import dtos.OrderOverviewDTO;
 import repositories.interfaces.*;
+import repositories.interfaces.base.DeliveryRequestRepository;
 
 import javax.inject.Inject;
 import java.util.Collection;
@@ -22,18 +25,24 @@ public class OrderService {
     final private RestaurantRepository restaurantRepo;
     final private ShoppingItemRepository shoppingItemRepo;
     final private DelivererRepository delivererRepo;
+    final private DeliveryRequestRepository deliveryRequestRepo;
+    final private DelivererService delivererService;
 
     @Inject
     public OrderService(OrderRepository orderRepo,
                         CustomerRepository customerRepo,
                         RestaurantRepository restaurantRepo,
                         ShoppingItemRepository shoppingItemRepo,
-                        DelivererRepository delivererRepo) {
+                        DelivererRepository delivererRepo,
+                        DeliveryRequestRepository deliveryRequestRepo,
+                        DelivererService delivererService) {
         this.orderRepo = orderRepo;
         this.customerRepo = customerRepo;
         this.restaurantRepo = restaurantRepo;
         this.shoppingItemRepo = shoppingItemRepo;
         this.delivererRepo = delivererRepo;
+        this.deliveryRequestRepo = deliveryRequestRepo;
+        this.delivererService = delivererService;
     }
 
     public Collection<OrderOverviewDTO> getOrdersForRestaurant(long restaurantId) {
@@ -57,8 +66,8 @@ public class OrderService {
         Order order = orderRepo.get(orderId);
         OrderOverviewDTO orderDto = createOrderOverviewDTO(order);
         Collection<ShoppingItem> items = shoppingItemRepo.getMultipleWithProducts(order.getItemsIds());
-        // TODO: Should get DeliveryRequests also
-        return new OrderDetailsDTO(orderDto, items);
+        Collection<DeliveryRequestDTO> deliveryRequestsForOrder = getDeliveryRequestsForOrder(orderId);
+        return new OrderDetailsDTO(orderDto, items, deliveryRequestsForOrder);
     }
 
     public Order changeOrderStatus(long orderId, OrderStatus status) {
@@ -95,5 +104,66 @@ public class OrderService {
         return orderRepo.getOrdersByStatus(status).stream()
                 .map(this::createOrderOverviewDTO)
                 .collect(Collectors.toList());
+    }
+
+    public Collection<OrderOverviewDTO> getAvailableOrdersForDeliverer(long id) {
+        Collection<Long> alreadyRequestedOrdersIds = getAlreadyRequestedOrdersForDeliverer(id);
+        return orderRepo.getOrdersByStatus(OrderStatus.WAITING_ON_DELIVERY).stream()
+                .filter(order -> !alreadyRequestedOrdersIds.contains(order.getId()))
+                .map(this::createOrderOverviewDTO)
+                .collect(Collectors.toList());
+    }
+
+    private Collection<Long> getAlreadyRequestedOrdersForDeliverer(long id) {
+        Collection<Long> deliveryRequestIds = delivererRepo.get(id).getDeliveryRequestIds();
+        return deliveryRequestRepo.getMultiple(deliveryRequestIds).stream()
+                .map(deliveryRequest -> deliveryRequest.getOrder().getId())
+                .collect(Collectors.toList());
+    }
+
+    public DeliveryRequest addDeliveryRequest(DeliveryRequest newDeliveryRequest) {
+        DeliveryRequest saved = deliveryRequestRepo.save(newDeliveryRequest);
+        Deliverer deliverer = delivererRepo.get(saved.getDeliverer().getId());
+        deliverer.addRequest(saved);
+        delivererRepo.update(deliverer);
+        return saved;
+    }
+
+    public Collection<DeliveryRequestDTO> getDeliveryRequestsForOrder(long orderId) {
+        return deliveryRequestRepo.getRequestsForOrder(orderId).stream()
+                .map(this::createDeliveryRequestDTO)
+                .collect(Collectors.toList());
+    }
+
+    private DeliveryRequestDTO createDeliveryRequestDTO(DeliveryRequest deliveryRequest) {
+        Deliverer deliverer = delivererRepo.get(deliveryRequest.getDeliverer().getId());
+        Order order = orderRepo.get(deliveryRequest.getOrder().getId());
+        return new DeliveryRequestDTO(
+                delivererService.createDelivererOverviewDTO(deliverer),
+                createOrderOverviewDTO(order),
+                deliveryRequest);
+    }
+
+
+    public DeliveryRequest acceptDeliveryRequest(long deliveryRequestid) {
+        DeliveryRequest deliveryRequest = deliveryRequestRepo.get(deliveryRequestid);
+
+        Order order = orderRepo.get(deliveryRequest.getOrder().getId());
+        order.setStatus(OrderStatus.IN_TRANSPORT);
+        orderRepo.update(order);
+
+        Deliverer deliverer = delivererRepo.get(deliveryRequest.getDeliverer().getId());
+        deliverer.addOrder(order);
+        delivererRepo.update(deliverer);
+
+        deliveryRequestRepo.getRequestsForOrder(order.getId())
+                .forEach(this::rejectDeliveryRequest);
+        deliveryRequest.approve();
+        return deliveryRequestRepo.update(deliveryRequest);
+    }
+
+    private void rejectDeliveryRequest(DeliveryRequest deliveryRequest) {
+        deliveryRequest.reject();
+        deliveryRequestRepo.update(deliveryRequest);
     }
 }

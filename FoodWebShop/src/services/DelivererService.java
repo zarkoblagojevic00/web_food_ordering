@@ -29,10 +29,8 @@ public class DelivererService {
                 .collect(Collectors.toList());
     }
 
-    private DelivererOverviewDTO createDelivererOverviewDTO(Deliverer deliverer) {
-        Collection<Long> orderIds = deliverer.getOrders().stream()
-                .map(Entity::getId)
-                .collect(Collectors.toList());
+    public DelivererOverviewDTO createDelivererOverviewDTO(Deliverer deliverer) {
+        Collection<Long> orderIds = deliverer.getOrdersIds();
         DelivererActivityReport activityReport = new DelivererActivityReport(orderRepo.getMultiple(orderIds));
         return new DelivererOverviewDTO(deliverer, activityReport);
     }

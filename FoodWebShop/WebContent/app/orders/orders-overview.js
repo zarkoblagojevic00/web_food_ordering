@@ -74,7 +74,7 @@ export default Vue.component("orders-overview",{
         },
 
         getOrdersForDeliverer() {
-            if (this.isAvailableOrders) return () => orderService.getAvailableOrders();
+            if (this.isAvailableOrders) return () => delivererService.getAvailableOrders(this.id);
             return () => delivererService.getOrders(this.id);
         },
 

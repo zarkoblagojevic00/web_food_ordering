@@ -126,8 +126,9 @@ export default Vue.component("order",{
         },
 
         async sendRequest() {
+            await orderService.sendRequest(this.order.id, this.id)
             this.requestedDelivery = true;
-            throw new Error('Not implemented!')
+            
         }
     }
 })

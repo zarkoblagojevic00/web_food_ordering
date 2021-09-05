@@ -45,4 +45,18 @@ public class Deliverer extends User {
                 .map(Entity::getId)
                 .collect(Collectors.toList());
     }
+
+    public Collection<Long> getDeliveryRequestIds () {
+        return deliveryRequests.stream()
+                .map(Entity::getId)
+                .collect(Collectors.toList());
+    }
+
+    public void addRequest(DeliveryRequest saved) {
+        deliveryRequests.add(saved);
+    }
+
+    public void addOrder(Order order) {
+        orders.add(order);
+    }
 }

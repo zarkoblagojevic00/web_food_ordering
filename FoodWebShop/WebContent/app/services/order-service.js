@@ -3,13 +3,22 @@ import init from "./http-utils/axios-util.js";
 const serverEndpoint = init('orders');
 
 const orderService = {
-       getAvailableOrders() {return this.getOrdersWithStatus('WAITING_ON_DELIVERY')},
        getOrdersWithStatus: (status) => serverEndpoint.get({relPath: 'get', params: {status}}),
        getOrderOverview: (orderId) => serverEndpoint.get({relPath: `${orderId}/details`}),
        setOrderStatus: (orderId, status) => serverEndpoint.put({
-              relPath: `${orderId}/status`,
-              data: `"${status}"`
+            relPath: `${orderId}/status`,
+            data: `"${status}"`
        }),
+       sendRequest: (orderId, delivererId) => serverEndpoint.post({
+              relPath: 'delivery-request',
+              data: {
+                order: { id: orderId },
+				deliverer: { id: delivererId },    
+            }
+       }),
+	   acceptRequest: (requestId) => serverEndpoint.post({
+		   relPath: `delivery-request/${requestId}/accept`
+	   })
 }
 
 export { orderService as default };

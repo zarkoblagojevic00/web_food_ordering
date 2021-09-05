@@ -7,6 +7,8 @@ const delivererService = {
         ban: (username) => serverEndpoint.put({relPath: 'ban', data: username}),
         delete: (username) => serverEndpoint.delete({relPath: username}),
         getOrders: (id) => serverEndpoint.get({relPath: `${id}/orders`}),
+        getAvailableOrders: (id) => serverEndpoint.get({relPath: `${id}/orders/available`}),
+
 }
 
 export { delivererService as default };
