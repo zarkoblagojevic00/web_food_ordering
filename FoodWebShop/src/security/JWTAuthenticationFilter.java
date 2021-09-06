@@ -58,7 +58,7 @@ public class JWTAuthenticationFilter implements ContainerRequestFilter {
     }
 
     private String getTokenFromHeader(String authHeaderValue) {
-        return authHeaderValue.replaceFirst("Bearer ", "").trim();
+        return authHeaderValue.replaceFirst("Bearer", "").trim();
     }
 
     private User authenticateUser(String token) {

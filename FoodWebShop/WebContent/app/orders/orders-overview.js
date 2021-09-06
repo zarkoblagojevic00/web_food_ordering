@@ -9,7 +9,7 @@ import orderService from "../services/order-service.js";
 
 export default Vue.component("orders-overview",{
     mixins: [authMixin],
-    props: ['parentResourceId', 'type'],
+    props: ['restaurantId', 'type'],
     components: {
         finder,
         order,
@@ -71,7 +71,7 @@ export default Vue.component("orders-overview",{
         },
 
         getOrders() {
-            if (this.isManager) return () => restaurantService.getOrders(this.parentResourceId);
+            if (this.isManager) return () => restaurantService.getOrders(this.restaurantId);
             if (this.isDeliverer) return this.getOrdersForDeliverer;
             if (this.isCustomer) return () => customerService.getOrders(this.id);  
         },
@@ -117,7 +117,7 @@ const getFilterByType = function() {
             options: {
                 ITALIAN: 'Italian',
                 CHINESE: 'Chinese',
-                BBQ: 'Barbaque',
+                BBQ: 'Barbeque',
                 GREEK: 'Greek',
                 INDIAN: 'Indian'
             },

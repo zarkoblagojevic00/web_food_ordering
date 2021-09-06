@@ -10,7 +10,7 @@ import ManagersOverview from './roles/admin/users-overview/managers/vues/manager
 import DeliverersOverview from './roles/admin/users-overview/deliverers/vues/deliverers-overview.js'
 import AdminsOverview from './roles/admin/users-overview/admins/vues/admins-overview.js'
 import AddUser from './roles/admin/users-overview/add-user.js'
-import RestaurantsOverview from './roles/admin/restaurants/restaurants-overview.js'
+import AdminRestaurantsOverview from './roles/admin/restaurants/restaurants-overview.js'
 import AddRestaurant from './restaurant/info/add-restaurant.js'
 import ManagerRoot from './roles/manager/manager-root.js'
 import ManagerHome from './roles/manager/manager-home.js'
@@ -24,19 +24,27 @@ import OrdersOverview from './orders/orders-overview.js'
 import OrderDetails from './orders/order-details.js'
 import DelivererRoot from './roles/deliverer/deliverer-root.js'
 import DelivererHome from './roles/deliverer/deliverer-home.js'
+import RestaurantsOverview from './restaurant/overview/restaurants-overview.js'
 
 const restaurantRoutes = {
-    path: 'restaurants/:restaurantId', component: RestaurantRoot, props: true,
+    path: `restaurants/:restaurantId`, component: RestaurantRoot, props: true,
         children: [
-            {path: '/',         name: 'restaurant-root',        redirect: 'products',           props: true},
-            {path: 'products',  name: 'restaurant-products',    component: ProductsOverview,    props: true},
-            {path: 'info',      name: 'restaurant-info',        component: RestaurantInfo,      props: true},
-            {path: 'comments',  name: 'restaurant-comments',    component: CommentsOverview,    props: true},
+            {path: '/',                        redirect: 'products',           props: true},
+            {path: 'products',                 component: ProductsOverview,    props: true},
+            {path: 'info',                     component: RestaurantInfo,      props: true},
+            {path: 'comments',                 component: CommentsOverview,    props: true},
+            {path: 'add-product',              component: AddProduct,          props: true},
+            {path: 'edit-product/:productId',  component: EditProduct,         props: true},
         ],
-}
+};
 
 const routes = [
-    {path: '/',             name: 'home',       component: Home},
+    {path: '/', component: Home, 
+        children: [
+            {path: '/', name: 'home', component: RestaurantsOverview},
+            restaurantRoutes,
+        ]
+    },
     {path: '/login',        name: 'login',      component: Login},
     {path: '/signup',       name: 'signup',     component: SignUp},
     
@@ -53,7 +61,7 @@ const routes = [
                     { path: 'add/:role',        name: 'add-user',               component: AddUser, props: true},
                 ]
             },
-            { path: 'restaurants',  component: RestaurantsOverview,   
+            { path: 'restaurants',  component: AdminRestaurantsOverview,   
                 children : [
                     { path: '/',                name: 'restaurants-home',       redirect: 'add-restaurant'},
                     { path: 'add-restaurant',   name: 'add-restaurant',         component: AddRestaurant}   
@@ -68,11 +76,10 @@ const routes = [
             {path: '/',         name: 'manager-home',           component: ManagerHome,     props: true},
             {path: 'profile',   name: 'manager-profile',        component: EditProfile},
             restaurantRoutes,
-            {path: 'restaurant/:restaurantId/add-product',              name: 'add-product',                   component: AddProduct,           props: true},
-            {path: 'restaurant/:restaurantId/edit-product/:productId',  name: 'edit-product',                  component: EditProduct,          props: true},
-            {path: 'restaurant/:parentResourceId/orders',               name: 'restaurant-orders-overview',    component: OrdersOverview,       props: true},
-            {path: 'restaurant/:parentResourceId/orders/:orderId',      name: 'restaurant-order-details',      component: OrderDetails,         props: true},
-            {path: 'restaurant/:restaurantId/customers',                name: 'restaurant-customers',          component: CustomersOverview,    props: true}
+            
+            {path: 'restaurants/:restaurantId/orders',                   name: 'restaurant-orders-overview',    component: OrdersOverview,       props: true},
+            {path: 'restaurants/:restaurantId/orders/:orderId',          name: 'restaurant-order-details',      component: OrderDetails,         props: true},
+            {path: 'restaurants/:restaurantId/customers',                name: 'restaurant-customers',          component: CustomersOverview,    props: true}
         ] 
     },
     {path: '/deliverer/:id', component: DelivererRoot, props: true,

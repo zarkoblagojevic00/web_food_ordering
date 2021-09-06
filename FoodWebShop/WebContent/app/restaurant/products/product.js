@@ -49,10 +49,7 @@ export default Vue.component("product",{
            objects: {
                picture: null
            },
-           editProductRoute: {name: 'edit-product', params: {
-                restaurantId: this.restaurantId,
-                productId: this.product.id,
-           }},
+           editProductRoute: `edit-product/${this.product.id}`
         }
     },
 

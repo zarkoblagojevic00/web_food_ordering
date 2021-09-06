@@ -7,4 +7,6 @@ import java.util.Collection;
 
 public interface CommentRepository extends Repository<Comment> {
     public Collection<Comment> getCommentsForRestaurant(long restaurantId);
+
+    double getAverageMarkForRestaurant(long id);
 }

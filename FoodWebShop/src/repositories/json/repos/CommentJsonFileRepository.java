@@ -19,4 +19,12 @@ public class CommentJsonFileRepository extends JsonFileRepository<Comment> imple
                 .filter(comment -> comment.belongsTo(restaurantId))
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public double getAverageMarkForRestaurant(long id) {
+        return getCommentsForRestaurant(id).stream()
+                .mapToDouble(Comment::getMark)
+                .average()
+                .orElse(0);
+    }
 }

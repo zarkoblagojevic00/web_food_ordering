@@ -9,6 +9,7 @@ import services.RestaurantService;
 import services.util.FileUploadDTO;
 
 import javax.inject.Inject;
+import javax.print.attribute.standard.Media;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -24,6 +25,12 @@ public class RestaurantController {
     private CommentController commentController;
     @Inject
     private OrderController orderController;
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getAll() {
+        return Response.ok(restaurantService.getAll()).build();
+    }
 
     @GET
     @Path("types")

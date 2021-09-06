@@ -5,6 +5,8 @@ import formatDateMixin from "../../../../../mixins/format-date-mixin.js";
 import userActivityStatusMixin from "../../../../../mixins/user-activity-status-mixin.js";
 import createObjectUrlMixin from "../../../../../mixins/create-object-url-mixin.js";
 
+import restaurant from "../../../../../restaurant/overview/restaurant.js";
+
 export default Vue.component("manager",{
     mixins: [formatDateMixin, userActivityStatusMixin, createObjectUrlMixin],
     props: {
@@ -16,6 +18,11 @@ export default Vue.component("manager",{
         restaurant: Object,
         activityStatus: String,
     },
+
+    components: {
+        restaurant
+    },
+
     template: `
     <div v-if="!isDeleted" id="manager" style="border: 1px solid black;">
         <div>
@@ -43,52 +50,15 @@ export default Vue.component("manager",{
             <span>{{dateOfBirth | formatDate}}</span>
         </div>
         
-        <div v-if="restaurant" style="border: 1px solid indianred;">
-            <div>
-                <img :src="objectsSource['restaurantLogo']"></img>
-            </div>
-            
-            <div>
-                <label for="restaurantName">Manager at: </label>
-                <span>{{restaurant.name}}</span>
-            </div>
-            
-            <div>
-                <label for="restaurantType">Type: </label>
-                <span>{{restaurant.type}}</span>
-            </div>
-            
-            <div v-if="restaurant.location" style="border: 1px dotted burlywood;" >
-                <div>
-                    <label for="locationMunicipality">Municipality: </label>
-                    <span>{{restaurant.location.municipality}}</span>
-                </div>
-                <div>
-                    <label for="locationStreetName">Street name: </label>
-                    <span>{{restaurant.location.streetName}}</span>
-                </div>
-                <div>
-                    <label for="locationStreetNumber">Street number: </label>
-                    <span>{{restaurant.location.streetNumber}}</span>
-                </div>
-            </div>
-        </div>
+        <restaurant :restaurant="restaurant"></restaurant>
+        
         <button v-if="isOk" @click="banManager">Ban</button>
         <button @click="deleteManager">Delete</button>
     </div> 
     `,
     data() { 
         return {
-           isDeleted: false,
-           objects: {
-                restaurantLogo: null
-           }
-        }
-    },
-
-    async created() {
-        if (this.restaurant) {
-            this.objects.restaurantLogo = await imageService.getImage(this.restaurant.logoPath)
+            isDeleted: false,
         }
     },
 

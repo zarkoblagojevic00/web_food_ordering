@@ -11,6 +11,7 @@ public class RestaurantOverviewDTO {
     final private String logoPath;
     final private boolean opened;
     final private Location location;
+    private double averageMark;
 
     public RestaurantOverviewDTO(Restaurant restaurant) {
         this.id = restaurant.getId();
@@ -19,5 +20,15 @@ public class RestaurantOverviewDTO {
         this.logoPath = restaurant.getLogoPath();
         this.opened = restaurant.isOpened();
         this.location = restaurant.getLocation();
+    }
+
+    public RestaurantOverviewDTO(Restaurant restaurant, double averageMark) {
+        this.id = restaurant.getId();
+        this.name = restaurant.getName();
+        this.type = restaurant.getType();
+        this.logoPath = restaurant.getLogoPath();
+        this.opened = restaurant.isOpened();
+        this.location = restaurant.getLocation();
+        this.averageMark = averageMark;
     }
 }

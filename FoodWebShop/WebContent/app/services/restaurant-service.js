@@ -3,6 +3,7 @@ import init from "./http-utils/axios-util.js";
 const serverEndpoint = init('restaurants');
 
 const restaurantService = {
+    getAll: () => serverEndpoint.get(),
     get: (restaurantId) => serverEndpoint.get({relPath: `${restaurantId}`}),
     getTypes: () => serverEndpoint.get({relPath: 'types'}),
     add: (restaurantInfo, selectedManagerId) => {

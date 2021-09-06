@@ -1,9 +1,12 @@
 import createMap from "./map-creator.js"
 
+import formatDoubleMixin from "../../mixins/format-double-mixin.js";
+
 import baseForm from "../form/base-form.js";
 import baseField from "../form/base-field.js";
 
 export default Vue.component("ol-map",{
+    mixins: [formatDoubleMixin],
     props: {
         value: {
             required: true
@@ -98,7 +101,7 @@ export default Vue.component("ol-map",{
             const longitude = this.location.longitude;
             const latitude = this.location.latitude;
             if (longitude && latitude) {
-                return `${round(longitude)}, ${round(latitude)}`
+                return `${this.round(longitude, 5)}, ${this.round(latitude, 5)}`
             }
         },
     },
@@ -115,5 +118,3 @@ export default Vue.component("ol-map",{
         },
     }
 })
-
-const round = (value, dec=5) => value.toFixed(dec);

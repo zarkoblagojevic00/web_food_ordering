@@ -21,7 +21,7 @@
   "name" : "MyBBQ",
   "type" : "BBQ",
   "logoPath" : "restaurants/2/mybbq_logo.jpg",
-  "opened" : true,
+  "opened" : false,
   "location" : {
     "longitude" : 19.82944746369153,
     "latitude" : 45.25309504401335,
@@ -72,7 +72,7 @@
   "name" : "Dagostino's",
   "type" : "ITALIAN",
   "logoPath" : "restaurants/5/dagostino's_logo.jpg",
-  "opened" : true,
+  "opened" : false,
   "location" : {
     "longitude" : 19.838063986216152,
     "latitude" : 45.24661107670127,

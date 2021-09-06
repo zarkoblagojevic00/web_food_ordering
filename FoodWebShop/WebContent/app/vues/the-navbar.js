@@ -26,9 +26,9 @@ export default Vue.component("the-navbar",{
             </span>
             
             <span v-if="isManager && managerRestaurantId">
-                <li><router-link :to="getManagerRoute('restaurantId','restaurant-root')" exact>Restaurant</router-link></li>
-                <li><router-link :to="getManagerRoute('restaurantId', 'restaurant-customers')" exact>Customers</router-link></li>
-                <li><router-link :to="getManagerRoute('parentResourceId','restaurant-orders-overview')" exact>Orders</router-link></li>
+                <li><router-link :to="getManagerRestaurantRoute()" exact>Restaurant</router-link></li>
+                <li><router-link :to="getManagerRoute('restaurant-customers')" exact>Customers</router-link></li>
+                <li><router-link :to="getManagerRoute('restaurant-orders-overview')" exact>Orders</router-link></li>
             </span>
             
             <span v-if="!isGuest">
@@ -84,8 +84,13 @@ export default Vue.component("the-navbar",{
             return { name: routeName, params: { id: this.id }}
         },
 
-        getManagerRoute(resourceId, routeName) {
-            return { name: routeName, params: { id: this.id, [resourceId]: this.managerRestaurantId}}
+        getManagerRestaurantRoute() {
+            return `restaurants/${this.managerRestaurantId}`;
+            // return { path: , params: { id: this.id, restaurantId: this.managerRestaurantId}}
+        },
+
+        getManagerRoute(routeName) {
+            return { name: routeName, params: { id: this.id, restaurantId: this.managerRestaurantId}}
         },
 
         getDelivererRoute(routeName, type) {

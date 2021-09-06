@@ -10,13 +10,13 @@ export default Vue.component("manager-home",{
         </div>
         <span v-if="restaurantId">
             <div>
-                <router-link :to="restaurantPath('restaurantId', 'restaurant-root')">Restaurant</router-link>
+                <router-link :to="restaurantRoot">Restaurant</router-link>
             </div>
             <div>
-                <router-link :to="restaurantPath('restaurantId','restaurant-customers')">Customers</router-link>
+                <router-link :to="restaurantPath('restaurant-customers')">Customers</router-link>
             </div>
             <div>
-                <router-link :to="restaurantPath('parentResourceId', 'restaurant-orders-overview')">Orders</router-link>
+                <router-link :to="restaurantPath('restaurant-orders-overview')">Orders</router-link>
             </div>
         </span>
     </div> 
@@ -36,9 +36,15 @@ export default Vue.component("manager-home",{
         
     },
 
+    computed: {
+        restaurantRoot() {
+            return `restaurants/${this.restaurantId}`
+        }
+    },
+
     methods: {
-        restaurantPath(resourceId, path) {
-            return {name: path, params: { [resourceId]: this.restaurantId }};
+        restaurantPath(path) {
+            return {name: path, params: { restaurantId: this.restaurantId }};
         }
     }
 })
