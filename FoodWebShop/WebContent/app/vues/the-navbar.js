@@ -1,5 +1,6 @@
 import { getRole, getId, clearStorage, getRestaurantId } from "../local-storage-util.js"
 import authMixin from "../mixins/auth-mixin.js"
+import authService from "../services/auth-service.js"
 
 export default Vue.component("the-navbar",{
     mixins: [authMixin],
@@ -18,7 +19,10 @@ export default Vue.component("the-navbar",{
                 <li><router-link :to="getRoleRoute('users-home')" exact>Users</router-link></li>
                 <li><router-link :to="getRoleRoute('restaurants-home')" exact>Restaurants</router-link></li>
             </span>
-            <span v-if="isCustomer"></span>
+            
+            <span v-if="isCustomer">
+                <li><router-link :to="getRoleRoute('customer-cart')" exact>Shopping cart</router-link></li>
+            </span>
             
             <span v-if="isDeliverer">
                 <li><router-link :to="getDelivererRoute('deliverer-orders', 'available')" exact>Available orders</router-link></li>
@@ -98,6 +102,7 @@ export default Vue.component("the-navbar",{
         },
 
         logout () {
+            authService.logout();
             clearStorage();
             this.role = null;
             this.id = null;

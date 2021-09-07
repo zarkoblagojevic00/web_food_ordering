@@ -24,6 +24,11 @@ public class ShoppingItemJsonFileRepository extends JsonFileRepository<ShoppingI
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public ShoppingItem getItemWithProduct(long id) {
+        return createShoppingItemWithProduct(get(id));
+    }
+
     private ShoppingItem createShoppingItemWithProduct(ShoppingItem shoppingItem) {
         Product product = productRepo.get(shoppingItem.getProduct().getId());
         return new ShoppingItem(product, shoppingItem);

@@ -29,4 +29,20 @@ public class ShoppingItem extends Entity {
     public int getQuantity() {
         return quantity;
     }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    public double getPrice() {
+        return quantity * product.getPrice();
+    }
+
+    public boolean hasProduct(long productId) {
+        return product.getId() == productId;
+    }
+
+    public long getRestaurantId() {
+        return product.getRestaurant().getId();
+    }
 }

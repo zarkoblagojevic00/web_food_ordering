@@ -81,7 +81,6 @@ export default Vue.component("restaurant-overview",{
                     postalCode: null
                 },
             },
-            location: null
         }
     },
 

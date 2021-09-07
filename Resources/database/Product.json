@@ -38,4 +38,14 @@
   "portion" : 850.0,
   "description" : "",
   "picturePath" : "restaurants/1/81d27931-7f76-40c7-a643-90bc57cba1a9.jpg"
+}, {
+  "id" : 5,
+  "deleted" : false,
+  "name" : "Chicken Gyros",
+  "price" : 320.0,
+  "type" : "FOOD",
+  "restaurant" : 4,
+  "portion" : 350.0,
+  "description" : "Traditional Greek gyros with chicken meat, fried potatoes, and tzatziki",
+  "picturePath" : "restaurants/4/b950270d-ea6a-4c44-b893-62d09b89a01d.jpg"
 } ]

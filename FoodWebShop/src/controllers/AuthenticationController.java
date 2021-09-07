@@ -39,6 +39,13 @@ public class AuthenticationController {
         return Response.ok(authResponse).build();
     }
 
+    @POST
+    @Path("logout/{username}")
+    public Response logout(@PathParam("username") String username) {
+        authService.logout(username);
+        return Response.noContent().build();
+    }
+
 
 
 }

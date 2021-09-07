@@ -42,4 +42,12 @@ public class Product extends Entity {
     public void setPicturePath(String picturePath) {
         this.picturePath = picturePath;
     }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public Restaurant getRestaurant() {
+        return restaurant;
+    }
 }

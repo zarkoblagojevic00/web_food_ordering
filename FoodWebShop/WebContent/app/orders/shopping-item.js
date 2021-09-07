@@ -1,8 +1,10 @@
 import createObjectUrlMixin from "../mixins/create-object-url-mixin.js";
 import imageService from "../services/image-service.js";
+import cartService from "../services/cart-service.js";
+import authMixin from "../mixins/auth-mixin.js";
 
 export default Vue.component("shopping-item",{
-    mixins: [createObjectUrlMixin],
+    mixins: [createObjectUrlMixin, authMixin],
 
     props: {
         item: {
@@ -30,13 +32,19 @@ export default Vue.component("shopping-item",{
         <div>
             <label for="portion">Portion: </label>
             <span>{{item.product.portion}}</span>
+            <span>{{item.product.type == 'FOOD'? 'g' : 'ml'}}</span>
         </div>
 
         <div>
             <label for="quantity">Quantity: </label>
-            <span>{{item.quantity}}</span>
+            <span v-if="isReadonly">{{item.quantity}}</span>
+            <num-input-range v-else
+                v-model="quantity"
+                :min="1">
+            </num-input-range>
         </div>
 
+        <button v-if="isCustomer" @click="removeItem">Remove from cart</button>
         <div>
             <img :src="objectsSource['picture']"></img>
         </div>
@@ -46,12 +54,16 @@ export default Vue.component("shopping-item",{
         return {
             objects: {
                picture: null
-           },
+            },
+            quantity: this.item.quantity
         }
     },
 
-    computed: {
-        
+    watch: {
+        async quantity() {
+            await cartService.editCart(this.item, this.quantity);
+            dispatchCartChaged();
+        }
     },
 
     async created() {
@@ -59,6 +71,11 @@ export default Vue.component("shopping-item",{
     },
 
     methods: {
-        
+        async removeItem() {
+            await cartService.removeItemFromCart(this.item.id);
+            dispatchCartChaged();
+        }
     }
 })
+
+const dispatchCartChaged = () => dispatchEvent(new CustomEvent('on-cart-changed')); 

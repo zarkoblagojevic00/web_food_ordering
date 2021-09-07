@@ -1,0 +1,19 @@
+[ {
+  "id" : 1,
+  "deleted" : true,
+  "items" : [ 14, 15 ],
+  "customer" : 6,
+  "totalPrice" : 2840.0
+}, {
+  "id" : 2,
+  "deleted" : true,
+  "items" : [ 16, 17 ],
+  "customer" : 6,
+  "totalPrice" : 1950.0
+}, {
+  "id" : 3,
+  "deleted" : false,
+  "items" : [ ],
+  "customer" : 6,
+  "totalPrice" : 0.0
+} ]

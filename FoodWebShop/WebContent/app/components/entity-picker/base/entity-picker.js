@@ -1,8 +1,7 @@
 export default Vue.component("entity-picker",{
     props: {
         value: {
-            type: [String, Number, Object],
-            required: true, 
+            required: true,
         },
         options: {
             type: Array,
@@ -42,7 +41,7 @@ export default Vue.component("entity-picker",{
 
     data() { 
         return {
-            selectedOption: this.toValue(this.options[0]) || this.value 
+            selectedOption: this.value || this.toValue(this.options[0]) 
         }
     },
 

@@ -2,12 +2,18 @@ import imageService from "../../services/image-service.js"
 
 import createObjectUrlMixin from "../../mixins/create-object-url-mixin.js"
 import authMixin from "../../mixins/auth-mixin.js";
+import numInputRange from "../../components/num-input-range/num-input-range.js";
+import cartService from "../../services/cart-service.js";
 
 export default Vue.component("product",{
     mixins: [createObjectUrlMixin, authMixin],
     props :{
         product: Object,
         restaurantId: String,
+    },
+
+    components: {
+        'num-input-range': numInputRange
     },
 
     template: `
@@ -42,6 +48,15 @@ export default Vue.component("product",{
             <img :src="objectsSource['picture']"></img>
         </div>
 
+        <span v-if="isCustomer">
+            <label for="quantity">Quantity:</label>
+            <num-input-range
+                v-model="quantity"
+                :min="1">
+            </num-input-range>
+            <button @click="addToCart">Add to cart</button>
+        </span>
+
     </div> 
     `,
     data() { 
@@ -49,11 +64,18 @@ export default Vue.component("product",{
            objects: {
                picture: null
            },
-           editProductRoute: `edit-product/${this.product.id}`
+           editProductRoute: `edit-product/${this.product.id}`,
+           quantity: 1,
         }
     },
 
     async created() {
         this.objects.picture = await imageService.getImage(this.product.picturePath);
+    },
+
+    methods: {
+        async addToCart() {
+            await cartService.addToCart(this.product.id, this.quantity);
+        }
     }
 })

@@ -4,7 +4,7 @@ import beans.TestUser;
 import beans.users.base.*;
 import beans.users.roles.admin.Admin;
 import beans.users.roles.customer.CustomerType;
-import beans.users.roles.customer.CustomerTypeFinder;
+import beans.users.roles.customer.CustomerTypeManager;
 import beans.users.roles.customer.CustomerTypeName;
 import repositories.interfaces.AdminRepository;
 import repositories.json.repos.AdminJsonFileRepository;
@@ -112,13 +112,5 @@ public class TestController {
 
 		return createdAdmin;
 
-	}
-
-	@Path("/typefinder/{points}")
-	@GET
-	@Consumes(MediaType.APPLICATION_JSON)
-	@Produces(MediaType.APPLICATION_JSON)
-	public CustomerType getType(@PathParam("points") double points) {
-		return new CustomerTypeFinder().getCustomerType(CustomerTypeName.GOLD);
 	}
 }

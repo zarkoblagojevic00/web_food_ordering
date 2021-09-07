@@ -23,16 +23,16 @@ public class Customer extends User {
         type = CustomerTypeName.BRONZE;
     }
 
+    public Customer(long customerId) {
+        super(Role.CUSTOMER, customerId);
+    }
+
     public ShoppingCart getCart() {
         return cart;
     }
 
     public int getPointsEarned() {
         return pointsEarned;
-    }
-
-    public void setPointsEarned(int pointsEarned) {
-        this.pointsEarned = pointsEarned;
     }
 
     public CustomerTypeName getCustomerTypeName() {
@@ -45,5 +45,9 @@ public class Customer extends User {
 
     public boolean isCustomerType(CustomerTypeName type) {
         return this.type.equals(type);
+    }
+
+    public void addPointsEarned(int newPointsEarned) {
+        pointsEarned += newPointsEarned;
     }
 }

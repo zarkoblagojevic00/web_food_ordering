@@ -58,4 +58,34 @@
   "customer" : 5,
   "totalPrice" : 4500.0,
   "status" : "CANCELED"
+}, {
+  "id" : 7,
+  "deleted" : false,
+  "code" : "fLkLL4hl6k",
+  "items" : [ 14 ],
+  "restaurant" : 1,
+  "creationDate" : 1631044663560,
+  "customer" : 6,
+  "totalPrice" : 2200.0,
+  "status" : "PROCESSING"
+}, {
+  "id" : 8,
+  "deleted" : false,
+  "code" : "E4SM8if0R2",
+  "items" : [ 15 ],
+  "restaurant" : 4,
+  "creationDate" : 1631044663560,
+  "customer" : 6,
+  "totalPrice" : 640.0,
+  "status" : "PROCESSING"
+}, {
+  "id" : 9,
+  "deleted" : false,
+  "code" : "S85MzfNZnf",
+  "items" : [ 16, 17 ],
+  "restaurant" : 1,
+  "creationDate" : 1631045005841,
+  "customer" : 6,
+  "totalPrice" : 1950.0,
+  "status" : "PROCESSING"
 } ]

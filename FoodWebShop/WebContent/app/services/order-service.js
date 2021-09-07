@@ -18,7 +18,8 @@ const orderService = {
        }),
 	   acceptRequest: (requestId) => serverEndpoint.post({
 		   relPath: `delivery-request/${requestId}/accept`
-	   })
+	   }),
+        getOrdersForCustomer: (customerId) => serverEndpoint.get({relPath: `customer-orders/${customerId}`})
 }
 
 export { orderService as default };

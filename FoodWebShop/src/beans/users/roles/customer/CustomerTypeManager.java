@@ -3,10 +3,10 @@ package beans.users.roles.customer;
 import java.util.HashMap;
 import java.util.Map;
 
-public class CustomerTypeFinder {
+public class CustomerTypeManager {
     Map<CustomerTypeName, CustomerType> customerTypes;
 
-    public CustomerTypeFinder() {
+    public CustomerTypeManager() {
         initializeCustomerTypes();
     }
 
@@ -18,7 +18,7 @@ public class CustomerTypeFinder {
         }};
     }
 
-    public CustomerType getCustomerType(CustomerTypeName typeName) {
+    private CustomerType getCustomerType(CustomerTypeName typeName) {
         return customerTypes.get(typeName);
     }
 
@@ -29,11 +29,15 @@ public class CustomerTypeFinder {
                 .orElseThrow(() -> new IllegalArgumentException("No customer type with " + points + " points"));
     }
 
-    public Customer evaluateCustomerType(Customer customer) {
+    public Customer setCustomerTypeByPoints(Customer customer) {
         CustomerTypeName typeByPoints = findCustomerType(customer.getPointsEarned()).getName();
         if (customer.isCustomerType(typeByPoints))
             return customer;
         customer.setCustomerTypeName(typeByPoints);
         return customer;
+    }
+
+    public double calculateDiscount(CustomerTypeName typeName, double originalPrice) {
+        return getCustomerType(typeName).calculateDiscountedPrice(originalPrice);
     }
 }

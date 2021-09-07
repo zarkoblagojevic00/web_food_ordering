@@ -29,6 +29,11 @@ public class User extends Entity implements Identifiable, Authorizable, Principa
         this.activityStatus = UserActivityStatus.OK;
     }
 
+    public User(Role role, long id) {
+        super(id);
+        this.role = role;
+    }
+
     public PersonalData getPersonalData() {
         return personalData;
     }

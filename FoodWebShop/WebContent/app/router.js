@@ -25,6 +25,8 @@ import OrderDetails from './orders/order-details.js'
 import DelivererRoot from './roles/deliverer/deliverer-root.js'
 import DelivererHome from './roles/deliverer/deliverer-home.js'
 import RestaurantsOverview from './restaurant/overview/restaurants-overview.js'
+import CustomerRoot from './roles/customer/customer-root.js'
+import ShoppingCart from './orders/shopping-cart.js'
 
 const restaurantRoutes = {
     path: `restaurants/:restaurantId`, component: RestaurantRoot, props: true,
@@ -67,7 +69,7 @@ const routes = [
                     { path: 'add-restaurant',   name: 'add-restaurant',         component: AddRestaurant}   
                 ]
             }, 
-            { path: 'profile',          name: 'admin-profile',          component: EditProfile} 
+            { path: 'profile', name: 'admin-profile', component: EditProfile} 
         ]
     },
 
@@ -88,6 +90,17 @@ const routes = [
             {path: 'profile',                   name: 'deliverer-profile',   component: EditProfile},
             {path: 'orders/:type',              name: 'deliverer-orders',    component: OrdersOverview,    props: true},
             {path: 'orders/:type/:orderId',     name: 'order-details',       component: OrderDetails,      props: true},   
+        ]
+    },
+
+    {path: '/customer/:id', component: CustomerRoot, props: true,
+        children: [
+            {path: '/',                         name: 'customer-home',              component: RestaurantsOverview,     props: true},
+            {path: 'profile',                   name: 'customer-profile',           component: EditProfile},
+            restaurantRoutes,
+            {path: 'cart',                      name: 'customer-cart',              component: ShoppingCart,      props: true},  
+            {path: 'orders/mine',               name: 'customer-orders',            component: OrdersOverview,    props: true},
+            {path: 'orders/mine/:orderId',      name: 'customer-order-details',     component: OrderDetails,      props: true},   
         ]
     },
 

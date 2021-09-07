@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import beans.ecommerce.ShoppingCart;
 import beans.ecommerce.ShoppingItem;
 import beans.restaurants.Product;
 import beans.restaurants.requests.Comment;
@@ -24,6 +25,7 @@ import repositories.TestRepository;
 import repositories.interfaces.*;
 import repositories.interfaces.base.DeliveryRequestRepository;
 import repositories.json.repos.*;
+import repositories.json.repos.base.JsonFileRepository;
 import services.*;
 import services.auth.AuthenticationService;
 
@@ -45,6 +47,7 @@ public class ApplicationConfig extends ResourceConfig {
             put(OrderRepository.class, OrderJsonFileRepository.class);
             put(ShoppingItemRepository.class, ShoppingItemJsonFileRepository.class);
             put(DeliveryRequestRepository.class, DeliveryRequestJsonFileRepository.class);
+            put(ShoppingCartRepository.class, ShoppingCartJsonFileRepository.class);
         }};
 
         concretes = Arrays.asList(
@@ -62,7 +65,8 @@ public class ApplicationConfig extends ResourceConfig {
                 CommentService.class,
                 CommentController.class,
                 OrderService.class,
-                OrderController.class
+                OrderController.class,
+                ShoppingCartService.class
         );
 
         registerDependencyInjection();

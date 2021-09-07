@@ -26,7 +26,7 @@ export default Vue.component("num-input-range",{
 
     data() {
         return {
-            realNumber: null
+            realNumber: this.value
         }
     },
     

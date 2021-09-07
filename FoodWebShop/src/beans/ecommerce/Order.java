@@ -20,6 +20,16 @@ public class Order extends Entity {
 
     }
 
+    public Order(long restaurantId, Long customerId, List<ShoppingItem> shoppingItems, double discountedPrice) {
+        code = generateRandomAlphanumericString(10);
+        items = shoppingItems;
+        restaurant = new Restaurant(restaurantId);
+        creationDate = new Date();
+        customer = new Customer(customerId);
+        totalPrice = discountedPrice;
+        status = OrderStatus.PROCESSING;
+    }
+
     public Order(long restaurantId, Order newOrder, Collection<ShoppingItem> savedItems) {
         code = generateRandomAlphanumericString(10);
         items = savedItems;

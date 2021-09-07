@@ -6,5 +6,7 @@ import repositories.interfaces.base.Repository;
 import java.util.Collection;
 
 public interface ShoppingItemRepository extends Repository<ShoppingItem> {
-    public Collection<ShoppingItem> getMultipleWithProducts(Collection<Long> ids);
+    Collection<ShoppingItem> getMultipleWithProducts(Collection<Long> ids);
+
+    ShoppingItem getItemWithProduct(long id);
 }

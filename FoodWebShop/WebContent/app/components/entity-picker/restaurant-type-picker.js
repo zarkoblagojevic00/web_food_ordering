@@ -31,7 +31,7 @@ export default Vue.component("restaurant-type-picker",{
     `,
     data() { 
         return {
-           selectedType: '',
+           selectedType: this.value,
            restaurantTypes: null
         }
     },

@@ -73,7 +73,7 @@ export default Vue.component("orders-overview",{
         getOrders() {
             if (this.isManager) return () => restaurantService.getOrders(this.restaurantId);
             if (this.isDeliverer) return this.getOrdersForDeliverer;
-            if (this.isCustomer) return () => customerService.getOrders(this.id);  
+            if (this.isCustomer) return () => orderService.getOrdersForCustomer(this.id);  
         },
 
         getOrdersForDeliverer() {
