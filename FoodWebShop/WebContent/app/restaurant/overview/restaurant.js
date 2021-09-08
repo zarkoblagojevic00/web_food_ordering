@@ -1,9 +1,10 @@
 import imageService from "../../services/image-service.js";
 import createObjectUrlMixin from "../../mixins/create-object-url-mixin.js";
 import formatDoubleMixin from "../../mixins/format-double-mixin.js";
+import authMixin from "../../mixins/auth-mixin.js";
 
 export default Vue.component("restaurant",{
-    mixins: [createObjectUrlMixin, formatDoubleMixin],
+    mixins: [createObjectUrlMixin, formatDoubleMixin, authMixin],
     props: {
         restaurant: {
             type: Object,
@@ -13,7 +14,7 @@ export default Vue.component("restaurant",{
 
     template: `
     <div id="restaurant">
-        <router-link :to="restaurantRoute" exact>
+        <router-link :to="restaurantRoute" tag="div" style="cursor: pointer;" exact>
             <div v-if="restaurant" style="border: 1px solid indianred;">
                 <div>
                     <img :src="objectsSource['restaurantLogo']"></img>
@@ -61,7 +62,7 @@ export default Vue.component("restaurant",{
             return `${location.municipality} - ${location.streetName}, ${location.streetNumber}`
         },
         restaurantRoute() {
-            return {path: `restaurants/${this.restaurant.id}`};
+            return (this.isAdmin) ? '' : {path: `restaurants/${this.restaurant.id}`};
         }
     },
 
@@ -70,8 +71,4 @@ export default Vue.component("restaurant",{
             this.objects.restaurantLogo = await imageService.getImage(this.restaurant.logoPath)
         }
     },
-
-    methods: {
-        
-    }
 })

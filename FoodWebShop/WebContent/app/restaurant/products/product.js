@@ -48,7 +48,7 @@ export default Vue.component("product",{
             <img :src="objectsSource['picture']"></img>
         </div>
 
-        <span v-if="isCustomer">
+        <span v-if="canAddToCart">
             <label for="quantity">Quantity:</label>
             <num-input-range
                 v-model="quantity"
@@ -66,6 +66,12 @@ export default Vue.component("product",{
            },
            editProductRoute: `edit-product/${this.product.id}`,
            quantity: 1,
+        }
+    },
+
+    computed: {
+        canAddToCart() {
+            return this.isCustomer && this.product.restaurant.opened
         }
     },
 

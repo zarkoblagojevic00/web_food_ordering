@@ -63,4 +63,8 @@ public class Comment extends Entity implements ManagerApprovable {
     public RequestStatus getStatus() {
         return status;
     }
+
+    public boolean isStatus(RequestStatus status) {
+        return this.status == status;
+    }
 }

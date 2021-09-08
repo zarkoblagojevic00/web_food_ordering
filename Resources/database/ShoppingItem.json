@@ -83,4 +83,14 @@
   "deleted" : false,
   "product" : 2,
   "quantity" : 1
+}, {
+  "id" : 18,
+  "deleted" : false,
+  "product" : 1,
+  "quantity" : 2
+}, {
+  "id" : 19,
+  "deleted" : false,
+  "product" : 3,
+  "quantity" : 2
 } ]

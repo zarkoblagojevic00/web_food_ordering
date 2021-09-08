@@ -50,4 +50,8 @@ public class Product extends Entity {
     public Restaurant getRestaurant() {
         return restaurant;
     }
+
+    public void setRestaurant(Restaurant restaurant) {
+        this.restaurant = restaurant;
+    }
 }

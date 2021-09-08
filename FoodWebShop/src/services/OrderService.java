@@ -6,7 +6,7 @@ import beans.ecommerce.OrderStatus;
 import beans.ecommerce.ShoppingItem;
 import beans.restaurants.Restaurant;
 import beans.restaurants.requests.DeliveryRequest;
-import beans.users.roles.customer.Customer;
+import beans.users.roles.customer.*;
 import beans.users.roles.deliverer.Deliverer;
 import dtos.CustomerOverviewDTO;
 import dtos.DeliveryRequestDTO;
@@ -27,6 +27,9 @@ public class OrderService {
     final private DelivererRepository delivererRepo;
     final private DeliveryRequestRepository deliveryRequestRepo;
     final private DelivererService delivererService;
+    final private ActivityService activityService;
+    final private CustomerPointsCalculator pointsCalculator;
+    final private CustomerTypeManager typeManager;
 
     @Inject
     public OrderService(OrderRepository orderRepo,
@@ -35,7 +38,7 @@ public class OrderService {
                         ShoppingItemRepository shoppingItemRepo,
                         DelivererRepository delivererRepo,
                         DeliveryRequestRepository deliveryRequestRepo,
-                        DelivererService delivererService) {
+                        DelivererService delivererService, ActivityService activityService) {
         this.orderRepo = orderRepo;
         this.customerRepo = customerRepo;
         this.restaurantRepo = restaurantRepo;
@@ -43,6 +46,9 @@ public class OrderService {
         this.delivererRepo = delivererRepo;
         this.deliveryRequestRepo = deliveryRequestRepo;
         this.delivererService = delivererService;
+        this.activityService = activityService;
+        this.pointsCalculator = new CustomerPointsCalculator();
+        this.typeManager = new CustomerTypeManager();
     }
 
     public Collection<OrderOverviewDTO> getOrdersForRestaurant(long restaurantId) {
@@ -72,8 +78,23 @@ public class OrderService {
 
     public Order changeOrderStatus(long orderId, OrderStatus status) {
         Order existing = orderRepo.get(orderId);
+        if (existing.isStatus(OrderStatus.PROCESSING) && status == OrderStatus.CANCELED) {
+            removePointsEarned(existing);
+        }
         existing.setStatus(status);
         return orderRepo.update(existing);
+    }
+
+    private void removePointsEarned(Order existing) {
+        Customer cancelingCustomer = customerRepo.get(existing.getCustomer().getId());
+        cancelingCustomer.addPointsEarned(-pointsCalculator.getPointsLost(existing.getTotalPrice()));
+        typeManager.setCustomerTypeByPoints(cancelingCustomer);
+
+        UserActivityStatus newActivityStatus = activityService.saveCustomerActivity(
+                new Activity(ActivityType.CANCEL_ORDER, cancelingCustomer));
+
+        cancelingCustomer.setActivityStatus(newActivityStatus);
+        customerRepo.update(cancelingCustomer);
     }
 
     public Collection<CustomerOverviewDTO> getRestaurantCustomersOverview(long restaurantId) {

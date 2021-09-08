@@ -44,7 +44,7 @@ export default Vue.component("shopping-item",{
             </num-input-range>
         </div>
 
-        <button v-if="isCustomer" @click="removeItem">Remove from cart</button>
+        <button v-if="isCustomer && !isReadonly" @click="removeItem">Remove from cart</button>
         <div>
             <img :src="objectsSource['picture']"></img>
         </div>

@@ -25,15 +25,11 @@ export default Vue.component("products-overview",{
     `,
     data() { 
         return {
-           products: []
+           products: [],
         }
     },
 
     async created() {
-        this.products = await restaurantService.getProducts(this.restaurantId)
+        this.products = await restaurantService.getProducts(this.restaurantId);
     },
-
-    methods: {
-        
-    }
 })

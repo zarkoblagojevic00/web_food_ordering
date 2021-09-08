@@ -21,8 +21,8 @@ public class ProductJsonFileRepository extends JsonFileRepository<Product> imple
     }
 
     @Override
-    public void checkUniqueName(String name) throws FieldNotUniqueException {
-        boolean anyNameMatches = getAll().stream()
+    public void checkUniqueName(long restaurantId, String name) throws FieldNotUniqueException {
+        boolean anyNameMatches = getProductsForRestaurant(restaurantId).stream()
                 .anyMatch(product -> product.getName().equals(name));
         if (anyNameMatches)
             throw new FieldNotUniqueException("Product name must be unique!");

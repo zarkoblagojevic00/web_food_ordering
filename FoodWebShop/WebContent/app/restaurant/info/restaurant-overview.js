@@ -55,6 +55,11 @@ export default Vue.component("restaurant-overview",{
             </ol-map>
         </base-field>
 
+        <div>
+            <label for="status">Status: </label>
+            <span>{{restaurant.opened ? 'Opened' : 'Closed'}}</span>
+        </div>
+
         <base-field
             fieldName="Logo"
             required

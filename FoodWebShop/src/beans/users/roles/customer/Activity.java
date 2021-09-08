@@ -13,10 +13,10 @@ public class Activity extends Entity {
 
     }
 
-    public Activity(ActivityType type, Date dateOccurred, Customer user) {
+    public Activity(ActivityType type, Customer user) {
         this.type = type;
-        this.dateOccurred = dateOccurred;
         this.user = user;
+        this.dateOccurred = new Date();
     }
 
     public ActivityType getType() {

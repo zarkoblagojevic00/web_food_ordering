@@ -27,16 +27,17 @@ import DelivererHome from './roles/deliverer/deliverer-home.js'
 import RestaurantsOverview from './restaurant/overview/restaurants-overview.js'
 import CustomerRoot from './roles/customer/customer-root.js'
 import ShoppingCart from './orders/shopping-cart.js'
+import AddComment from './restaurant/comments/add-comment.js'
+import managerHome from './roles/manager/manager-home.js'
 
-const restaurantRoutes = {
+const restaurantOverviewRoutes = {
     path: `restaurants/:restaurantId`, component: RestaurantRoot, props: true,
         children: [
             {path: '/',                        redirect: 'products',           props: true},
             {path: 'products',                 component: ProductsOverview,    props: true},
             {path: 'info',                     component: RestaurantInfo,      props: true},
             {path: 'comments',                 component: CommentsOverview,    props: true},
-            {path: 'add-product',              component: AddProduct,          props: true},
-            {path: 'edit-product/:productId',  component: EditProduct,         props: true},
+            
         ],
 };
 
@@ -44,7 +45,7 @@ const routes = [
     {path: '/', component: Home, 
         children: [
             {path: '/', name: 'home', component: RestaurantsOverview},
-            restaurantRoutes,
+            restaurantOverviewRoutes,
         ]
     },
     {path: '/login',        name: 'login',      component: Login},
@@ -75,10 +76,12 @@ const routes = [
 
     {path: '/manager/:id', component: ManagerRoot, props: true, 
         children: [
-            {path: '/',         name: 'manager-home',           component: ManagerHome,     props: true},
-            {path: 'profile',   name: 'manager-profile',        component: EditProfile},
-            restaurantRoutes,
-            
+            {path: '/',             name: 'manager-home',           component: ManagerHome,                props: true},
+            {path: 'profile',       name: 'manager-profile',        component: EditProfile},
+            {path: 'restaurant',    name: 'restaurant-root',        redirect: 'restaurants/:restaurantId', props: true},
+            restaurantOverviewRoutes,
+            {path: 'restaurants/:restaurantId/add-product',              component: AddProduct,          props: true},
+            {path: 'restaurants/:restaurantId/edit-product/:productId',  component: EditProduct,         props: true},
             {path: 'restaurants/:restaurantId/orders',                   name: 'restaurant-orders-overview',    component: OrdersOverview,       props: true},
             {path: 'restaurants/:restaurantId/orders/:orderId',          name: 'restaurant-order-details',      component: OrderDetails,         props: true},
             {path: 'restaurants/:restaurantId/customers',                name: 'restaurant-customers',          component: CustomersOverview,    props: true}
@@ -97,10 +100,11 @@ const routes = [
         children: [
             {path: '/',                         name: 'customer-home',              component: RestaurantsOverview,     props: true},
             {path: 'profile',                   name: 'customer-profile',           component: EditProfile},
-            restaurantRoutes,
+            restaurantOverviewRoutes,
             {path: 'cart',                      name: 'customer-cart',              component: ShoppingCart,      props: true},  
             {path: 'orders/mine',               name: 'customer-orders',            component: OrdersOverview,    props: true},
-            {path: 'orders/mine/:orderId',      name: 'customer-order-details',     component: OrderDetails,      props: true},   
+            {path: 'orders/mine/:orderId',      name: 'customer-order-details',     component: OrderDetails,      props: true},
+            {path: 'comments/:restaurantId',    name: 'add-comment',                component: AddComment,        props: true},   
         ]
     },
 

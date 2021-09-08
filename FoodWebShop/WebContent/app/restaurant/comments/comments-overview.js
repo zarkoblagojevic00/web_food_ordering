@@ -9,9 +9,10 @@ export default Vue.component("comments-overview",{
     components: {
         comment
     },
-    mixinis: [authMixin],
+    mixins: [authMixin],
     template: `
     <div id="comments-overview">
+        <h3 v-if="averageMark">Average mark: {{averageMark}}</h3>
         <comment v-for="comment in comments"
             :key="comment.id"
             :comment="comment"
@@ -26,11 +27,22 @@ export default Vue.component("comments-overview",{
     },
 
     computed: {
-        
+        getComments() {
+            return (this.isCustomer || this.isGuest) ? 
+            () => restaurantService.getCommentsWithStatus(this.restaurantId, "APPROVED") :
+            () => restaurantService.getComments(this.restaurantId)  
+        },
+
+        averageMark() {    
+            const approved = this.comments
+                .filter(comment => comment.status === "APPROVED")
+            const sum = approved.reduce((prev, curr) => prev + curr.mark, 0);
+            return (sum / approved.length) || 0;
+        }
     },
 
     async created() {
-        this.comments = await restaurantService.getComments(this.restaurantId);
+        this.comments = await this.getComments();
     },
 
     methods: {

@@ -12,7 +12,67 @@
   "totalPrice" : 1950.0
 }, {
   "id" : 3,
-  "deleted" : false,
+  "deleted" : true,
+  "items" : [ ],
+  "customer" : 6,
+  "totalPrice" : 0.0
+}, {
+  "id" : 4,
+  "deleted" : true,
+  "items" : [ ],
+  "customer" : 6,
+  "totalPrice" : 0.0
+}, {
+  "id" : 5,
+  "deleted" : true,
+  "items" : [ ],
+  "customer" : 6,
+  "totalPrice" : 0.0
+}, {
+  "id" : 6,
+  "deleted" : true,
+  "items" : [ 18, 19 ],
+  "customer" : 6,
+  "totalPrice" : 4060.0
+}, {
+  "id" : 7,
+  "deleted" : true,
+  "items" : [ ],
+  "customer" : 6,
+  "totalPrice" : 0.0
+}, {
+  "id" : 8,
+  "deleted" : true,
+  "items" : [ ],
+  "customer" : 6,
+  "totalPrice" : 0.0
+}, {
+  "id" : 9,
+  "deleted" : true,
+  "items" : [ ],
+  "customer" : 6,
+  "totalPrice" : 0.0
+}, {
+  "id" : 10,
+  "deleted" : true,
+  "items" : [ ],
+  "customer" : 6,
+  "totalPrice" : 0.0
+}, {
+  "id" : 11,
+  "deleted" : true,
+  "items" : [ ],
+  "customer" : 6,
+  "totalPrice" : 0.0
+}, {
+  "id" : 12,
+  "deleted" : true,
+  "items" : [ ],
+  "customer" : 6,
+  "totalPrice" : 0.0
+}, {
+  "id" : 13,
+  "deleted" : true,
   "items" : [ ],
   "customer" : 6,
   "totalPrice" : 0.0

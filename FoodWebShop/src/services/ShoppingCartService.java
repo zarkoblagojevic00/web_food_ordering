@@ -78,15 +78,16 @@ public class ShoppingCartService {
 
     public void createOrderForCart(long customerId) {
         ShoppingCart usersCart = getFullShoppingCartForCustomer(customerId);
-        updateCustomerPoints(customerId, usersCart.getPrice());
+        addCustomerPoints(customerId, usersCart.getPrice());
         orderRepo.saveAll(createOrders(usersCart, customerId));
         shoppingCartRepo.delete(usersCart.getId());
         shoppingCartRepo.save(new ShoppingCart(customerId));
     }
 
-    private void updateCustomerPoints(long customerId, double cartPrice) {
+    private void addCustomerPoints(long customerId, double cartPrice) {
         Customer customer = customerRepo.get(customerId);
         customer.addPointsEarned(pointsCalculator.getPointsEarned(cartPrice));
+        typeManager.setCustomerTypeByPoints(customer);
         customerRepo.update(customer);
     }
 

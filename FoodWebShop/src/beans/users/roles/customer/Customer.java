@@ -49,5 +49,8 @@ public class Customer extends User {
 
     public void addPointsEarned(int newPointsEarned) {
         pointsEarned += newPointsEarned;
+        if (pointsEarned < 0) {
+            pointsEarned = 0;
+        }
     }
 }

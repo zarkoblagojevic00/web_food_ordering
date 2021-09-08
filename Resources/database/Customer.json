@@ -103,7 +103,7 @@
   },
   "role" : "CUSTOMER",
   "activityStatus" : "OK",
-  "pointsEarned" : 637,
+  "pointsEarned" : 0,
   "type" : "BRONZE",
   "cart" : null
 }, {

@@ -85,6 +85,7 @@ export default Vue.component("order",{
 
         <span v-if="isCustomer">
             <button v-if="isProcessing" @click="setStatus('CANCELED')">Cancel order</button>
+            <router-link v-if="isDelivered" :to="addCommentRoute"">Leave a comment</router-link>
         </span>
 
     </div> 
@@ -97,7 +98,6 @@ export default Vue.component("order",{
 
     computed: {
         detailsRoute() {
-            
             return (this.isManager) ? {
                 name: 'restaurant-order-details', 
                 params: {
@@ -105,10 +105,17 @@ export default Vue.component("order",{
                     orderId: this.order.id
                 },
             } : {
-                name: 'order-details',
+                name: (this.isDeliverer) ? 'order-details' : 'customer-order-details',
                 params: {
                     orderId: this.order.id
                 },
+            } 
+        },
+
+        addCommentRoute() {
+            return {
+                name: "add-comment",
+                params: { restaurantId: this.order.restaurant.id}
             }
         },
 

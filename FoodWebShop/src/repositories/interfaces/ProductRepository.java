@@ -9,5 +9,5 @@ import java.util.Collection;
 public interface ProductRepository extends Repository<Product> {
     public Collection<Product> getProductsForRestaurant(long restaurantId);
 
-    void checkUniqueName(String name) throws FieldNotUniqueException;
+    void checkUniqueName(long restaurantId, String name) throws FieldNotUniqueException;
 }

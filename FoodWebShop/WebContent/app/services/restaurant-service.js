@@ -46,6 +46,11 @@ const restaurantService = {
     },
 
     getComments: (restaurantId) => serverEndpoint.get({relPath: getCommentsPath(restaurantId)}),
+    getCommentsWithStatus: (restaurantId, status) => serverEndpoint.get({
+        relPath: `${getCommentsPath(restaurantId)}/get`, 
+        params: {status}
+    }),
+    postComment: (restaurantId, comment) => serverEndpoint.post({relPath: getCommentsPath(restaurantId), data: comment}),
     sendCommentApproval: (answer, restaurantId, commentId) => serverEndpoint.put({
         relPath: `${getCommentPath(restaurantId, commentId)}/approval`, 
         data: `"${answer}"`}),

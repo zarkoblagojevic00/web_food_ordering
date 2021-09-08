@@ -29,12 +29,10 @@ public class CustomerTypeManager {
                 .orElseThrow(() -> new IllegalArgumentException("No customer type with " + points + " points"));
     }
 
-    public Customer setCustomerTypeByPoints(Customer customer) {
+    public void setCustomerTypeByPoints(Customer customer) {
         CustomerTypeName typeByPoints = findCustomerType(customer.getPointsEarned()).getName();
-        if (customer.isCustomerType(typeByPoints))
-            return customer;
-        customer.setCustomerTypeName(typeByPoints);
-        return customer;
+        if (!customer.isCustomerType(typeByPoints))
+            customer.setCustomerTypeName(typeByPoints);
     }
 
     public double calculateDiscount(CustomerTypeName typeName, double originalPrice) {

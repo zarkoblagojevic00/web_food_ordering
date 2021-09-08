@@ -22,4 +22,12 @@
   "content" : "Food was really good, waiters were not. They mistook my order, two times. Two, frickin, times! By the time I got arround to eating I couldn't fully enjoy my meal.",
   "mark" : 2,
   "status" : "REJECTED"
+}, {
+  "id" : 4,
+  "deleted" : false,
+  "author" : 6,
+  "restaurant" : 1,
+  "content" : "Brilliant food, kind waiters. Good job Pepe's",
+  "mark" : 5,
+  "status" : "PENDING"
 } ]

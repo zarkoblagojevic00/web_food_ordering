@@ -1,5 +1,6 @@
 package repositories.json.repos;
 
+import beans.restaurants.RequestStatus;
 import beans.restaurants.requests.Comment;
 import repositories.interfaces.CommentRepository;
 import repositories.json.repos.base.JsonFileRepository;
@@ -23,6 +24,7 @@ public class CommentJsonFileRepository extends JsonFileRepository<Comment> imple
     @Override
     public double getAverageMarkForRestaurant(long id) {
         return getCommentsForRestaurant(id).stream()
+                .filter(comment -> comment.isStatus(RequestStatus.APPROVED))
                 .mapToDouble(Comment::getMark)
                 .average()
                 .orElse(0);

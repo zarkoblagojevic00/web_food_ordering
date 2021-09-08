@@ -88,4 +88,14 @@
   "customer" : 6,
   "totalPrice" : 1950.0,
   "status" : "PROCESSING"
+}, {
+  "id" : 10,
+  "deleted" : false,
+  "code" : "6XQ4wRjMm9",
+  "items" : [ 18, 19 ],
+  "restaurant" : 1,
+  "creationDate" : 1631086656501,
+  "customer" : 6,
+  "totalPrice" : 3857.0,
+  "status" : "CANCELED"
 } ]

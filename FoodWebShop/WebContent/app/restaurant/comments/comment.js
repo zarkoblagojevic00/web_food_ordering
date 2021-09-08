@@ -1,8 +1,11 @@
 import restaurantService from "../../services/restaurant-service.js";
 
 import ratingPicker from "../../components/rating-picker/rating-picker.js";
+import authMixin from "../../mixins/auth-mixin.js";
 
 export default Vue.component("comment",{
+    mixins: [authMixin],
+
     props: {
         comment: {
             type: Object,
@@ -40,12 +43,12 @@ export default Vue.component("comment",{
             </rating-picker>
         </div>
         
-        <div>
+        <div v-if="isManager || isAdmin">
             <label for="status">Status: </label>
             <span>{{comment.status}}</span>
         </div>
 
-        <span v-if="isPending">
+        <span v-if="isManager && isPending">
            <button @click="sendApproval('APPROVED')">Approve</button> 
            <button @click="sendApproval('REJECTED')">Reject</button> 
         </span>

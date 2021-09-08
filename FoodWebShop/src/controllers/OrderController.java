@@ -51,6 +51,13 @@ public class OrderController {
         return Response.ok(orderService.getDeliveryRequestsForOrder(orderId)).build();
     }
 
+    @GET
+    @Path("customer-orders/{customerId}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getOrdersForCustomer(@PathParam("customerId") long customerId) {
+        return Response.ok(orderService.getOrdersForCustomer(customerId)).build();
+    }
+
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
