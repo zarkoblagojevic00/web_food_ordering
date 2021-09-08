@@ -5,50 +5,52 @@ import authService from "../services/auth-service.js"
 export default Vue.component("the-navbar",{
     mixins: [authMixin],
     template: `
-    <div id="the-navbar" style="border-bottom: 3px  solid blueviolet;">
-        <h2 >FeastNow.io</h2>
-        <ul>
-            <li><router-link :to="userHome" exact>Home</router-link></li>
+    <nav id="the-navbar" class="navbar sticky-top navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">FeastNow</a>
+            <ul class="list-inline">
+                <router-link class="list-inline-item" tag="li" :to="userHome" exact>Home</router-link>
             
-            <span v-if="isGuest">
-                <li><router-link :to="{ name: 'login'}" exact>Login</router-link></li>
-                <li><router-link :to="{ name: 'signup'}" exact>Sign up</router-link></li>
-            </span>
+                <span class="center-inline-flex" v-if="isGuest">
+                    <router-link class="list-inline-item" tag="li" :to="{ name: 'login'}" exact>Login</router-link>
+                    <router-link id="signup" class="list-inline-item btn btn-primary round-edges" :to="{ name: 'signup'}" exact>Sign up</router-link>
+                </span>
             
-            <span v-if="isAdmin">
-                <li><router-link :to="getRoleRoute('users-home')" exact>Users</router-link></li>
-                <li><router-link :to="getRoleRoute('restaurants-home')" exact>Restaurants</router-link></li>
-            </span>
+                <span v-if="isAdmin">
+                    <router-link class="list-inline-item" tag="li" :to="getRoleRoute('users-home')" exact>Users</router-link>
+                    <router-link class="list-inline-item" tag="li" :to="getRoleRoute('restaurants-home')" exact>Restaurants</router-link>
+                </span>
             
-            <span v-if="isCustomer">
-                <li><router-link :to="getRoleRoute('customer-cart')" exact>Shopping cart</router-link></li>
-                <li><router-link :to="getCustomerRoute('customer-orders')" exact>My orders</router-link></li>
-            </span>
+                <span v-if="isCustomer">
+                    <router-link class="list-inline-item" tag="li" :to="getRoleRoute('customer-cart')" exact>Shopping cart</router-link>
+                    <router-link class="list-inline-item" tag="li" :to="getCustomerRoute('customer-orders')" exact>My orders</router-link>
+                </span>
             
-            <span v-if="isDeliverer">
-                <li><router-link :to="getDelivererRoute('deliverer-orders', 'available')" exact>Available orders</router-link></li>
-                <li><router-link :to="getDelivererRoute('deliverer-orders', 'mine')" exact>My orders</router-link></li>
-            </span>
+                <span v-if="isDeliverer">
+                    <router-link class="list-inline-item" tag="li" :to="getDelivererRoute('deliverer-orders', 'available')" exact>Available orders</router-link>
+                    <router-link class="list-inline-item" tag="li" :to="getDelivererRoute('deliverer-orders', 'mine')" exact>My orders</router-link>
+                </span>
             
-            <span v-if="isManager && managerRestaurantId">
-                <li><router-link :to="getManagerRoute('restaurant-root')" exact>Restaurant</router-link></li>
-                <li><router-link :to="getManagerRoute('restaurant-customers')" exact>Customers</router-link></li>
-                <li><router-link :to="getManagerRoute('restaurant-orders-overview')" exact>Orders</router-link></li>
-            </span>
+                <span v-if="isManager && managerRestaurantId">
+                    <router-link class="list-inline-item" tag="li" :to="getManagerRoute('restaurant-root')" exact>Restaurant</router-link>
+                    <router-link class="list-inline-item" tag="li" :to="getManagerRoute('restaurant-customers')" exact>Customers</router-link>
+                    <router-link class="list-inline-item" tag="li" :to="getManagerRoute('restaurant-orders-overview')" exact>Orders</router-link>
+                </span>
             
-            <span v-if="!isGuest">
-                <li><router-link :to="userProfile" exact>Profile</router-link></li>
-                <li>
-                    <router-link
+                <span class="center-inline-flex" v-if="!isGuest">
+                    <router-link class="list-inline-item" tag="li" :to="userProfile" exact>Profile</router-link>
+                    
+                    <router-link class="list-inline-item btn btn-outline-success round-edges "
                         :to="{ name: 'home'}"
                         @click.native="logout"
                         exact>
                         Log out
                     </router-link>
-                </li>
-            </span>
-        </ul>
-    </div> 
+                    
+                </span>
+            </ul>
+        </div>
+    </nav> 
     `,
     data() { 
         return {

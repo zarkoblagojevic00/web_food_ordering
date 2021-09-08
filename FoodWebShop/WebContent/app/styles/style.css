@@ -1,3 +1,102 @@
+:root {
+    --orange: #e8491d;
+    --darkgrey: #35424a;
+    --lightgrey: #aaa;
+    --primary: #007bff;
+    --white: #fff;
+    --primary-darker: #0860c5;
+}
+
+.center-inline-flex {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.round-edges {
+    border-radius: 10px;
+}
+
+#the-navbar {
+    min-height: 125px ;
+    background: var(--darkgrey);
+    border-bottom: 4px solid var(--orange);
+}
+
+.navbar-dark .navbar-brand {
+    color: var(--orange);
+    font-size: 1.85em;
+    background: var(--darkgrey);
+    font-weight: bolder;
+}
+
+#the-navbar ul {
+    margin-top: 20px;
+}
+
+#the-navbar li {
+    padding-left: 15px;
+    padding-right: 15px;
+    letter-spacing: 0.565px;
+    color: var(--lightgrey);
+    font-size: 1.1em;
+}
+
+#the-navbar li:hover{
+    color: var(--orange);
+    cursor: pointer;
+    font-weight: bold;
+    letter-spacing: 0;
+}
+
+#the-navbar li.router-link-exact-active {
+    color: var(--orange);
+    font-weight: bold;
+    cursor: default;
+    letter-spacing: 0;
+}
+
+#the-navbar a#signup {
+    margin-left: 10px;
+}
+
+#home #picture {
+    width: 100%;
+}
+
+#home .picture-container {
+    position: relative;
+    text-align: center;
+    color: var(--white);
+    
+}
+
+#home .picture-container hr {
+    position: relative;
+    border: none;
+    height: 2px;
+    background: var(--lightgrey);
+    margin-bottom: 10px;
+}
+
+#home #text-over-picture {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#home #text-over-picture h1 {
+    font-weight: 700;
+    font-size: 3.5em;
+    text-shadow: 3px 4px var(--darkgrey);
+
+}
+
+#home #text-over-picture p {
+    font-weight: normal;
+    font-size: 1.4em;
+}
 
 
 
