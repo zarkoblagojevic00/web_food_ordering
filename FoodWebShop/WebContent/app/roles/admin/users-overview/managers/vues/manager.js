@@ -50,7 +50,10 @@ export default Vue.component("manager",{
             <span>{{dateOfBirth | formatDate}}</span>
         </div>
         
-        <restaurant :restaurant="restaurant"></restaurant>
+        <restaurant 
+            :restaurant="restaurant"
+            :isNavigable="false">
+        </restaurant>
         
         <button v-if="isOk" @click="banManager">Ban</button>
         <button @click="deleteManager">Delete</button>

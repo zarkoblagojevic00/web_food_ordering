@@ -11,6 +11,10 @@ export default Vue.component("restaurant-overview",{
         isReadonly: {
             type: Boolean,
             default: false
+        },
+        showStatus: {
+            type: Boolean,
+            default: true
         }
     },
 
@@ -55,7 +59,7 @@ export default Vue.component("restaurant-overview",{
             </ol-map>
         </base-field>
 
-        <div>
+        <div v-if="showStatus">
             <label for="status">Status: </label>
             <span>{{restaurant.opened ? 'Opened' : 'Closed'}}</span>
         </div>

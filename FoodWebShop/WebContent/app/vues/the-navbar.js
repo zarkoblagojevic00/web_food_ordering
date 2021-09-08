@@ -1,4 +1,4 @@
-import { getRole, getId, clearStorage, getRestaurantId } from "../local-storage-util.js"
+import { getRestaurantId } from "../local-storage-util.js"
 import authMixin from "../mixins/auth-mixin.js"
 import authService from "../services/auth-service.js"
 
@@ -105,9 +105,8 @@ export default Vue.component("the-navbar",{
             return { name: routeName, params: { id: this.id, type: 'mine'}}
         },
 
-        logout () {
-            authService.logout();
-            clearStorage();
+        async logout () {
+            await authService.logout();
             this.role = null;
             this.id = null;
         }

@@ -64,13 +64,10 @@ const routes = [
                     { path: 'add/:role',        name: 'add-user',               component: AddUser, props: true},
                 ]
             },
-            { path: 'restaurants',  component: AdminRestaurantsOverview,   
-                children : [
-                    { path: '/',                name: 'restaurants-home',       redirect: 'add-restaurant'},
-                    { path: 'add-restaurant',   name: 'add-restaurant',         component: AddRestaurant}   
-                ]
-            }, 
-            { path: 'profile', name: 'admin-profile', component: EditProfile} 
+            { path: 'restaurants',      name: 'restaurants-home',   component: RestaurantsOverview},
+            restaurantOverviewRoutes,
+            { path: 'add-restaurant',   name: 'add-restaurant',     component: AddRestaurant},   
+            { path: 'profile',          name: 'admin-profile',      component: EditProfile} 
         ]
     },
 
@@ -87,6 +84,7 @@ const routes = [
             {path: 'restaurants/:restaurantId/customers',                name: 'restaurant-customers',          component: CustomersOverview,    props: true}
         ] 
     },
+
     {path: '/deliverer/:id', component: DelivererRoot, props: true,
         children: [
             {path: '/',                         name: 'deliverer-home',      component: DelivererHome,     props: true},

@@ -23,7 +23,8 @@ export default Vue.component("add-restaurant",{
             :errorMap="errorMap">
             
             <restaurant-overview
-                v-model="restaurant">
+                v-model="restaurant"
+                :showStatus="false">
             </restaurant-overview>
 
             <base-field v-if="selectedManagerId"

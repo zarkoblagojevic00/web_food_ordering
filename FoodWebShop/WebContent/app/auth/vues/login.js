@@ -53,8 +53,9 @@ export default Vue.component("login",{
             },
 
             errorMap: {
+                '403': 'Sorry, you can\'t login because you are banned.',
                 '404': 'Wrong username or password. Please try again.',
-                default: 'Sorry, we were unable to log you in. Please, try again later.'
+                default: 'Sorry, we were unable to log you in. Please, try again later.',
             }
         }
     },

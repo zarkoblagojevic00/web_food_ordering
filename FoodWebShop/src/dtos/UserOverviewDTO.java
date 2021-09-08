@@ -24,4 +24,8 @@ public class UserOverviewDTO {
         this.dateOfBirth = user.getDateOfBirth();
         this.activityStatus = user.getActivityStatus();
     }
+
+    public UserActivityStatus getActivityStatus() {
+        return activityStatus;
+    }
 }

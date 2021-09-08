@@ -10,8 +10,10 @@ export default Vue.component("restaurants-overview",{
     },
     
     template: `
-    <div id="restaurants-overview">
+    <div :key="$route.path" id="restaurants-overview">
         <h4>Restaurants</h4>
+
+        <router-link v-if="isAdmin" :to="{name: 'add-restaurant'}">Add restaurant</router-link>
 
         <finder v-if="restaurants"
             :items="restaurants"
@@ -69,10 +71,14 @@ export default Vue.component("restaurants-overview",{
         }
     },
 
+    computed: {
+        isAdmin() {
+            return location.href.includes("admin");
+        }
+    },
 
     async created() {
         const restaurants = await restaurantService.getAll();
         this.restaurants = restaurants.sort((x, y) => (x.opened === y.opened)? 0: x.opened? -1 : 1)
     },
-
 })

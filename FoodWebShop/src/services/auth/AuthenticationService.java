@@ -4,12 +4,15 @@ import beans.users.base.Credentials;
 import beans.users.base.Role;
 import beans.users.base.User;
 import beans.users.roles.customer.Customer;
+import beans.users.roles.customer.UserActivityStatus;
 import security.JwtUtil;
 import services.ShoppingCartService;
 import services.UserService;
 import services.exceptions.BadCredentialsException;
 
 import javax.inject.Inject;
+import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.core.Response;
 
 public class AuthenticationService {
     final private UserService userService;
@@ -27,6 +30,9 @@ public class AuthenticationService {
         User loginUser = userService.findUserByUsername(credentials.getUsername());
         if (!loginUser.isMyIdentity(credentials)) {
             throw new BadCredentialsException("Wrong password!");
+        }
+        if (loginUser.getActivityStatus() == UserActivityStatus.BANNED) {
+            throw new WebApplicationException(Response.Status.FORBIDDEN);
         }
         if (loginUser.hasAuthority(Role.CUSTOMER)) {
             createShoppingCartForUser(loginUser.getId());

@@ -7,9 +7,12 @@ export default Vue.component("restaurant",{
     mixins: [createObjectUrlMixin, formatDoubleMixin, authMixin],
     props: {
         restaurant: {
-            type: Object,
             required: true,
         },
+        isNavigable: {
+            type: Boolean,
+            default: true,
+        }
     },
 
     template: `
@@ -62,7 +65,7 @@ export default Vue.component("restaurant",{
             return `${location.municipality} - ${location.streetName}, ${location.streetNumber}`
         },
         restaurantRoute() {
-            return (this.isAdmin) ? '' : {path: `restaurants/${this.restaurant.id}`};
+            return (!this.isNavigable) ? '' : {path: `restaurants/${this.restaurant.id}`};
         }
     },
 

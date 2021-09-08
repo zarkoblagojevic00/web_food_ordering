@@ -29,7 +29,8 @@ public class ManagerService {
 
     public Collection<ManagerOverviewDTO> getAvailableManagers() {
         return getManagersOverviewStream()
-                .filter(overview -> overview.getRestaurant() == null)
+                .filter(overview -> overview.getRestaurant() == null ||
+                                    overview.getActivityStatus() != UserActivityStatus.BANNED)
                 .collect(Collectors.toList());
     }
 
