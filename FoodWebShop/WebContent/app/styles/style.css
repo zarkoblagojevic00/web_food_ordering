@@ -2,9 +2,16 @@
     --orange: #e8491d;
     --darkgrey: #35424a;
     --lightgrey: #aaa;
+    --lightergrey: rgb(202, 199, 199);
     --primary: #007bff;
     --white: #fff;
     --primary-darker: #0860c5;
+}
+
+@media (min-width: 1200px) {
+    .container{
+        max-width: 85%;
+    }
 }
 
 .center-inline-flex {
@@ -60,18 +67,17 @@
     margin-left: 10px;
 }
 
-#home #picture {
+.background-img {
     width: 100%;
 }
 
-#home .picture-container {
+.picture-container {
     position: relative;
-    text-align: center;
-    color: var(--white);
-    
+    overflow: hidden;
 }
 
-#home .picture-container hr {
+
+.picture-container hr {
     position: relative;
     border: none;
     height: 2px;
@@ -79,26 +85,94 @@
     margin-bottom: 10px;
 }
 
-#home #text-over-picture {
+.picture-container .centered-over-picture {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
 
-#home #text-over-picture h1 {
+#home>.picture-container {
+    text-align: center;
+    color: var(--white);
+}
+
+#home h1 {
     font-weight: 700;
     font-size: 3.5em;
     text-shadow: 3px 4px var(--darkgrey);
-
 }
 
-#home #text-over-picture p {
+#home p {
     font-weight: normal;
     font-size: 1.4em;
 }
 
+#base-field {
+    margin-top: 15px;
+}
 
+#base-field small {
+    color: var(--orange);
+}
+
+#base-form {
+    padding: 20px 0;
+    border-radius: 15px;
+    background: var(--lightergrey);
+    opacity: .9;
+    max-width: 500px;
+    min-width: 500px;
+    width: 500px;
+}
+
+#base-form div#title {
+    text-align: center;
+    margin-top: 20px;
+}
+
+#base-form div#fail {
+    text-align: center;
+    word-wrap: break-word;      /* IE 5.5-7 */
+    white-space: pre-wrap;   
+}
+
+#base-form div#submit {
+    margin-top: 20px;
+    text-align: center;
+}
+
+#password-box {
+    position: relative;
+}
+
+#password-box input {
+    display: inline-block;
+}
+
+#password-box img {
+    padding-top: 5px;
+    position: absolute;
+    right: 8px;
+}
+
+#password-box img:hover {
+    -webkit-filter: drop-shadow(1px 2px 2px var(--primary));
+            filter: drop-shadow(1px 2px 2px var(--primary));
+    cursor: pointer;
+}
+
+#login div#base-form {
+    max-width: 350px;
+    min-width: 350px;
+    width: 350px;
+}
+
+#login a {
+    display:block;
+    text-align:center;
+    margin: 15px 0;
+}
 
 
 /* tabs */

@@ -12,7 +12,7 @@ export default Vue.component("date-picker",{
 
     template: `
     <span id="date-picker">
-        <vuejs-datepicker
+        <vuejs-datepicker input-class="form-control"
             placeholder="Select date"
             :disabledDates="disabledDates"
             v-model="date"

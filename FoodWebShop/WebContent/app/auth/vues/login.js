@@ -3,6 +3,7 @@ import { getRole, getId, saveClaimsToLocalStorage } from '../../local-storage-ut
 
 import baseForm from '../../components/form/base-form.js';
 import baseField from '../../components/form/base-field.js';
+import { load } from '../../path-loader.js';
 
 export default Vue.component("login",{
     components: {
@@ -11,18 +12,19 @@ export default Vue.component("login",{
     },
 
     template: `
-    <div id="login">
-        <base-form
+    <div id="login" class="picture-container">
+        <img :src="imgSrc" class="background-img"></img>
+        <base-form class="centered-over-picture"
             title="Login"
             :submit="submit"
             :errorMap="errorMap">
             
-            <base-field
+            <base-field 
                 fieldName="Username"
                 required
                 :value="credentials.username"
                 >
-                <input 
+                <input class="form-control"
                     v-model="credentials.username" 
                     type="text"
                     required>
@@ -38,6 +40,7 @@ export default Vue.component("login",{
             
             <router-link :to="{ name: 'signup'}" class="medium" exact>Not Registered? Sign up for free!</router-link>
         </base-form>
+        
     </div> 
     `,
     data() { 
@@ -47,6 +50,8 @@ export default Vue.component("login",{
                 password: null
             },
 
+            imgSrc: load('img/pictures/jonathan-borba-8l8Yl2ruUsg-unsplash.jpg'),
+
             submit: {
                 display: "Log in",
                 invoke: this.login
@@ -54,7 +59,7 @@ export default Vue.component("login",{
 
             errorMap: {
                 '403': 'Sorry, you can\'t login because you are banned.',
-                '404': 'Wrong username or password. Please try again.',
+                '404': `Wrong username or password.\nPlease try again.`,
                 default: 'Sorry, we were unable to log you in. Please, try again later.',
             }
         }

@@ -20,16 +20,13 @@ export default Vue.component("base-field",{
         }
     },
     template: `
-    <div id="base-field">
-        <label>{{fieldName}}: </label>
-        
+    <div id="base-field" class="container">
+        <div>
+            <label :for="fieldName">{{fieldName}}: </label>
+        </div>
         <slot></slot>
         
-        <div v-if="hint" 
-            v-hide="value"
-            class="small">
-            {{hint}}
-        </div>
+        <small v-hide="value" v-if="hint" class="form-text"> {{hint}} </small>
     </div> 
     `,
 

@@ -23,7 +23,7 @@ export default Vue.component("entity-picker",{
 
     template: `
     <span id="entity-picker">
-        <select
+        <select class="form-control"
             v-if="!isReadonly" 
             v-model="selectedOption">
             <option 

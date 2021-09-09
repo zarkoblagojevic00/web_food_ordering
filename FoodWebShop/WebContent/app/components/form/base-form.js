@@ -15,17 +15,24 @@ export default Vue.component("base-form",{
     },
 
     template: `
-    <div id="base-form">
-        <h4>{{title}}</h4>
-        <slot ref="slot"></slot>
-        <div v-if="error"> 
-            {{error.message}} 
+    <div id="base-form" class="form-group">
+        <div id="title">
+            <h4>{{title}}</h4>
         </div>
-        <input 
+
+        <slot ref="slot"></slot>
+        
+        <div id="submit">
+            <input
                 type="submit" 
                 :value="submit.display" 
-                class="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2" 
-                @click.prevent="submitData">  
+                class="btn btn-lg btn-primary text-uppercase font-weight-bold mb-2" 
+                @click.prevent="submitData">
+        </div>
+
+        <div id="fail" v-hide="!error.message" class="alert alert-danger fade show">
+            <strong>{{error.message}}</strong>
+        </div>
     </div> 
     `,
 

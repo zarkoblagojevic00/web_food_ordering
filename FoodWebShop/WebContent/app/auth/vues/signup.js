@@ -6,6 +6,7 @@ import baseField from '../../components/form/base-field.js';
 import passwordBox from '../../components/password-box/password-box.js';
 import datePicker from '../../components/date-picker/date-picker.js';
 import genderPicker from '../../components/entity-picker/gender-picker.js';
+import { load } from '../../path-loader.js';
 
 export default Vue.component("signup",{
     components: {
@@ -17,9 +18,9 @@ export default Vue.component("signup",{
 	},
 
     template: `
-    <div id="signup">
-
-        <base-form
+    <div id="signup" class="picture-container">
+        <img :src="imgSrc" class="background-img">
+        <base-form class="centered-over-picture"
             title="Registration"
             :submit="submit"
             :errorMap="errorMap">
@@ -28,7 +29,7 @@ export default Vue.component("signup",{
                 fieldName="Username"
                 required
                 :value="credentials.username">
-                <input 
+                <input class="form-control"
                     v-model="credentials.username"
                     type="text" 
                     required>
@@ -46,7 +47,7 @@ export default Vue.component("signup",{
                 fieldName="First name"
                 required
                 :value="personalData.firstName" >
-                 <input 
+                 <input class="form-control"
                     v-model="personalData.firstName" 
                     type="text" 
                     required>
@@ -57,7 +58,7 @@ export default Vue.component("signup",{
                 fieldName="Last name"
                 required
                 :value="personalData.lastName">
-                 <input 
+                 <input class="form-control"
                     v-model="personalData.lastName" 
                     type="text" 
                     required>
@@ -65,19 +66,18 @@ export default Vue.component("signup",{
             </base-field>
             
             <base-field
-                fieldName="Gender"
-                required
-                :value="personalData.gender">
-                <gender-picker v-model="personalData.gender"></gender-picker>
-            </base-field>
-
-            <base-field
                 fieldName="Date of birth"
                 required
                 :value="personalData.dateOfBirth">
                 <date-picker v-model="personalData.dateOfBirth"></date-picker>
             </base-field>
 
+            <base-field
+                fieldName="Gender"
+                required
+                :value="personalData.gender">
+                <gender-picker v-model="personalData.gender"></gender-picker>
+            </base-field>
 
         </base-form>
     </div> 
@@ -105,6 +105,8 @@ export default Vue.component("signup",{
                 '409': 'User with given username already exists.\nPlease enter another username.',
                 default: 'Sorry, we were unable to sign you up.\nPlease try again later.'
             },
+
+            imgSrc: load('img/pictures/chinese-food-background.jpg')
 
             
         }

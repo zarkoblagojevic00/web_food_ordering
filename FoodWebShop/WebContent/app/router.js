@@ -10,7 +10,6 @@ import ManagersOverview from './roles/admin/users-overview/managers/vues/manager
 import DeliverersOverview from './roles/admin/users-overview/deliverers/vues/deliverers-overview.js'
 import AdminsOverview from './roles/admin/users-overview/admins/vues/admins-overview.js'
 import AddUser from './roles/admin/users-overview/add-user.js'
-import AdminRestaurantsOverview from './roles/admin/restaurants/restaurants-overview.js'
 import AddRestaurant from './restaurant/info/add-restaurant.js'
 import ManagerRoot from './roles/manager/manager-root.js'
 import ManagerHome from './roles/manager/manager-home.js'
@@ -28,26 +27,20 @@ import RestaurantsOverview from './restaurant/overview/restaurants-overview.js'
 import CustomerRoot from './roles/customer/customer-root.js'
 import ShoppingCart from './orders/shopping-cart.js'
 import AddComment from './restaurant/comments/add-comment.js'
-import managerHome from './roles/manager/manager-home.js'
 
-const restaurantOverviewRoutes = {
-    path: `restaurants/:restaurantId`, component: RestaurantRoot, props: true,
+const restaurantOverviewRoutes = (prefix='') => ({
+    path: `${prefix}restaurants/:restaurantId`, component: RestaurantRoot, props: true,
         children: [
             {path: '/',                        redirect: 'products',           props: true},
             {path: 'products',                 component: ProductsOverview,    props: true},
             {path: 'info',                     component: RestaurantInfo,      props: true},
             {path: 'comments',                 component: CommentsOverview,    props: true},
-            
         ],
-};
+});
 
 const routes = [
-    {path: '/', component: Home, 
-        children: [
-            {path: '/', name: 'home', component: RestaurantsOverview},
-            restaurantOverviewRoutes,
-        ]
-    },
+    {path: '/restaurants', name: 'home', component: Home},
+    restaurantOverviewRoutes('/'),
     {path: '/login',        name: 'login',      component: Login},
     {path: '/signup',       name: 'signup',     component: SignUp},
     
@@ -65,7 +58,7 @@ const routes = [
                 ]
             },
             { path: 'restaurants',      name: 'restaurants-home',   component: RestaurantsOverview},
-            restaurantOverviewRoutes,
+            restaurantOverviewRoutes(),
             { path: 'add-restaurant',   name: 'add-restaurant',     component: AddRestaurant},   
             { path: 'profile',          name: 'admin-profile',      component: EditProfile} 
         ]
@@ -76,7 +69,7 @@ const routes = [
             {path: '/',             name: 'manager-home',           component: ManagerHome,                props: true},
             {path: 'profile',       name: 'manager-profile',        component: EditProfile},
             {path: 'restaurant',    name: 'restaurant-root',        redirect: 'restaurants/:restaurantId', props: true},
-            restaurantOverviewRoutes,
+            restaurantOverviewRoutes(),
             {path: 'restaurants/:restaurantId/add-product',              component: AddProduct,          props: true},
             {path: 'restaurants/:restaurantId/edit-product/:productId',  component: EditProduct,         props: true},
             {path: 'restaurants/:restaurantId/orders',                   name: 'restaurant-orders-overview',    component: OrdersOverview,       props: true},
@@ -98,7 +91,7 @@ const routes = [
         children: [
             {path: '/',                         name: 'customer-home',              component: RestaurantsOverview,     props: true},
             {path: 'profile',                   name: 'customer-profile',           component: EditProfile},
-            restaurantOverviewRoutes,
+            restaurantOverviewRoutes(),
             {path: 'cart',                      name: 'customer-cart',              component: ShoppingCart,      props: true},  
             {path: 'orders/mine',               name: 'customer-orders',            component: OrdersOverview,    props: true},
             {path: 'orders/mine/:orderId',      name: 'customer-order-details',     component: OrderDetails,      props: true},

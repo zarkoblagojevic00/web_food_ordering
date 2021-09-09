@@ -8,14 +8,13 @@ export default Vue.component("password-box",{
 
     template: `
     <span id="password-box">
-        <input
+        <input class="form-control" 
             @input="$emit('input', password)"
             v-model="password"
             :type="activeMode['type']"
             required>
         </input>
         <img :src="activeMode['imgSrc']" @click="switchMode">
-
     </span> `,
     data() { 
         return {
