@@ -18,7 +18,11 @@ export default Vue.component("filter-number-range",{
 
     template: `
     <div id="filter-number-range">
-        <div v-for="(value, key, index) in filterBy">
+        <h5>Filter by range: </h5>
+        <div class="form-check-inline"
+            v-for="(value, key, index) in filterBy"
+            :key="key">
+            
             <label for="number-range">{{value}}: </label>
             
             <div>

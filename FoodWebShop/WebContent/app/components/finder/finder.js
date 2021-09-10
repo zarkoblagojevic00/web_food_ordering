@@ -41,26 +41,34 @@ export default Vue.component("finder",{
 
     template: `
     <div id="finder">
-        <div v-if='sortBy'>
-            <sorters :sortBy="sortBy" ref="sorter"></sorters>
-        </div>
         
-        <div v-if="filterByOptions">
-            <filters-option :filterBy="filterByOptions" ref="filters-option"></filters-option>
-        </div>
-        
-        <div v-if="searchByTextFields">
-            <search-text-fields :filterBy="searchByTextFields" ref="search-text-fields"></search-text-fields>
-        </div>
+        <div id="subfinders" class="item">
+            <div v-if='sortBy'>
+                <sorters :sortBy="sortBy" ref="sorter"></sorters>
+                <hr>
+            </div>
 
-        <div v-if="filterByNumberRange">
-            <filter-number-range :filterBy="filterByNumberRange" ref="filter-number-range"></filter-number-range>
-        </div>
-        
-        <div v-if="filterByDateRange">
-            <filter-date-range :filterBy="filterByDateRange" ref="filter-date-range"></filter-date-range>
-        </div>
+            <div v-if="filterByOptions">
+                <filters-option :filterBy="filterByOptions" ref="filters-option"></filters-option>
+                <hr>    
+            </div>
 
+            <div v-if="searchByTextFields">
+                <search-text-fields :filterBy="searchByTextFields" ref="search-text-fields"></search-text-fields>
+                <hr>
+            </div>
+
+            <div v-if="filterByNumberRange">
+                <filter-number-range :filterBy="filterByNumberRange" ref="filter-number-range"></filter-number-range>
+                <hr>
+            </div>
+
+            <div v-if="filterByDateRange">
+                <filter-date-range :filterBy="filterByDateRange" ref="filter-date-range"></filter-date-range>
+                <hr>
+            </div>
+
+        </div>
 
         <div id="display">
             <component :is="component"

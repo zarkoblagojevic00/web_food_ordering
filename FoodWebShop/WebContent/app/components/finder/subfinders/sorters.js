@@ -1,4 +1,5 @@
 import { parseProperty } from "../../../property-parser.js";
+import { load } from "../../../path-loader.js";
 
 export default Vue.component("sorters",{
     props: {
@@ -7,11 +8,12 @@ export default Vue.component("sorters",{
 
     template: `
     <div id="sorters">
-        <button 
+        <h5>Sort by:</h5>
+        <button class="btn btn-md btn-primary"
             v-for="(value, key, index) in sortBy"
             :key="key"
             @click="activate(index)">
-                {{value}} {{sorters[index].order}} {{(index === activeSorterIndex) ? 'w' : ''}}
+                {{value}} <img v-hide="!isActive(index)" :src="arrowImg(index)">
         </button>
     </div> 
     `,
@@ -41,5 +43,17 @@ export default Vue.component("sorters",{
             const activeSorter = this.sorters[this.activeSorterIndex];
             return (!activeSorter) ? items : items.sort(activeSorter.getSortFunction());
         },
+
+        arrowImg(index) {
+            if (this.sorters[index].order === -1) {
+                return load('img/icons/ascendant-arrow.png')
+            } else {
+                return load('img/icons/descendant-arrow.png')
+            } 
+        },
+
+        isActive(index) {
+            return this.activeSorterIndex === index;    
+        }
     }
 })

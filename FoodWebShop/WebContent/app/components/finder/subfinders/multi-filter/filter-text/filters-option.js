@@ -3,13 +3,19 @@ import filterText from "./filter-text.js"
 export default Vue.component("filters-option",{
     extends: filterText,
     template: `
-    <div id="filters-option">
-        <div 
+    <div id="filters-option" >
+        
+        <h5>Filter by: </h5>
+        
+        <div class="form-check-inline"
             v-for="(value, key, index) in filterBy"
             :key="key">
+
             <label>{{value.display}}: </label>
+            
             <span>
-                <select v-model="filters[index].value">
+                <select class="form-control"
+                    v-model="filters[index].value">
                     <option 
                         v-for="(opt_value, opt_key) in value.options"
                         :key="opt_key"
@@ -19,7 +25,7 @@ export default Vue.component("filters-option",{
                     <option value="">All</option>
                 </select>
             </span>
-        </div> 
+        </div>
     </div> 
     `,
     methods: {

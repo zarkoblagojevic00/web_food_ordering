@@ -19,7 +19,11 @@ export default Vue.component("filter-date-range",{
     
     template: `
     <div id="filter-date-range">
-        <div v-for= "(value, key, index) in filterBy">
+
+        <div class="form-check-inline"
+            v-for= "(value, key, index) in filterBy"
+            :key="key">
+
             <label for="number-range">{{value}}: </label>
             <div>
                 <label for="from">From: </label>
@@ -52,7 +56,7 @@ export default Vue.component("filter-date-range",{
         },
 
         disabledDatesTo(index) {
-            const from = new Date(this.toMax(index));
+            const from = new Date();
             const to = new Date(this.fromMin(index));
             return {from, to};
         },
