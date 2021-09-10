@@ -39,7 +39,7 @@ const restaurantOverviewRoutes = (prefix='') => ({
 });
 
 const routes = [
-    {path: '/restaurants', name: 'home', component: Home},
+    {path: '/', name: 'home', component: Home},
     restaurantOverviewRoutes('/'),
     {path: '/login',        name: 'login',      component: Login},
     {path: '/signup',       name: 'signup',     component: SignUp},

@@ -16,7 +16,7 @@ export default Vue.component("num-input-range",{
    
     template: `
     <div id="num-input-range">
-        <input
+        <input class="form-control"
             type="number"
             v-model.number.lazy="realNumber"
             :min="min"

@@ -17,7 +17,7 @@ export default Vue.component("edit-profile",{
         'gender-picker': genderPicker,
 	},
     template: `
-    <div id="edit-profile">
+    <div id="edit-profile" class="edit-profile">
         <base-form
             title="Edit profile"
             :submit="submitProfile"
@@ -27,7 +27,7 @@ export default Vue.component("edit-profile",{
                 fieldName="Username"
                 required
                 :value="credentials.username">
-                <input 
+                <input class="form-control"
                     v-model="credentials.username"
                     type="text" 
                     required>
@@ -39,7 +39,7 @@ export default Vue.component("edit-profile",{
                 fieldName="First name"
                 required
                 :value="personalData.firstName" >
-                 <input 
+                 <input class="form-control"
                     v-model="personalData.firstName" 
                     type="text" 
                     required>
@@ -48,9 +48,9 @@ export default Vue.component("edit-profile",{
             
             <base-field
                 fieldName="Last name"
-                required
+                required 
                 :value="personalData.lastName">
-                 <input 
+                 <input class="form-control"
                     v-model="personalData.lastName" 
                     type="text" 
                     required>
@@ -108,7 +108,7 @@ export default Vue.component("edit-profile",{
             },
 
             submitProfile: {
-                display: "Submit changes to profile",
+                display: "Update profile",
                 invoke: this.editProfile
             },
 
@@ -121,7 +121,7 @@ export default Vue.component("edit-profile",{
             newPassword: '',
 
             submitPassword: {
-                display: "Submit changes to password",
+                display: "Change password",
                 invoke: this.editPassword
             },
 

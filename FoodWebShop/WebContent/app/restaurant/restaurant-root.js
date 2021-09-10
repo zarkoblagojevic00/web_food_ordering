@@ -3,15 +3,12 @@ export default Vue.component("restaurant-root",{
 
     template: `
     <div id="restaurant-root">
-        <div class="tabs">
-            <ul v-if="restaurantId" class='tabs__header'>
-                <li><router-link :to="restaurantPath('products')">Products</router-link></li>
-                <li><router-link :to="restaurantPath('info')">Info</router-link></li>
-                <li><router-link :to="restaurantPath('comments')">Comments</router-link></li>
-            </ul>
-
-            <router-view></router-view>
-        </div>
+        <ul v-if="restaurantId" class="list-inline">
+            <router-link tag="li" class="list-inline-item restaurant-tab" :to="restaurantPath('products')">Products</router-link>
+            <router-link tag="li" class="list-inline-item restaurant-tab" :to="restaurantPath('info')">Info</router-link>
+            <router-link tag="li" class="list-inline-item restaurant-tab" :to="restaurantPath('comments')">Comments</router-link>
+        </ul>
+        <router-view></router-view>
     </div> 
     `,
 

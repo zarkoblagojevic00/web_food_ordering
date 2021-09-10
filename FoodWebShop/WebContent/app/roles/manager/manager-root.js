@@ -1,7 +1,7 @@
 export default Vue.component("manager-root",{
     template: `
     <div id="manager-root">
-        <router-view></router-view>
+        <router-view class="container"></router-view>
     </div> 
     `,
     data() { 

@@ -2,7 +2,7 @@ export default Vue.component("base-field",{
     props: {
         fieldName: String,
         
-        value: [Object, String, Number, Date, File, Blob],
+        value: [Object, String, Number, Date, File, Blob, Boolean],
         
         validator: {
             type: Function,
@@ -21,7 +21,7 @@ export default Vue.component("base-field",{
     },
     template: `
     <div id="base-field" class="container">
-        <div>
+        <div v-if="fieldName">
             <label :for="fieldName">{{fieldName}}: </label>
         </div>
         <slot></slot>

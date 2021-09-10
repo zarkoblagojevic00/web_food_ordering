@@ -33,7 +33,7 @@ export default Vue.component("entity-picker",{
                 {{display(option)}}
             </option> 
         </select>
-        <input v-else 
+        <input v-else class="form-control"
             :value="display(selectedOption)"
             readonly>
     </span> 

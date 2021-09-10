@@ -27,30 +27,53 @@ export default Vue.component("restaurant-overview",{
 
     template: `
     <div id="restaurant-overview">
-        <base-field
-            fieldName="Name"
-            required
-            :value="restaurant.name">
-            <input 
-                v-model="restaurant.name"
-                type="text" 
-                required
-                :readonly="isReadonly">
-            </input>
-        </base-field>
+        <div class="image-info-container">
 
-        <base-field
-            fieldName="Restaurant type"
-            required
-            :value="restaurant.type">
-            <restaurant-type-picker 
-                v-model="restaurant.type"
-                :isReadonly="isReadonly">
-            </restaurant-type-picker>
-        </base-field>
+            <div class="image-left-side-container">
+                <base-field 
+                    fieldName="Logo"
+                    required
+                    :value="restaurant.logoPicture">
+                    <image-picker
+                        v-model="restaurant.logoPicture"
+                        :isReadonly="isReadonly">
+                    </image-picker>
+                </base-field>
+            </div>
+            
+            <div class="info-right-side">
+                <base-field
+                    fieldName="Name"
+                    required
+                    :value="restaurant.name">
+                    <input class="form-control"
+                        v-model="restaurant.name"
+                        type="text"
+                        required
+                        :readonly="isReadonly">
+                    </input>
+                </base-field>
+                
+                <base-field
+                    fieldName="Restaurant type"
+                    required
+                    :value="restaurant.type">
+                    <restaurant-type-picker
+                        v-model="restaurant.type"
+                        :isReadonly="isReadonly">
+                    </restaurant-type-picker>
+                </base-field>
+                
+                <base-field v-if="showStatus"
+                    fieldName="Status"
+                    :value="restaurant.opened">
+                        <input class="form-control" type="text" readonly :value="restaurant.opened ? 'Opened' : 'Closed'"/>
+                </base-field>
+            </div>
 
-        <base-field
-            fieldName="Location"
+        </div>
+        
+        <base-field class="adjust-location-base-field" 
             required
             :value="restaurant.location">
             <ol-map 
@@ -59,20 +82,7 @@ export default Vue.component("restaurant-overview",{
             </ol-map>
         </base-field>
 
-        <div v-if="showStatus">
-            <label for="status">Status: </label>
-            <span>{{restaurant.opened ? 'Opened' : 'Closed'}}</span>
-        </div>
-
-        <base-field
-            fieldName="Logo"
-            required
-            :value="restaurant.logoPicture">
-            <image-picker 
-                v-model="restaurant.logoPicture"
-                :isReadonly="isReadonly">
-            </image-picker>
-        </base-field>
+        
     </div> 
     `,
     data() { 

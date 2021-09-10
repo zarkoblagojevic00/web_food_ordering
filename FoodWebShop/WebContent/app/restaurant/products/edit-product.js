@@ -8,10 +8,10 @@ export default Vue.component("edit-product",{
         
     data() { 
         return {
-           title: "Edit product",
+           title: "Product overview",
 
            submit: {
-               display: "Product Overview",
+               display: "Edit product",
                invoke: this.add
            },
 

@@ -8,8 +8,8 @@ export default Vue.component("home",{
 
     template: `
     <div id="home">
-        <div class="picture-container">
-            <img class="background-img" :src="pictureSrc" alt="Pic">
+        <div class="negative-margin picture-container">
+            <img class=" background-img" :src="pictureSrc" alt="Pic">
         
             <div class="centered-over-picture">
                 <h1 class="display-4">Welcome to FeastNow!</h1>

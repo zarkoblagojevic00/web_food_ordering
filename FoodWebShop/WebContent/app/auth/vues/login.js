@@ -12,35 +12,38 @@ export default Vue.component("login",{
     },
 
     template: `
-    <div id="login" class="picture-container">
-        <img :src="imgSrc" class="background-img"></img>
-        <base-form class="centered-over-picture"
-            title="Login"
-            :submit="submit"
-            :errorMap="errorMap">
-            
-            <base-field 
-                fieldName="Username"
-                required
-                :value="credentials.username"
-                >
-                <input class="form-control"
-                    v-model="credentials.username" 
-                    type="text"
-                    required>
-                </input>
-            </base-field>
-            
-            <base-field
-                fieldName="Password"
-                required
-                :value="credentials.password">
-                <password-box v-model="credentials.password"></password-box>
-            </base-field>
-            
-            <router-link :to="{ name: 'signup'}" class="medium" exact>Not Registered? Sign up for free!</router-link>
-        </base-form>
+    <div id="login">
         
+        <div class="negative-margin picture-container">
+            <img :src="imgSrc" class="background-img"></img>
+            
+            <base-form class="centered-over-picture"
+                title="Login"
+                :submit="submit"
+                :errorMap="errorMap">
+                
+                <base-field 
+                    fieldName="Username"
+                    required
+                    :value="credentials.username"
+                    >
+                    <input class="form-control"
+                        v-model="credentials.username" 
+                        type="text"
+                        required>
+                    </input>
+                </base-field>
+                
+                <base-field
+                    fieldName="Password"
+                    required
+                    :value="credentials.password">
+                    <password-box v-model="credentials.password"></password-box>
+                </base-field>
+                    
+                <router-link :to="{ name: 'signup'}" class="medium" exact>Not Registered? Sign up for free!</router-link>
+            </base-form>
+        <div>
     </div> 
     `,
     data() { 

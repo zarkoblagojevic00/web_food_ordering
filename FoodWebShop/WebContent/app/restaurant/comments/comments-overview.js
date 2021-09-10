@@ -3,16 +3,22 @@ import restaurantService from "../../services/restaurant-service.js";
 import comment from "./comment.js";
 
 import authMixin from "../../mixins/auth-mixin.js";
+import formatDoubleMixin from "../../mixins/format-double-mixin.js";
 
 export default Vue.component("comments-overview",{
     props: ['restaurantId'],
     components: {
         comment
     },
-    mixins: [authMixin],
+    mixins: [authMixin, formatDoubleMixin],
     template: `
-    <div id="comments-overview">
-        <h3 v-if="averageMark">Average mark: {{averageMark}}</h3>
+    <div id="comments-overview" class="comments-overview">
+        <h2>Comments</h2>
+        <h3 v-if="averageMark">Average mark: 
+            <span id="comment-avg-mark">
+                {{averageMark | formatDouble}}
+            </span>
+        </h3>
         <comment v-for="comment in comments"
             :key="comment.id"
             :comment="comment"
@@ -44,8 +50,4 @@ export default Vue.component("comments-overview",{
     async created() {
         this.comments = await this.getComments();
     },
-
-    methods: {
-        
-    }
 })

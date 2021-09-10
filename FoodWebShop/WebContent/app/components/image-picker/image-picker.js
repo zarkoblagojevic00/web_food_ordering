@@ -12,7 +12,7 @@ export default Vue.component("image-picker",{
 
     template: `
     <div id="image-picker">
-        <input v-if="!isReadonly"
+        <input v-if="!isReadonly" class="form-control"
             ref="file"
             @change="uploadFile" 
             type="file"
@@ -21,7 +21,7 @@ export default Vue.component("image-picker",{
         </input>
 
         <div>
-            <img :src="imageSource" alt="">
+            <img class="image-left-side" :src="imageSource" alt="">
         </div>
     </div> 
     `,

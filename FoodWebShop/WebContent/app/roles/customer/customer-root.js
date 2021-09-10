@@ -1,7 +1,7 @@
 export default Vue.component("customer-root",{
     template: `
     <div id="customer-root">
-        <router-view></router-view>
+        <router-view class="container"></router-view>
     </div> 
     `,
     data() { 

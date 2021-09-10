@@ -32,7 +32,7 @@ export default Vue.component("the-navbar",{
                 </span>
             
                 <span v-if="isManager && managerRestaurantId">
-                    <router-link class="list-inline-item" tag="li" :to="getManagerRoute('restaurant-root')" exact>Restaurant</router-link>
+                    <router-link class="list-inline-item" tag="li" :to="getManagerRoute('restaurant-root')">Restaurant</router-link>
                     <router-link class="list-inline-item" tag="li" :to="getManagerRoute('restaurant-customers')" exact>Customers</router-link>
                     <router-link class="list-inline-item" tag="li" :to="getManagerRoute('restaurant-orders-overview')" exact>Orders</router-link>
                 </span>
@@ -78,10 +78,6 @@ export default Vue.component("the-navbar",{
 
         roleLowerCased() {
             return this.role.toLowerCase();
-        },
-
-        managerRestaurantRoute() {
-            return ''
         },
     },
 

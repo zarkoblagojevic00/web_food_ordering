@@ -2,7 +2,8 @@
     --orange: #e8491d;
     --darkgrey: #35424a;
     --lightgrey: #aaa;
-    --lightergrey: rgb(202, 199, 199);
+    --lightergrey: #cac7c7;
+    --item-bg-grey: #ebebeb;
     --primary: #007bff;
     --white: #fff;
     --primary-darker: #0860c5;
@@ -68,14 +69,17 @@
 }
 
 .background-img {
-    width: 100%;
+    width: 100%; 
+}
+
+.negative-margin {
+    margin-right: -10.2%;
+    margin-left: -10.2%;
 }
 
 .picture-container {
     position: relative;
-    overflow: hidden;
 }
-
 
 .picture-container hr {
     position: relative;
@@ -95,6 +99,7 @@
 #home>.picture-container {
     text-align: center;
     color: var(--white);
+    
 }
 
 #home h1 {
@@ -171,60 +176,198 @@
 #login a {
     display:block;
     text-align:center;
+    margin: 15px;
+}
+
+li.restaurant-tab {
+    margin-top: 20px;
+    padding: 15px 30px;
+    border-radius: 10px;
+    cursor: pointer;
+    background: var(--lightergrey);
+    color: var(--orange);
+}
+
+li.restaurant-tab:hover {
+    background: var(--darkgrey);
+}
+
+li.restaurant-tab.router-link-exact-active {
+    background: var(--darkgrey);
+    font-weight: bold;
+}
+
+.image-info-container {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+}
+
+.image-left-side-container {
+    margin: 25px;
+}
+
+.image-left-side {
+    height: auto; 
+    width: auto; 
+    max-width: 350px; 
+    max-height: 350px;
+    border-radius: 15px;
+}
+
+.info-right-side {
+    margin: 25px;
+    width: 100%;
+}
+
+.item {
+    margin: 30px 0;
+    background: var(--item-bg-grey);
+    border-radius: 15px;
+    border: 3px solid var(--orange);
+    font: 1.2em;
+}
+
+#product label[for="productType"]+span {
+    text-transform: lowercase;
+}
+
+.fixed-bottom-right {
+    position: fixed;
+    bottom: 50px;
+    right: 100px;
+}
+
+
+#product label {
+    font-weight: bold;
+}
+
+#product div#num-input-range {
+    width: 40%;
+}
+
+#product span.center-inline-flex {
+    justify-content: space-between;
+}
+
+
+#restaurant-overview .image-left-side-container .image-left-side {
+    max-width: 275px;
+    max-height: 275px;
+}
+
+#restaurant-overview .info-right-side {
+    margin-bottom: 70px;
+}
+
+.adjust-location-base-field {
+    margin-left: 3.5%;
+    
+}
+
+#ol-map {
+    background: var(--orange);
+    width: 100%;
+    border-radius: 15px;
+}
+
+#ol-map h3 {
+    padding-top: 5%;
+    margin-left: 3%;
+}
+
+#ol-map hr {
+    position: relative;
+    border: none;
+    height: 2px;
+    margin-left: 3%;
+    margin-right: 8%;
+    background: var(--darkgrey);
+}
+
+#ol-map #base-field label{
+    font-weight: bold;
+}
+
+.map {
+    width:400px; 
+    height:400px;
+    margin-left: 8%;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.comments-overview h3{
+    display: inline-block;
+    background: var(--lightergrey);
+    border-radius: 15px;
+    padding: 10px 20px;
+}
+
+#comment {
+    padding: 15px 30px;
+}
+
+#comment-avg-mark {
+    color: var(--orange);
+    font-weight: bold;
+}
+
+#comment label{
+    font-weight: bold;
+}
+
+#comment hr {
+    position: relative;
+    border: none;
+    height: 2px;
+    background: var(--lightgrey);
+}
+
+#comment hr#above-content {
+    margin-top: 0;
+}
+
+#comment #content {
+    text-align: justify;
+    font-style: italic;
+}
+
+#comment #status {
     margin: 15px 0;
 }
 
-
-/* tabs */
-ul.tabs__header {
-    display: block;
-    list-style: none;
-    margin: 0 0 0 20px;
-    padding: 0;
+.badge-props {
+    font-size: 1.025em;
 }
 
-ul.tabs__header > li {
-    padding: 15px 30px;
-    border-radius: 10px;
-    margin: 0;
-    display: inline-block;
-    margin-right: 5px;
-    cursor: pointer;
+.add-product {
+    margin-top: 50px;
+    margin-bottom: 50px;
+    width: 100%;
 }
 
-ul.tabs__header > li.tab__selected {
-    font-weight: bold;
-    border-radius: 10px 10px 0 0;
-    border-bottom: 8px solid transparent;
+.add-product>#base-form {
+    padding: 50px 0;
+    margin: 0 auto;
+    max-width: 650px;
+    min-width: 650px;
+    width: 650px;
 }
 
-.tab {
-    display: inline-block;
-    color: black;
-    padding: 20px;
-    min-width: 800px;
-    border-radius: 10px;
-    min-height: 400px;
+.add-product #image-picker img {
+    margin-top: 20px;
 }
 
-.tabs__light .tab{
-    background-color: #fff;
+.add-product textarea {
+    min-height: 180px ;
 }
 
-.tabs__light li {
-    background-color: #ddd;
-    color: #aaa;
-}
-
-.tabs__light li:hover {
-    background-color: rgb(143, 143, 143);
-    color: #83FFB3;
-}
-
-
-.tabs__light li.tab__selected {
-    background-color: #fff;
-    color: #83FFB3;
-    pointer-events: none;
-    cursor:default
+.edit-profile>#base-form {
+    margin: 30px auto;
+    max-width: 550px;
+    min-width: 550px;
+    width: 550px;
+    
 }

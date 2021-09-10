@@ -27,66 +27,74 @@ export default Vue.component("ol-map",{
     },
 
     template: `
-    <div id="ol-map">
-        <base-field
-            fieldName="City"
-            required
-            :value="location.municipality">
-            <input 
-                v-model="location.municipality" 
-                type="text"
-                :readonly="isReadonly" 
-                required>
-            </input>
-        </base-field>
+    <div id="ol-map" >
+        <h3>Location</h3>
+        <hr>    
 
-        <base-field
-            fieldName="Street name"
-            required
-            :value="location.streetName">
-            <input 
-                v-model="location.streetName" 
-                type="text"
-                :readonly="isReadonly" 
-                required>
-            </input>
-        </base-field>
+        <div class="image-info-container">
+            <div>
+                <div :id="mapTarget" class="map"></div>
+            </div>
 
-        <base-field
-            fieldName="House number"
-            required
-            :value="location.streetNumber">
-            <input 
-                v-model="location.streetNumber" 
-                type="text"
-                :readonly="isReadonly" 
-                required>
-            </input>
-        </base-field>
+            <div class="info-right-side">
+                <base-field
+                    fieldName="City"
+                    required
+                    :value="location.municipality">
+                    <input class="form-control"
+                        v-model="location.municipality"
+                        type="text"
+                        :readonly="isReadonly"
+                        required>
+                    </input>
+                </base-field>
+                <base-field
+                    fieldName="Street name"
+                    required
+                    :value="location.streetName">
+                    <input class="form-control"
+                        v-model="location.streetName"
+                        type="text"
+                        :readonly="isReadonly"
+                        required>
+                    </input>
+                </base-field>
+                <base-field
+                    fieldName="House number"
+                    required
+                    :value="location.streetNumber">
+                    <input class="form-control"
+                        v-model="location.streetNumber"
+                        type="text"
+                        :readonly="isReadonly"
+                        required>
+                    </input>
+                </base-field>
+                
+                <base-field
+                    fieldName="Postal code"
+                    required
+                    :value="location.postalCode">
+                    <input class="form-control"
+                        v-model="location.postalCode"
+                        type="text"
+                        :readonly="isReadonly"
+                        required>
+                    </input>
+                </base-field>
+                <base-field
+                    fieldName="Coordinates"
+                    :value="coordinates">
+                    <input class="form-control"
+                        v-model="coordinates"
+                        type="text"
+                        readonly>
+                    </input>
+                </base-field>
+            </div>
+        </div>
         
-        <base-field
-            fieldName="Postal code"
-            required
-            :value="location.postalCode">
-            <input 
-                v-model="location.postalCode" 
-                type="text"
-                :readonly="isReadonly" 
-                required>
-            </input>
-        </base-field>
 
-        <base-field
-            fieldName="Coordinates"
-            :value="coordinates">
-            <input 
-                v-model="coordinates" 
-                type="text"
-                readonly>
-            </input>
-        </base-field>
-
-        <div :id="mapTarget" style="width: 400px; height: 400px;"></div>
     </div> 
     `,
     data() { 

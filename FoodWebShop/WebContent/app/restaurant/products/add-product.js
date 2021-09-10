@@ -16,7 +16,7 @@ export default Vue.component("add-product",{
     },
     
     template: `
-    <div id="add-product">
+    <div id="add-product" class="add-product">
         <base-form
             :title="title"
             :submit="submit"
@@ -26,7 +26,7 @@ export default Vue.component("add-product",{
                 fieldName="Name"
                 required
                 :value="product.name">
-                <input 
+                <input class="form-control"
                     v-model="product.name"
                     type="text" 
                     required>
@@ -37,7 +37,7 @@ export default Vue.component("add-product",{
                 fieldName="Price"
                 required
                 :value="product.price">
-                <input 
+                <input class="form-control"
                     v-model="product.price"
                     type="number" 
                     required>
@@ -52,21 +52,21 @@ export default Vue.component("add-product",{
             </base-field>
 
             <base-field
-                fieldName="Portion"
+                :fieldName="'Portion (' + unitOfMeasure +')'"
                 :value="product.portion">
-                <input 
+                <input class="form-control"
                     v-model="product.portion"
                     type="number" 
                     >
                 </input>
-                <span>{{unitOfMeasure}}</span>
+                
             </base-field>
             
             <base-field
                 fieldName="Description"
                 :value="product.description">
                 <div>
-                    <textarea
+                    <textarea class="form-control"
                         v-model="product.description"
                         >
                     </textarea>

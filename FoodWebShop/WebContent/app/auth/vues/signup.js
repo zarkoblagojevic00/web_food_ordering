@@ -18,68 +18,71 @@ export default Vue.component("signup",{
 	},
 
     template: `
-    <div id="signup" class="picture-container">
-        <img :src="imgSrc" class="background-img">
-        <base-form class="centered-over-picture"
-            title="Registration"
-            :submit="submit"
-            :errorMap="errorMap">
+    <div id="signup">
 
-            <base-field
-                fieldName="Username"
-                required
-                :value="credentials.username">
-                <input class="form-control"
-                    v-model="credentials.username"
-                    type="text" 
-                    required>
-                </input>
-            </base-field>
-            
-            <base-field
-                fieldName="Password"
-                required
-                :value="credentials.password">
-                <password-box v-model="credentials.password"></password-box>
-            </base-field>
-            
-            <base-field
-                fieldName="First name"
-                required
-                :value="personalData.firstName" >
-                 <input class="form-control"
-                    v-model="personalData.firstName" 
-                    type="text" 
-                    required>
-                </input>
-            </base-field>
-            
-            <base-field
-                fieldName="Last name"
-                required
-                :value="personalData.lastName">
-                 <input class="form-control"
-                    v-model="personalData.lastName" 
-                    type="text" 
-                    required>
-                </input>
-            </base-field>
-            
-            <base-field
-                fieldName="Date of birth"
-                required
-                :value="personalData.dateOfBirth">
-                <date-picker v-model="personalData.dateOfBirth"></date-picker>
-            </base-field>
+        <div class="negative-margin picture-container">
+            <img :src="imgSrc" class="background-img">
+            <base-form class="centered-over-picture"
+                title="Registration"
+                :submit="submit"
+                :errorMap="errorMap">
 
-            <base-field
-                fieldName="Gender"
-                required
-                :value="personalData.gender">
-                <gender-picker v-model="personalData.gender"></gender-picker>
-            </base-field>
+                <base-field
+                    fieldName="Username"
+                    required
+                    :value="credentials.username">
+                    <input class="form-control"
+                        v-model="credentials.username"
+                        type="text" 
+                        required>
+                    </input>
+                </base-field>
+                
+                <base-field
+                    fieldName="Password"
+                    required
+                    :value="credentials.password">
+                    <password-box v-model="credentials.password"></password-box>
+                </base-field>
+                
+                <base-field
+                    fieldName="First name"
+                    required
+                    :value="personalData.firstName" >
+                    <input class="form-control"
+                        v-model="personalData.firstName" 
+                        type="text" 
+                        required>
+                    </input>
+                </base-field>
+                
+                <base-field
+                    fieldName="Last name"
+                    required
+                    :value="personalData.lastName">
+                    <input class="form-control"
+                        v-model="personalData.lastName" 
+                        type="text" 
+                        required>
+                    </input>
+                </base-field>
+                
+                <base-field
+                    fieldName="Date of birth"
+                    required
+                    :value="personalData.dateOfBirth">
+                    <date-picker v-model="personalData.dateOfBirth"></date-picker>
+                </base-field>
 
-        </base-form>
+                <base-field
+                    fieldName="Gender"
+                    required
+                    :value="personalData.gender">
+                    <gender-picker v-model="personalData.gender"></gender-picker>
+                </base-field>
+
+            </base-form>
+        </div>
     </div> 
     `,
     data() { 
