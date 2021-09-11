@@ -1,5 +1,6 @@
 import authService from '../../services/auth-service.js';
-import { getRole, getId, saveClaimsToLocalStorage } from '../../local-storage-util.js';
+import managerService from '../../services/manager-service.js';
+import { getRole, getId, saveClaimsToLocalStorage, setRestaurantId } from '../../local-storage-util.js';
 
 import baseForm from '../../components/form/base-form.js';
 import baseField from '../../components/form/base-field.js';
@@ -78,11 +79,16 @@ export default Vue.component("login",{
         $_login_authenticate: async function() {
             const jwt = (await authService.login(this.credentials)).jwt;
             saveClaimsToLocalStorage(jwt);
+            
+            if ( getRole() === "MANAGER" ) {
+                const manager = await managerService.getManager(getId());
+                setRestaurantId(manager.restaurant.id);
+            }
+            
         },
 
         $_login_navigate: function() {
-            const userHome = `${getRole().toLowerCase()}-home`
-            this.$router.push({name: userHome, params: { id: getId() }});
+            this.$router.push({name: 'home'});
         },
     }
 })

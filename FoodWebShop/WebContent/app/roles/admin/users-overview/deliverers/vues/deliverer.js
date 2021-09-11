@@ -15,7 +15,7 @@ export default Vue.component("deliverer",{
         activityReport: Object,
     },
     template: `
-    <div v-if="!isDeleted" id="deliverer" style="border: 1px solid black;">
+    <div v-if="!isDeleted" id="deliverer" class="item item-padding-label">
         <div>
             <label for="username">Username: </label>
             <span>{{username}}</span>
@@ -52,8 +52,8 @@ export default Vue.component("deliverer",{
         </div>
 
         <span v-if="isAdmin">
-            <button v-if="isOk" @click="banDeliverer">Ban</button>
-            <button @click="deleteDeliverer">Delete</button>
+            <button class="btn btn-md btn-warning" v-if="isOk" @click="banDeliverer">Ban</button>
+            <button class="btn btn-md btn-danger" @click="deleteDeliverer">Delete</button>
         </span>
         
     </div> 

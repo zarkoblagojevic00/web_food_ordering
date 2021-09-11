@@ -93,4 +93,9 @@
   "deleted" : false,
   "product" : 3,
   "quantity" : 2
+}, {
+  "id" : 20,
+  "deleted" : false,
+  "product" : 5,
+  "quantity" : 1
 } ]

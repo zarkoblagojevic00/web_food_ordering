@@ -24,7 +24,7 @@ export default Vue.component("manager",{
     },
 
     template: `
-    <div v-if="!isDeleted" id="manager" style="border: 1px solid black;">
+    <div v-if="!isDeleted" id="manager" class="item item-padding-label manager">
         <div>
             <label for="username">Username: </label>
             <span>{{username}}</span>
@@ -50,13 +50,14 @@ export default Vue.component("manager",{
             <span>{{dateOfBirth | formatDate}}</span>
         </div>
         
+        <label v-if="restaurant" for="restaurant">Manager at: </label>
         <restaurant 
             :restaurant="restaurant"
             :isNavigable="false">
         </restaurant>
         
-        <button v-if="isOk" @click="banManager">Ban</button>
-        <button @click="deleteManager">Delete</button>
+        <button class="btn btn-md btn-warning" v-if="isOk" @click="banManager">Ban</button>
+        <button class="btn btn-md btn-danger" @click="deleteManager">Delete</button>
     </div> 
     `,
     data() { 

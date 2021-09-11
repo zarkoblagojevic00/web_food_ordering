@@ -13,7 +13,7 @@ export default Vue.component("restaurants-overview",{
     <div :key="$route.path" id="restaurants-overview">
         <h4>Restaurants</h4>
 
-        <router-link v-if="isAdmin" :to="{name: 'add-restaurant'}">Add restaurant</router-link>
+        <router-link class="btn btn-lg btn-success text-uppercase fixed-bottom-right" v-if="isAdmin" :to="{name: 'add-restaurant'}">Add restaurant</router-link>
 
         <finder v-if="restaurants"
             :items="restaurants"

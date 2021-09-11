@@ -34,7 +34,7 @@ export default Vue.component("comments-overview",{
 
     computed: {
         getComments() {
-            return (this.isCustomer || this.isGuest) ? 
+            return (this.isCustomer || this.isGuest || this.isDeliverer) ? 
             () => restaurantService.getCommentsWithStatus(this.restaurantId, "APPROVED") :
             () => restaurantService.getComments(this.restaurantId)  
         },

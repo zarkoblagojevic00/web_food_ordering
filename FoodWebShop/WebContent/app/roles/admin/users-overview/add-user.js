@@ -17,7 +17,7 @@ export default Vue.component("add-user",{
         'gender-picker': genderPicker,
 	},
     template: `
-    <div id="add-user">
+    <div id="add-user" class="add-user">
         <base-form
             title="New user"
             :submit="submit"
@@ -27,7 +27,7 @@ export default Vue.component("add-user",{
                 fieldName="Username"
                 required
                 :value="credentials.username">
-                <input 
+                <input class="form-control"
                     v-model="credentials.username"
                     type="text" 
                     required>
@@ -45,7 +45,7 @@ export default Vue.component("add-user",{
                 fieldName="First name"
                 required
                 :value="personalData.firstName" >
-                 <input 
+                 <input class="form-control"
                     v-model="personalData.firstName" 
                     type="text" 
                     required>
@@ -56,7 +56,7 @@ export default Vue.component("add-user",{
                 fieldName="Last name"
                 required
                 :value="personalData.lastName">
-                 <input 
+                 <input class="form-control"
                     v-model="personalData.lastName" 
                     type="text" 
                     required>
@@ -80,7 +80,7 @@ export default Vue.component("add-user",{
             <base-field
                 fieldName="User type"
                 :value="role">
-                <input
+                <input class="form-control"
                     :value="role" 
                     type="text" 
                     disabled 
@@ -105,7 +105,7 @@ export default Vue.component("add-user",{
             },
 
             submit: {
-                display: "Register restaurant",
+                display: "Add user",
                 invoke: this.add
             },
 

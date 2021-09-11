@@ -88,4 +88,16 @@
   "items" : [ ],
   "customer" : 6,
   "totalPrice" : 0.0
+}, {
+  "id" : 16,
+  "deleted" : true,
+  "items" : [ 20 ],
+  "customer" : 6,
+  "totalPrice" : 320.0
+}, {
+  "id" : 17,
+  "deleted" : true,
+  "items" : [ ],
+  "customer" : 6,
+  "totalPrice" : 0.0
 } ]

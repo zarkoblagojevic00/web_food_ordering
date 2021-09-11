@@ -128,8 +128,7 @@ export default Vue.component("signup",{
         },
 
         $_signup_navigate: function() {
-            const userHome = `${getRole().toLowerCase()}-home`
-            this.$router.push({name: userHome, params: { id: getId() }});
+            this.$router.push({name: 'home'});
         },
     }
 })

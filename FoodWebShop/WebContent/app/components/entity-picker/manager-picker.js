@@ -33,7 +33,7 @@ export default Vue.component("manager-picker",{
 
     data() { 
         return {
-           selectedManagerId: -1,
+           selectedManagerId: null,
            managers: null
         }
     },

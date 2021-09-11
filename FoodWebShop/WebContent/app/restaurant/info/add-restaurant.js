@@ -16,7 +16,7 @@ export default Vue.component("add-restaurant",{
     },
 
     template: `
-    <div id="add-restaurant">
+    <div id="add-restaurant" class="add-restaurant">
         <base-form
             title="New restaurant"
             :submit="submit"
@@ -33,11 +33,11 @@ export default Vue.component("add-restaurant",{
                 :value="selectedManagerId">
                 
                 <manager-picker 
-                    v-show="!addManager"
+                    v-show="selectedManagerId"
                     v-model="selectedManagerId">
                     </manager-picker>
                 <span v-show="addManager">
-                    <router-link :to="{name: 'add-user', params: {role: 'MANAGER'}}">Add manager</router-link>
+                    <router-link class="btn btn-lg btn-success" :to="{name: 'add-user', params: {role: 'MANAGER'}}">Add manager</router-link>
                 </span>
             </base-field>
 

@@ -50,7 +50,7 @@ export default Vue.component("shopping-item",{
             </div>
 
             <hr>
-            <button v-if="isCustomer && !isReadonly" @click="removeItem">Remove from cart</button>
+            <button class="btn btn-md btn-danger" v-if="isCustomer && !isReadonly" @click="removeItem">Remove from cart</button>
         </div>
             
         

@@ -9,7 +9,7 @@ export default Vue.component("the-navbar",{
         <div class="container">
             <a class="navbar-brand" href="#">FeastNow</a>
             <ul class="list-inline">
-                <router-link class="list-inline-item" tag="li" :to="userHome" exact>Home</router-link>
+                <router-link class="list-inline-item" tag="li" :to="guestHome" exact>Home</router-link>
             
                 <span class="center-inline-flex" v-if="isGuest">
                     <router-link class="list-inline-item" tag="li" :to="{ name: 'login'}" exact>Login</router-link>
@@ -17,8 +17,8 @@ export default Vue.component("the-navbar",{
                 </span>
             
                 <span v-if="isAdmin">
-                    <router-link class="list-inline-item" tag="li" :to="getRoleRoute('users-home')" exact>Users</router-link>
-                    <router-link class="list-inline-item" tag="li" :to="getRoleRoute('restaurants-home')" exact>Restaurants</router-link>
+                    <router-link class="list-inline-item" tag="li" :to="getRoleRoute('users-home')">Users</router-link>
+                    <router-link class="list-inline-item" tag="li" :to="getRoleRoute('add-restaurant')" exact>Add Restaurant</router-link>
                 </span>
             
                 <span v-if="isCustomer">

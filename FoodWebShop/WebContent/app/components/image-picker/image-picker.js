@@ -20,7 +20,7 @@ export default Vue.component("image-picker",{
             required>
         </input>
 
-        <div>
+        <div id="preview">
             <img class="image-left-side" :src="imageSource" alt="">
         </div>
     </div> 

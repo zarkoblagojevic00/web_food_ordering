@@ -17,7 +17,7 @@ export default Vue.component("customer",{
     },
 
     template: `
-    <div id="customer" style="border: 1px solid black;">
+    <div id="customer" class="item item-padding-label" :class="customerTypeClass">
         <div>
             <label for="username">Username: </label>
             <span>{{username}}</span>
@@ -58,13 +58,17 @@ export default Vue.component("customer",{
             <span>{{activityReport.numOfCanceledOrdersInPastMonth}}</span>
         </div>
 
-        <button v-if="isSuspicious" @click="banCustomer">Ban</button>
+        <button class="btn btn-md btn-warning" v-if="isSuspicious" @click="banCustomer">Ban</button>
     </div> 
     `,
 
     data() { 
         return {
-           
+            customerTypeClass: {
+                'bronze-grad': this.type === "BRONZE",
+                'silver-grad': this.type === "SILVER",
+                'gold-grad': this.type === "GOLD",
+            },
         }
     },
 

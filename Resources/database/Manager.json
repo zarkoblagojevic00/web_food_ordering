@@ -126,4 +126,20 @@
   "role" : "MANAGER",
   "activityStatus" : "OK",
   "restaurant" : 7
+}, {
+  "id" : 9,
+  "deleted" : false,
+  "credentials" : {
+    "username" : "mica1234",
+    "password" : "micamica"
+  },
+  "personalData" : {
+    "firstName" : "Milica",
+    "lastName" : "Milicić",
+    "gender" : "OTHER",
+    "dateOfBirth" : 938765820000
+  },
+  "role" : "MANAGER",
+  "activityStatus" : "OK",
+  "restaurant" : null
 } ]

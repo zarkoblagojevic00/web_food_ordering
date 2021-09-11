@@ -12,7 +12,7 @@ export default Vue.component("admin",{
         activityStatus: String,
     },
     template: `
-    <div id="admin" style="border: 1px solid black;">
+    <div id="admin" class="item item-padding-label"  >
         <div>
             <label for="username">Username: </label>
             <span>{{username}}</span>
@@ -39,4 +39,6 @@ export default Vue.component("admin",{
         </div>
     </div> 
     `,
+
+    
 })

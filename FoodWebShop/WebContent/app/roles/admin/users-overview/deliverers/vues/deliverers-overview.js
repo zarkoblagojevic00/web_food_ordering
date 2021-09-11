@@ -8,7 +8,7 @@ export default Vue.component("deliverers-overview",{
     },
     template: `
     <div id="deliverers-overview">
-        <router-link :to="{name: 'add-user', params: {role: 'DELIVERER'}}">Add deliverer</router-link>
+        <router-link class="btn btn-lg btn-success text-uppercase fixed-bottom-right" :to="{name: 'add-user', params: {role: 'DELIVERER'}}">Add deliverer</router-link>
         <finder ref="finder"
             :items="deliverers"
             :sortBy="sortBy"

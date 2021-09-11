@@ -9,7 +9,7 @@ export default Vue.component("managers-overview",{
 
     template: `
     <div id="managers-overview">
-        <router-link :to="{name: 'add-user', params: {role: 'MANAGER'}}">Add manager</router-link>
+        <router-link class="btn btn-lg btn-success text-uppercase fixed-bottom-right" :to="{name: 'add-user', params: {role: 'MANAGER'}}">Add manager</router-link>
         <finder
             :items="managers"
             :sortBy="sortBy"

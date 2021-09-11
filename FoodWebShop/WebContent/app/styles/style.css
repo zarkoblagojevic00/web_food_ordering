@@ -285,6 +285,9 @@ li.restaurant-tab.router-link-exact-active {
     font-weight: bold;
 }
 
+#restaurant-overview .image-info-container {
+}
+
 #restaurant-overview .image-left-side-container .image-left-side {
     max-width: 275px;
     max-height: 275px;
@@ -295,8 +298,7 @@ li.restaurant-tab.router-link-exact-active {
 }
 
 .adjust-location-base-field {
-    margin-left: 3.5%;
-    
+    display: unset;
 }
 
 #ol-map {
@@ -307,15 +309,14 @@ li.restaurant-tab.router-link-exact-active {
 
 #ol-map h3 {
     padding-top: 5%;
-    margin-left: 3%;
+    margin-left: 5%;
 }
 
 #ol-map hr {
     position: relative;
     border: none;
     height: 2px;
-    margin-left: 3%;
-    margin-right: 8%;
+    margin: 0 5%;
     background: var(--darkgrey);
 }
 
@@ -374,6 +375,49 @@ li.restaurant-tab.router-link-exact-active {
 .badge-props {
     font-size: 1.025em;
 }
+
+.add-restaurant {
+    margin-top: 50px;
+    margin-bottom: 50px;
+    width: 100%;
+}
+
+.add-restaurant>#base-form {
+    padding: 50px 0;
+    margin: 0 auto;
+    min-width: 1100px;
+}
+
+.add-restaurant #ol-map {
+    background: var(--lightergrey);
+}
+
+.add-restaurant .image-info-container {
+    display: unset;
+}
+
+.add-restaurant #map-root {
+    margin-top: 30px;
+    margin-left: 35%;
+}
+
+.add-restaurant #image-picker #preview {
+    margin-top: 30px;
+}
+
+.add-user {
+    margin-top: 50px;
+    margin-bottom: 50px;
+    width: 100%;
+}
+
+.add-user>#base-form {
+    padding: 50px 0;
+    margin: 0 auto;
+    min-width: 650px;
+}
+
+
 
 .add-product {
     margin-top: 50px;
@@ -484,4 +528,40 @@ li.restaurant-tab.router-link-exact-active {
 
 #delivery-request>div{
     border: none !important;
+    padding: 0 !important;
+}
+
+
+.shopping-cart>h3{
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.shopping-cart #total-price {
+    color: var(--orange);
+    font-size: 1.1em;
+    font-weight: bold;
+}
+
+.item-padding-label {
+    padding: 15px 30px;
+}
+
+.item-padding-label  label {
+    font-weight: 500;
+    font-size: 1.1em;
+}
+
+.manager #restaurant>div>div:hover {
+    cursor: default; 
+    background: var(--item-bg-grey);
+}
+
+.manager label[for="restaurant"] {
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.orders-overview h2 {
+    padding-top: 30px;
 }

@@ -16,7 +16,7 @@ export default Vue.component("orders-overview",{
     },
 
     template: `
-    <div id="orders-overview">
+    <div id="orders-overview" class="orders-overview">
         <h2>{{title}}</h2>
         <finder
             :items="orders"

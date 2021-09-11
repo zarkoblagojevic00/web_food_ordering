@@ -9,17 +9,17 @@ export default Vue.component("shopping-cart",{
     },
 
     template: `
-    <div v-if="cart" id="shopping-cart">
+    <div v-if="cart" id="shopping-cart" class="shopping-cart">
         <h3>Shopping cart</h3>
         
-        <h4> Total price: {{cart.totalPrice}}</h4>
+        <h4> Total price: <span id="total-price">{{cart.totalPrice}}</span></h4>
         
         <shopping-item v-for="item in cart.items"
             :key="item.id"
             :item="item">
         </shopping-item>
 
-        <button @click="finishShopping" v-if="cart.items[0]">Finish shopping</button>
+        <button class="btn btn-lg btn-success" @click="finishShopping" v-if="cart.items[0]">Finish shopping</button>
 
     </div> 
     `,
