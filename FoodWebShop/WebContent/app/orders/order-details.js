@@ -17,26 +17,26 @@ export default Vue.component("order-details",{
 
     template: `
     <div id="order-details">
+        <h3>Overview</h3>
         <order v-if="order"
             :order="order"
             :showDetailsNav="false">
         </order>
 
+        <h3>Ordered items</h3>
         <shopping-items-overview v-if="items"
             :items="items"
             :totalPrice="order.totalPrice"
             isReadonly>
         </shopping-items-overview>
 
-        <div v-if="requests">
-            <div v-if="isManager && isWaitingOnDelivery">
-                <h5>Delivery requests</h5>
+        <div v-if="requests?.length && isManager">
+                <h4>Delivery requests</h4>
                 <delivery-request 
                     v-for="request in requests"
                     :key="request.id"
                     :request="request">
                 </delivery-request>
-            </div>
         </div>
 
     </div> 

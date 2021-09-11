@@ -27,7 +27,7 @@
   "creationDate" : 1630579542753,
   "customer" : 5,
   "totalPrice" : 1600.0,
-  "status" : "WAITING_ON_DELIVERY"
+  "status" : "IN_TRANSPORT"
 }, {
   "id" : 4,
   "deleted" : false,

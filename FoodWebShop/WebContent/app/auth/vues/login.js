@@ -43,7 +43,7 @@ export default Vue.component("login",{
                     
                 <router-link :to="{ name: 'signup'}" class="medium" exact>Not Registered? Sign up for free!</router-link>
             </base-form>
-        <div>
+        </div>
     </div> 
     `,
     data() { 

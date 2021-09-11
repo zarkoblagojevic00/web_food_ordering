@@ -22,4 +22,4 @@ export default Vue.component("filter-text",{
 
 
 const stringFilter = (itemValue, filterValue) => itemValue.toLowerCase().includes(filterValue.toLowerCase());
-const numberFilter = (itemValue, filterValue) => (!filterValue) || (filterValue - 0.5 < itemValue && itemValue < filterValue + 0.5); 
+const numberFilter = (itemValue, filterValue) => (!filterValue) || (filterValue - 0.5 <= itemValue && itemValue <= filterValue + 0.5); 

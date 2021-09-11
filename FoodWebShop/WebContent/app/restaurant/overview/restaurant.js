@@ -17,35 +17,38 @@ export default Vue.component("restaurant",{
 
     template: `
     <div id="restaurant">
-        <router-link :to="restaurantRoute" tag="div" style="cursor: pointer;" exact>
-            <div v-if="restaurant" style="border: 1px solid indianred;">
-                <div>
-                    <img :src="objectsSource['restaurantLogo']"></img>
+        <router-link :to="restaurantRoute" tag="div" exact>
+            
+            <div v-if="restaurant" class="image-info-container item">
+                
+                <div class="image-left-side-container">
+                    <img class="image-left-side" :src="objectsSource['restaurantLogo']"></img>
                 </div>
             
-                <div>
-                    <label for="restaurantName">Name: </label>
-                    <span>{{restaurant.name}}</span>
-                </div>
-            
-                <div>
-                    <label for="restaurantType">Type: </label>
-                    <span>{{restaurant.type}}</span>
-                </div>
-            
-                <div>
-                    <label for="location">Location: </label>
-                    <span>{{location}}</span>
-                </div>
+                <div class="info-right-side">
+                    <div >
+                        <h4>{{restaurant.name}}</h4>
+                    </div>
+                
+                    <div>
+                        <label for="restaurantType">Type: </label>
+                        <span>{{restaurant.type}}</span>
+                    </div>
+                
+                    <div>
+                        <label for="location">Location: </label>
+                        <span>{{location}}</span>
+                    </div>
 
-                <div>
-                    <label for="status">Status: </label>
-                    <span>{{restaurant.opened ? 'Opened' : 'Closed'}}</span>
-                </div>
-            
-                <div v-if="restaurant.averageMark">
-                    <label for="averageMark">Average mark: </label>
-                    <span>{{restaurant.averageMark | formatDouble}}</span>
+                    <div>
+                        <label for="status">Status: </label>
+                        <span class="badge badge-props" :class="restaurantStatusClass">{{restaurant.opened ? 'Opened' : 'Closed'}}</span>
+                    </div>
+                
+                    <div v-if="restaurant.averageMark">
+                        <label for="averageMark">Average mark: </label>
+                        <span id="average-mark">{{restaurant.averageMark | formatDouble}}</span>
+                    </div>
                 </div>
             </div>
         </router-link>
@@ -66,6 +69,10 @@ export default Vue.component("restaurant",{
         },
         restaurantRoute() {
             return (!this.isNavigable) ? '' : {path: `restaurants/${this.restaurant.id}`};
+        },
+        
+        restaurantStatusClass() {
+            return this.restaurant.opened ? 'badge-success' : 'badge-danger';
         }
     },
 

@@ -18,36 +18,43 @@ export default Vue.component("shopping-item",{
     },
 
     template: `
-    <div id="shopping-item" style="border: 1px solid black;">
-        <div>
-            <label for="name">Name: </label>
-            <span>{{item.product.name}}</span>
-        </div>
+    <div id="shopping-item" class="image-info-container item">
         
-        <div>
-            <label for="price">Price: </label>
-            <span>{{item.product.price}}</span>
+        <div class="image-left-side-container">
+            <img class="image-left-side" :src="objectsSource['picture']"></img>
         </div>
 
         <div>
-            <label for="portion">Portion: </label>
-            <span>{{item.product.portion}}</span>
-            <span>{{item.product.type == 'FOOD'? 'g' : 'ml'}}</span>
-        </div>
+            <div>
+                <h4>{{item.product.name}}</h4>
+            </div>
+            
+            <div>
+                <label for="price">Price: </label>
+                <span>{{item.product.price}}</span>
+            </div>
 
-        <div>
-            <label for="quantity">Quantity: </label>
-            <span v-if="isReadonly">{{item.quantity}}</span>
-            <num-input-range v-else
-                v-model="quantity"
-                :min="1">
-            </num-input-range>
-        </div>
+            <div>
+                <label for="portion">Portion: </label>
+                <span>{{item.product.portion}}</span>
+                <span>{{item.product.type == 'FOOD'? 'g' : 'ml'}}</span>
+            </div>
 
-        <button v-if="isCustomer && !isReadonly" @click="removeItem">Remove from cart</button>
-        <div>
-            <img :src="objectsSource['picture']"></img>
+            <div>
+                <label for="quantity">Quantity: </label>
+                <span v-if="isReadonly">{{item.quantity}}</span>
+                <num-input-range v-else
+                    v-model="quantity"
+                    :min="1">
+                </num-input-range>
+            </div>
+
+            <hr>
+            <button v-if="isCustomer && !isReadonly" @click="removeItem">Remove from cart</button>
         </div>
+            
+        
+        
     </div> 
     `,
     data() { 

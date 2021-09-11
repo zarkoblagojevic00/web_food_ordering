@@ -15,5 +15,11 @@
   "deleted" : false,
   "order" : 3,
   "deliverer" : 1,
+  "status" : "APPROVED"
+}, {
+  "id" : 4,
+  "deleted" : false,
+  "order" : 1,
+  "deliverer" : 1,
   "status" : "PENDING"
 } ]

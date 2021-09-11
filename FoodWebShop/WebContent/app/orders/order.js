@@ -22,7 +22,7 @@ export default Vue.component("order",{
     },
 
     template: `
-    <div id="order" style="border: 1px solid black">
+    <div id="order" class="item" :class="customerTypeClass">
         <div>
             <label for="code">Code: </label>
             <span>{{order.code}}</span>
@@ -67,25 +67,25 @@ export default Vue.component("order",{
         </div>
 
         <div>
-            <label for="status">Status: </label>
-            <span>{{order.status}}</span>
+            <label for="status" >Status: </label>
+            <span class="badge badge-props" :class="orderStatusClass">{{order.status}}</span>
         </div>
 
-        <router-link v-if="showDetailsNav" :to="detailsRoute">Details</router-link>
+        <router-link class="btn btn-md btn-primary" v-if="showDetailsNav" :to="detailsRoute">Details</router-link>
         
         <span v-if="isManager">
-            <button v-if="isProcessing" @click="setStatus('IN_PREPARATION')">Confirm</button>
-            <button v-if="isInPreparation" @click="setStatus('WAITING_ON_DELIVERY')">To deliver</button>
+            <button class="btn btn-md btn-success" v-if="isProcessing" @click="setStatus('IN_PREPARATION')">Confirm</button>
+            <button class="btn btn-md btn-success" v-if="isInPreparation" @click="setStatus('WAITING_ON_DELIVERY')">To deliver</button>
         </span>
 
         <span v-if="isDeliverer">
-            <button v-if="isWaitingOnDelivery && !requestedDelivery" @click="sendRequest">Request delivery</button>
-            <button v-if="isInTransport" @click="setStatus('DELIVERED')">Delivered</button>
+            <button class="btn btn-md btn-success" v-if="isWaitingOnDelivery && !requestedDelivery" @click="sendRequest">Request delivery</button>
+            <button class="btn btn-md btn-success" v-if="isInTransport" @click="setStatus('DELIVERED')">Delivered</button>
         </span>
 
         <span v-if="isCustomer">
-            <button v-if="isProcessing" @click="setStatus('CANCELED')">Cancel order</button>
-            <router-link v-if="isDelivered" :to="addCommentRoute"">Leave a comment</router-link>
+            <button class="btn btn-md btn-danger" v-if="isProcessing" @click="setStatus('CANCELED')">Cancel order</button>
+            <router-link class="btn btn-md btn-success" v-if="isDelivered" :to="addCommentRoute"">Leave a comment</router-link>
         </span>
 
     </div> 
@@ -93,6 +93,12 @@ export default Vue.component("order",{
     data() { 
         return {
             requestedDelivery: false,
+            customerTypeClass: {
+                'bronze-grad': this.order.customerType === "BRONZE",
+                'silver-grad': this.order.customerType === "SILVER",
+                'gold-grad': this.order.customerType === "GOLD",
+            },
+            
         }
     },
 
@@ -109,7 +115,7 @@ export default Vue.component("order",{
                 params: {
                     orderId: this.order.id
                 },
-            } 
+            }
         },
 
         addCommentRoute() {
@@ -121,9 +127,17 @@ export default Vue.component("order",{
 
         restaurantLocation() {
             const location = this.order.restaurant.location;
-            return `${location.municipality} - ${location.streetName} ${location.streetNumber}`
-        }
+            return `${location.municipality} - ${location.streetName} ${location.streetNumber}`;
+        },
 
+        orderStatusClass() {
+            return {
+                'badge-danger': this.isCanceled,
+                'badge-success': this.isDelivered,
+                'badge-secondary': this.isInPreparation,
+                'badge-warning': this.isWaitingOnDelivery || this.isProcessing || this.isInTransport,
+            }
+        }
     },
 
     methods: {

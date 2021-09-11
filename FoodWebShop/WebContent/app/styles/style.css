@@ -7,6 +7,9 @@
     --primary: #007bff;
     --white: #fff;
     --primary-darker: #0860c5;
+    --bronze: #CD7F32;
+    --silver: #c0c0c0;
+    --gold: #d4af37;
 }
 
 @media (min-width: 1200px) {
@@ -263,6 +266,24 @@ li.restaurant-tab.router-link-exact-active {
     justify-content: space-between;
 }
 
+#restaurants-overview {
+    padding-top: 30px;
+}
+
+#restaurant label {
+    font-weight: 500;
+}
+
+#restaurant .item:hover {
+    cursor: pointer;
+    background: var(--lightgrey);
+}
+
+#restaurant #average-mark{
+    color: var(--orange);
+    font-size: 1.1em;
+    font-weight: bold;
+}
 
 #restaurant-overview .image-left-side-container .image-left-side {
     max-width: 275px;
@@ -429,4 +450,38 @@ li.restaurant-tab.router-link-exact-active {
 
 #filter-date-range div.form-check-inline div {
     margin-right: 7px;
+}
+
+#order {
+    padding: 15px 30px;
+    border: none;
+}
+
+.bronze-grad {
+    background-image: linear-gradient(45deg, var(--bronze), var(--bronze), var(--lightergrey));
+}
+
+.silver-grad {
+    background-image: linear-gradient(45deg, var(--silver), var(--silver), var(--gold));
+}
+
+.gold-grad {
+    background-image: linear-gradient(45deg, var(--gold), var(--gold), var(--darkgrey));
+}
+
+#order label {
+    font-weight: 500;
+}
+
+#delivery-request {
+    padding: 15px 30px;
+}
+
+#delivery-request label {
+    font-weight: 500;
+}
+
+
+#delivery-request>div{
+    border: none !important;
 }

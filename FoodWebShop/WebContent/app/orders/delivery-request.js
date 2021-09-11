@@ -15,15 +15,15 @@ export default Vue.component("delivery-request",{
     },
 
     template: `
-    <div id="delivery-request">
-        <deliverer v-bind="request.deliverer"></deliverer>
+    <div id="delivery-request" class="item">
+        <deliverer id="deliverer" v-bind="request.deliverer"></deliverer>
 
         <div>
             <label for="requestStatus">Request status: </label>
-            <span>{{request.status}}</span>
+            <span class="badge badge-props" :class="requestStatusClass">{{request.status}}</span>
         </div>
 
-        <button v-if="request.status==='PENDING'"@click="acceptRequest">Accept request</button>
+        <button class="btn btn-md btn-success" v-if="isPending" @click="acceptRequest">Accept request</button>
     </div> 
     `,
     data() { 
@@ -33,7 +33,25 @@ export default Vue.component("delivery-request",{
     },
 
     computed: {
-        
+        isPending() {
+            return this.request.status === 'PENDING';
+        },
+
+        isAccepted() {
+            return this.request.status === 'APPROVED';
+        },
+
+        isRejected() {
+            return this.request.status === 'REJECTED';
+        },
+
+        requestStatusClass() {
+            return {
+                'badge-success': this.isAccepted,
+                'badge-warning': this.isPending,
+                'badge-danger': this.isRejected,
+            }
+        }
     },
 
     methods: {

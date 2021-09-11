@@ -21,7 +21,6 @@ export default Vue.component("shopping-items-overview",{
 
     template: `
     <div id="shopping-items-overview">
-        <h3>Shopping items</h3>
         
         <h4> Total price: {{totalPrice}}</h4>
         
