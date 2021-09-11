@@ -4,6 +4,7 @@ import baseField from "../../components/form/base-field.js";
 import baseForm from "../../components/form/base-form.js";
 import productTypePicker from "../../components/entity-picker/product-type-picker.js";
 import imagePicker from "../../components/image-picker/image-picker.js";
+import numInputRange from "../../components/num-input-range/num-input-range.js";
 
 export default Vue.component("add-product",{
     props: ['restaurantId'],
@@ -13,6 +14,7 @@ export default Vue.component("add-product",{
         'base-form': baseForm,
         'product-type-picker': productTypePicker,
         'image-picker': imagePicker,
+        'num-input-range': numInputRange,
     },
     
     template: `
@@ -37,11 +39,11 @@ export default Vue.component("add-product",{
                 fieldName="Price"
                 required
                 :value="product.price">
-                <input class="form-control"
+                <num-input-range
                     v-model="product.price"
-                    type="number" 
-                    required>
-                </input>
+                    :min="1">
+                </num-input-range>
+                
             </base-field>
 
             <base-field
@@ -54,11 +56,10 @@ export default Vue.component("add-product",{
             <base-field
                 :fieldName="'Portion (' + unitOfMeasure +')'"
                 :value="product.portion">
-                <input class="form-control"
+                <num-input-range
                     v-model="product.portion"
-                    type="number" 
-                    >
-                </input>
+                    :min="1">
+                </num-input-range>
                 
             </base-field>
             
@@ -87,9 +88,9 @@ export default Vue.component("add-product",{
             title: "New Product",
             product: {
                 name: '',
-                price: 0,
+                price: 1,
                 type: '',
-                portion: 0,
+                portion: 1,
                 description: '',
             },
 

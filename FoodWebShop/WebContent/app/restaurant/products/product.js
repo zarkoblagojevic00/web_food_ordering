@@ -59,7 +59,10 @@ export default Vue.component("product",{
                 </num-input-range>
                 <button class="btn btn-md btn-primary"@click="addToCart">Add to cart</button>
             </span>
-            <router-link class="btn btn-lg btn-primary" v-if="isManager" :to="editProductRoute">Edit product</router-link>
+            <router-link 
+                class="btn btn-lg btn-primary" 
+                v-if="isManager && managersRest" 
+                :to="editProductRoute">Edit product</router-link>
         </div>
 
     </div> 
@@ -80,6 +83,9 @@ export default Vue.component("product",{
         },
         unit() {
             return (this.product.type === "FOOD") ? 'g' : 'ml';
+        },
+        managersRest() {
+            return location.href.includes("manager");
         }
     },
 

@@ -14,7 +14,10 @@ export default Vue.component("products-overview",{
     template: `
     <div id="products-overview">
         <h2>Products</h2>
-        <router-link class="btn btn-lg btn-success text-uppercase font-weight-bold fixed-bottom-right"v-if="isManager" to="add-product">Add product</router-link>
+        <router-link 
+            class="btn btn-lg btn-success text-uppercase font-weight-bold fixed-bottom-right" 
+            v-if="isManager && managersRest" 
+            to="add-product">Add product</router-link>
         <product v-for="product in products"
             :key="product.id"
             :product="product"
@@ -26,6 +29,12 @@ export default Vue.component("products-overview",{
     data() { 
         return {
            products: [],
+        }
+    },
+
+    computed: {
+        managersRest() {
+            return location.href.includes("manager");
         }
     },
 

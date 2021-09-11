@@ -38,66 +38,36 @@
   "id" : 7,
   "deleted" : true,
   "items" : [ ],
-  "customer" : 6,
+  "customer" : 8,
   "totalPrice" : 0.0
 }, {
   "id" : 8,
   "deleted" : true,
-  "items" : [ ],
-  "customer" : 6,
-  "totalPrice" : 0.0
+  "items" : [ 21, 23 ],
+  "customer" : 4,
+  "totalPrice" : 1700.0
 }, {
   "id" : 9,
   "deleted" : true,
-  "items" : [ ],
-  "customer" : 6,
-  "totalPrice" : 0.0
+  "items" : [ 24, 25 ],
+  "customer" : 4,
+  "totalPrice" : 1840.0
 }, {
   "id" : 10,
   "deleted" : true,
-  "items" : [ ],
-  "customer" : 6,
-  "totalPrice" : 0.0
+  "items" : [ 26, 27 ],
+  "customer" : 4,
+  "totalPrice" : 5160.0
 }, {
   "id" : 11,
   "deleted" : true,
   "items" : [ ],
-  "customer" : 6,
+  "customer" : 4,
   "totalPrice" : 0.0
 }, {
   "id" : 12,
   "deleted" : true,
   "items" : [ ],
-  "customer" : 6,
-  "totalPrice" : 0.0
-}, {
-  "id" : 13,
-  "deleted" : true,
-  "items" : [ ],
-  "customer" : 6,
-  "totalPrice" : 0.0
-}, {
-  "id" : 14,
-  "deleted" : true,
-  "items" : [ ],
-  "customer" : 6,
-  "totalPrice" : 0.0
-}, {
-  "id" : 15,
-  "deleted" : true,
-  "items" : [ ],
-  "customer" : 6,
-  "totalPrice" : 0.0
-}, {
-  "id" : 16,
-  "deleted" : true,
-  "items" : [ 20 ],
-  "customer" : 6,
-  "totalPrice" : 320.0
-}, {
-  "id" : 17,
-  "deleted" : true,
-  "items" : [ ],
-  "customer" : 6,
+  "customer" : 4,
   "totalPrice" : 0.0
 } ]

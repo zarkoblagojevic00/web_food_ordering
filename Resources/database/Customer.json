@@ -17,42 +17,6 @@
   "type" : "BRONZE",
   "cart" : null
 }, {
-  "id" : 2,
-  "deleted" : false,
-  "credentials" : {
-    "username" : "bbb",
-    "password" : "pass"
-  },
-  "personalData" : {
-    "firstName" : "Bbb",
-    "lastName" : "Bbb",
-    "gender" : "MALE",
-    "dateOfBirth" : 1628100600000
-  },
-  "role" : "CUSTOMER",
-  "activityStatus" : "SUSPICIOUS",
-  "pointsEarned" : 20,
-  "type" : "SILVER",
-  "cart" : null
-}, {
-  "id" : 3,
-  "deleted" : false,
-  "credentials" : {
-    "username" : "zzz",
-    "password" : "pass"
-  },
-  "personalData" : {
-    "firstName" : "Zzz",
-    "lastName" : "Zzz",
-    "gender" : "MALE",
-    "dateOfBirth" : 1628100600000
-  },
-  "role" : "CUSTOMER",
-  "activityStatus" : "OK",
-  "pointsEarned" : 100,
-  "type" : "GOLD",
-  "cart" : null
-}, {
   "id" : 4,
   "deleted" : false,
   "credentials" : {
@@ -67,8 +31,8 @@
   },
   "role" : "CUSTOMER",
   "activityStatus" : "OK",
-  "pointsEarned" : 0,
-  "type" : "BRONZE",
+  "pointsEarned" : 1157,
+  "type" : "SILVER",
   "cart" : null
 }, {
   "id" : 5,
@@ -118,6 +82,24 @@
     "lastName" : "Jones",
     "gender" : "MALE",
     "dateOfBirth" : 673558980000
+  },
+  "role" : "CUSTOMER",
+  "activityStatus" : "OK",
+  "pointsEarned" : 0,
+  "type" : "BRONZE",
+  "cart" : null
+}, {
+  "id" : 8,
+  "deleted" : false,
+  "credentials" : {
+    "username" : "tommy123",
+    "password" : "tomytomy"
+  },
+  "personalData" : {
+    "firstName" : "Tom",
+    "lastName" : "Jones",
+    "gender" : "MALE",
+    "dateOfBirth" : 697286400000
   },
   "role" : "CUSTOMER",
   "activityStatus" : "OK",

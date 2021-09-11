@@ -48,4 +48,184 @@
   "portion" : 350.0,
   "description" : "Traditional Greek gyros with chicken meat, fried potatoes, and tzatziki",
   "picturePath" : "restaurants/4/b950270d-ea6a-4c44-b893-62d09b89a01d.jpg"
+}, {
+  "id" : 6,
+  "deleted" : false,
+  "name" : "Chicken Curry",
+  "price" : 450.0,
+  "type" : "FOOD",
+  "restaurant" : 3,
+  "portion" : 400.0,
+  "description" : "Grilled chicken in curry delicious curry sauce.",
+  "picturePath" : "restaurants/3/0b2f8925-ce60-4afa-8542-e111d0de1543.jpg"
+}, {
+  "id" : 7,
+  "deleted" : false,
+  "name" : "Soul Triangles",
+  "price" : 400.0,
+  "type" : "FOOD",
+  "restaurant" : 3,
+  "portion" : 300.0,
+  "description" : "Beautiful, crispy dough filled with pork minced meat.",
+  "picturePath" : "restaurants/3/e813432e-1fd7-4747-b2bf-e7e7fb6e0f53.jpg"
+}, {
+  "id" : 8,
+  "deleted" : false,
+  "name" : "Spicy Gravy with Chicken nuggets",
+  "price" : 550.0,
+  "type" : "FOOD",
+  "restaurant" : 3,
+  "portion" : 400.0,
+  "description" : "Must try spicy curry gravy with chicken nuggets.",
+  "picturePath" : "restaurants/3/25099145-2285-4641-842b-2cd2c35d1f5f.jpg"
+}, {
+  "id" : 9,
+  "deleted" : false,
+  "name" : "Moussaka",
+  "price" : 500.0,
+  "type" : "FOOD",
+  "restaurant" : 4,
+  "portion" : 400.0,
+  "description" : "Minced beef meat covered in tasty potato dough.",
+  "picturePath" : "restaurants/4/2eae8bd5-aae2-4e06-8322-94248e785e92.jpg"
+}, {
+  "id" : 10,
+  "deleted" : false,
+  "name" : "Traditional Moussaka with minced pork ",
+  "price" : 400.0,
+  "type" : "FOOD",
+  "restaurant" : 4,
+  "portion" : 400.0,
+  "description" : "",
+  "picturePath" : "restaurants/4/c653af7e-abf0-45a5-838c-13719c384e95.jpg"
+}, {
+  "id" : 11,
+  "deleted" : false,
+  "name" : "Spicy chicken Gyros",
+  "price" : 330.0,
+  "type" : "FOOD",
+  "restaurant" : 4,
+  "portion" : 250.0,
+  "description" : "Chicken gyros with spicy gravy.",
+  "picturePath" : "restaurants/4/770fab2d-0238-4272-9ae1-425a59088e95.jpg"
+}, {
+  "id" : 12,
+  "deleted" : false,
+  "name" : "Hamburger medium - with French fries",
+  "price" : 300.0,
+  "type" : "FOOD",
+  "restaurant" : 2,
+  "portion" : 230.0,
+  "description" : "Delicious hamburger with crispy French fries.",
+  "picturePath" : "restaurants/2/dfc34a83-d959-496d-8345-78651cca6adc.jpg"
+}, {
+  "id" : 13,
+  "deleted" : false,
+  "name" : "3x Hamburger with gravy",
+  "price" : 450.0,
+  "type" : "FOOD",
+  "restaurant" : 2,
+  "portion" : 300.0,
+  "description" : "",
+  "picturePath" : "restaurants/2/378a07bb-166c-4b08-9a26-7088db168200.png"
+}, {
+  "id" : 14,
+  "deleted" : false,
+  "name" : "Cevapi with onions",
+  "price" : 300.0,
+  "type" : "FOOD",
+  "restaurant" : 2,
+  "portion" : 250.0,
+  "description" : "10 cevapis in a grilled bun with onions. ",
+  "picturePath" : "restaurants/2/75100e79-3272-4111-8c94-6f5ec265af99.jpg"
+}, {
+  "id" : 15,
+  "deleted" : false,
+  "name" : "Traditional Lasagna",
+  "price" : 300.0,
+  "type" : "FOOD",
+  "restaurant" : 5,
+  "portion" : 300.0,
+  "description" : "Traditional Lasagna with 5 amazing sauces.",
+  "picturePath" : "restaurants/5/90159675-26c4-494b-bb3a-c7e3dd308be8.jpg"
+}, {
+  "id" : 16,
+  "deleted" : false,
+  "name" : "Pizza Roma",
+  "price" : 400.0,
+  "type" : "FOOD",
+  "restaurant" : 5,
+  "portion" : 250.0,
+  "description" : "Taste Rome from your couch.",
+  "picturePath" : "restaurants/5/361655b3-1a52-4a4f-a58c-46287bbc1e74.jpg"
+}, {
+  "id" : 17,
+  "deleted" : false,
+  "name" : "Pizza Grande",
+  "price" : 1500.0,
+  "type" : "FOOD",
+  "restaurant" : 5,
+  "portion" : 800.0,
+  "description" : "Large traditional pizza with tomato sauce",
+  "picturePath" : "restaurants/5/812b4b45-1f84-40fe-8f85-01cd5eb1a227.jpg"
+}, {
+  "id" : 18,
+  "deleted" : false,
+  "name" : "Souvlaki",
+  "price" : 500.0,
+  "type" : "FOOD",
+  "restaurant" : 6,
+  "portion" : 350.0,
+  "description" : "Traditional souvlaki with veggies.",
+  "picturePath" : "restaurants/6/380dd984-951f-4f3a-969a-904000602faf.jfif"
+}, {
+  "id" : 19,
+  "deleted" : false,
+  "name" : "Cevapi with ajvar",
+  "price" : 300.0,
+  "type" : "FOOD",
+  "restaurant" : 6,
+  "portion" : 350.0,
+  "description" : "Delicious traditional cevapi with ajvar and kajmak.",
+  "picturePath" : "restaurants/6/90c600e1-3788-458e-b572-951bb5566cc5.jpg"
+}, {
+  "id" : 20,
+  "deleted" : false,
+  "name" : "Hamburger - TALL ",
+  "price" : 400.0,
+  "type" : "FOOD",
+  "restaurant" : 6,
+  "portion" : 450.0,
+  "description" : "Very very TALL Hamburger",
+  "picturePath" : "restaurants/6/6221c128-127b-48e1-9885-3663c52fc9d0.png"
+}, {
+  "id" : 21,
+  "deleted" : false,
+  "name" : "Chicken nuggets in gravy",
+  "price" : 800.0,
+  "type" : "FOOD",
+  "restaurant" : 7,
+  "portion" : 400.0,
+  "description" : "Delicious crispy chicken nuggets in gravy.",
+  "picturePath" : "restaurants/7/96ee26b0-c1d4-4797-b7f9-a15c74bef740.jpg"
+}, {
+  "id" : 22,
+  "deleted" : false,
+  "name" : "Chinese Steam Bun",
+  "price" : 600.0,
+  "type" : "FOOD",
+  "restaurant" : 7,
+  "portion" : 350.0,
+  "description" : "Delicious soft dough with many gravies.",
+  "picturePath" : "restaurants/7/c62aea08-9112-401c-80ae-f464f7f5b3f9.jpg"
+}, {
+  "id" : 23,
+  "deleted" : false,
+  "name" : "Chinese Lo Main",
+  "price" : 600.0,
+  "type" : "FOOD",
+  "restaurant" : 7,
+  "portion" : 450.0,
+  "description" : "",
+  "picturePath" : "restaurants/7/7a71d274-9869-427f-a260-b9aafb5ac63a.jpg"
 } ]

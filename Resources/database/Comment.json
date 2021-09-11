@@ -30,4 +30,12 @@
   "content" : "Brilliant food, kind waiters. Good job Pepe's",
   "mark" : 5,
   "status" : "PENDING"
+}, {
+  "id" : 5,
+  "deleted" : false,
+  "author" : 4,
+  "restaurant" : 3,
+  "content" : "Everything was amazing. Great job!",
+  "mark" : 5,
+  "status" : "APPROVED"
 } ]

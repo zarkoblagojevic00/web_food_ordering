@@ -565,3 +565,14 @@ li.restaurant-tab.router-link-exact-active {
 .orders-overview h2 {
     padding-top: 30px;
 }
+
+#add-comment {
+    margin-bottom: 50px;
+    width: 100%;
+}
+
+#add-comment>#base-form {
+    padding: 50px 0;
+    margin: 0 auto;
+    min-width: 700px;
+}

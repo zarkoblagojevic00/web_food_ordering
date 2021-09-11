@@ -32,7 +32,7 @@ export default Vue.component("add-comment",{
                 v-model="comment.content"
                 required>
                 <div>
-                    <textarea
+                    <textarea class="form-control"
                         v-model="comment.content"
                         name="content"
                         id="content"
